@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZ Language — Code Naturally</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #0f1319;
+    --card: #141820;
+    --border: #1e2530;
+    --accent: #00e5a0;
+    --accent2: #00b8ff;
+    --accent3: #ff6b35;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --dim: #374151;
+    --glow: 0 0 30px rgba(0,229,160,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    background: rgba(10,12,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo span { color: var(--text); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-github {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .nav-github:hover {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: var(--glow);
+  }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute;
+    top: 40%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0,184,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.25);
+    border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+  }
+  .hero h1 .hi { color: var(--accent); }
+  .hero h1 .h2 { color: var(--text); }
+  .hero h1 .h3 { color: var(--muted); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 0 20px rgba(0,229,160,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0,229,160,0.5);
+  }
+
+  .btn-secondary {
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* CODE TERMINAL */
+  .terminal-wrap {
+    padding: 80px 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+  }
+  .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .t-red { background: #ff5f57; }
+  .t-yellow { background: #febc2e; }
+  .t-green { background: #28c840; }
+  .terminal-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: 0.06em;
+  }
+
+  .terminal-body {
+    padding: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+
+  .c-comment { color: #4a5568; }
+  .c-kw { color: var(--accent); }
+  .c-kw2 { color: var(--accent2); }
+  .c-str { color: #f6c90e; }
+  .c-num { color: var(--accent3); }
+  .c-fn { color: #c084fc; }
+  .c-op { color: var(--muted); }
+  .c-id { color: var(--text); }
+  .c-out { color: var(--accent); }
+
+  .terminal-info h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .terminal-info h2 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .terminal-info p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .keyword-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.5rem;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text);
+  }
+  .pill-kw { color: var(--accent); }
+  .pill-arrow { color: var(--muted); font-size: 0.65rem; }
+
+  /* FEATURES */
+  .features {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .feature-card:hover { background: var(--card); }
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover::after { opacity: 1; }
+
+  .feature-icon {
+    width: 40px; height: 40px;
+    background: rgba(0,229,160,0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0,229,160,0.15);
+  }
+  .feature-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .feature-card p {
+    color: var(--muted);
+    font-size: 0.83rem;
+    line-height: 1.7;
+  }
+
+  /* LIBRARIES */
+  .libs {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .libs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .lib-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lib-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+    transform-origin: bottom;
+  }
+  .lib-card:hover { border-color: rgba(0,229,160,0.3); transform: translateY(-2px); }
+  .lib-card:hover::before { transform: scaleY(1); }
+
+  .lib-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+  }
+  .lib-icon {
+    font-size: 1.2rem;
+  }
+  .lib-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .lib-install {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--card);
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+  .lib-card p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .lib-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    background: rgba(0,184,255,0.06);
+    border: 1px solid rgba(0,184,255,0.15);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ADVANCED SECTION */
+  .advanced {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+  }
+  .code-block pre {
+    padding: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.9;
+    overflow-x: auto;
+    color: var(--text);
+  }
+
+  /* CREDIT SECTION */
+  .credits {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .credits-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .credits-inner::after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .avatar {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .avatar::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.5;
+  }
+
+  .credits-info h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .credits-info .handle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .credits-info p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 1.5rem;
+  }
+  .credit-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .ack-row {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    grid-column: 1 / -1;
+  }
+  .ack-row h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-family: 'Space Mono', monospace;
+  }
+  .ack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .ack-tag {
+    padding: 6px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+
+  /* ROADMAP */
+  .roadmap {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .roadmap-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .roadmap-card.current {
+    border-color: rgba(0,229,160,0.4);
+    background: rgba(0,229,160,0.04);
+  }
+
+  .version-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+  .v-done { background: rgba(0,229,160,0.1); color: var(--accent); border: 1px solid rgba(0,229,160,0.2); }
+  .v-current { background: rgba(0,184,255,0.1); color: var(--accent2); border: 1px solid rgba(0,184,255,0.2); }
+  .v-future { background: rgba(255,107,53,0.1); color: var(--accent3); border: 1px solid rgba(255,107,53,0.2); }
+
+  .roadmap-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .roadmap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .roadmap-item.done { color: var(--text); }
+  .check { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+  .todo { color: var(--dim); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+    font-family: 'Space Mono', monospace;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-ctas { animation-delay: 0.4s; }
+  .hero-stats { animation-delay: 0.5s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .terminal-wrap { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .credits-inner { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 3rem; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">EZ<span>lang</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#syntax">Syntax</a></li>
+    <li><a href="#libs">Libraries</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#credits">Credits</a></li>
+  </ul>
+  <a href="https://github.com/imabd645/EZ-language" target="_blank" class="nav-github">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+    GitHub
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    v1.2 — Actively Developed
+  </div>
+  <h1>
+    <span class="hi">Code</span><br>
+    <span class="h2">Naturally.</span><br>
+    <span class="h3">Think Freely.</span>
+  </h1>
+  <p class="hero-sub">
+    EZ is a dynamically-typed scripting language with English-like syntax, a full OOP system, async/await, garbage collection, native FFI, and a built-in package manager — all backed by a tight C++17 interpreter.
+  </p>
+  <div class="hero-ctas">
+    <a href="https://github.com/imabd645/EZ-language" target="_blank" class="btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      View on GitHub
+    </a>
+    <a href="#syntax" class="btn-secondary">Explore Syntax →</a>
+     <a href="https://ez-lang.site/guide.html" target="_blank" class="btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+      View Detailed Guide
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">194</span><span class="stat-label">Built-in functions</span></div>
+    <div class="stat"><span class="stat-num">9.5K</span><span class="stat-label">Lines of C++17</span></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">Standard libraries</span></div>
+    <div class="stat"><span class="stat-num">MIT</span><span class="stat-label">License</span></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TERMINAL / SYNTAX INTRO -->
+<div class="terminal-wrap" id="syntax">
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="t-dot t-red"></div>
+      <div class="t-dot t-yellow"></div>
+      <div class="t-dot t-green"></div>
+      <span class="terminal-title">hello.ez</span>
+    </div>
+    <div class="terminal-body"><pre><span class="c-comment">// EZ — readable by design</span>
+
+<span class="c-comment">// Variables — no keywords needed</span>
+<span class="c-id">name</span> <span class="c-op">=</span> <span class="c-str">"Alice"</span>
+<span class="c-id">score</span> <span class="c-op">=</span> <span class="c-num">95</span>
+
+<span class="c-comment">// Conditionals use 'when' / 'other'</span>
+<span class="c-kw">when</span> <span class="c-id">score</span> <span class="c-op">>=</span> <span class="c-num">90</span> {
+    <span class="c-fn">out</span> <span class="c-str">"Grade: A — Well done, "</span> <span class="c-op">+</span> <span class="c-id">name</span>
+} <span class="c-kw">other</span> {
+    <span class="c-fn">out</span> <span class="c-str">"Keep going!"</span>
+}
+
+<span class="c-comment">// Functions are 'task'</span>
+<span class="c-kw2">task</span> <span class="c-fn">greet</span>(<span class="c-id">person</span>) {
+    <span class="c-kw">give</span> <span class="c-str">"Hello, "</span> <span class="c-op">+</span> <span class="c-id">person</span> <span class="c-op">+</span> <span class="c-str">"!"</span>
+}
+
+<span class="c-fn">out</span> <span class="c-fn">greet</span>(<span class="c-str">"World"</span>)
+
+<span class="c-comment">// Async is native</span>
+<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchData</span>(<span class="c-id">url</span>) {
+    <span class="c-id">resp</span> <span class="c-op">=</span> <span class="c-fn">http_get</span>(<span class="c-id">url</span>)
+    <span class="c-kw">give</span> <span class="c-fn">parse_json</span>(<span class="c-id">resp</span>)
+}
+
+<span class="c-id">result</span> <span class="c-op">=</span> <span class="c-fn">await</span> <span class="c-fn">fetchData</span>(<span class="c-str">"https://api.example.com"</span>)</pre></div>
+  </div>
+
+  <div class="terminal-info">
+    <h2>Keywords that <em>speak</em> to you</h2>
+    <p>EZ replaces cryptic programmer shorthand with plain English. Loops, conditionals, functions, and returns all map to words you already know.</p>
+    <p>Under the hood it's a full tree-walk interpreter with TCO, closures, a mark-and-sweep GC, and real OS threading — zero compromises on capability.</p>
+    <div class="keyword-pills">
+      <span class="pill"><span class="pill-kw">when</span> <span class="pill-arrow">→</span> if</span>
+      <span class="pill"><span class="pill-kw">other</span> <span class="pill-arrow">→</span> else</span>
+      <span class="pill"><span class="pill-kw">task</span> <span class="pill-arrow">→</span> function</span>
+      <span class="pill"><span class="pill-kw">give</span> <span class="pill-arrow">→</span> return</span>
+      <span class="pill"><span class="pill-kw">out</span> <span class="pill-arrow">→</span> print</span>
+      <span class="pill"><span class="pill-kw">repeat…to</span> <span class="pill-arrow">→</span> for</span>
+      <span class="pill"><span class="pill-kw">in</span> <span class="pill-arrow">→</span> for-each</span>
+      <span class="pill"><span class="pill-kw">escape</span> <span class="pill-arrow">→</span> break</span>
+      <span class="pill"><span class="pill-kw">skip</span> <span class="pill-arrow">→</span> continue</span>
+      <span class="pill"><span class="pill-kw">model</span> <span class="pill-arrow">→</span> class</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <p class="section-label">// What EZ brings</p>
+  <h2 class="section-title">A complete language ecosystem</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚙️</div>
+      <h3>Tree-Walk Interpreter</h3>
+      <p>Built in C++17 with a recursive-descent parser, AST node visitor, and a 50,000-threshold mark-and-sweep garbage collector.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>Tail Call Optimization</h3>
+      <p>Parser marks tail-position calls; interpreter uses an exception-based trampoline so deeply recursive EZ programs never blow the stack.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Async / Await</h3>
+      <p>Async functions spawn real OS threads via <code>std::async</code>, returning futures. <code>await</code> blocks until resolved. <code>spawn()</code> is fire-and-forget.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏛️</div>
+      <h3>Full OOP System</h3>
+      <p>Classes (<code>model</code>), single inheritance (<code>extends</code>), <code>super</code>, <code>self</code>, visibility (<code>hidden</code>/<code>shown</code>), <code>static</code> members, and interfaces.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔌</div>
+      <h3>Native FFI</h3>
+      <p>Load any DLL, resolve function pointers, and call into system APIs directly from EZ. Full raw memory read/write with pointer arithmetic.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🖼️</div>
+      <h3>GUI Framework v6</h3>
+      <p>50+ WinAPI wrappers: windows, buttons, inputs, listviews, tabs, timers, drag-and-drop, color picker, canvas drawing, Windows 11 dark mode.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📦</div>
+      <h3>Built-in Package Manager</h3>
+      <p>Install, list, and init packages directly via <code>ez install</code>. Packages live on GitHub under the <code>EZ</code> prefix. JSON manifest format.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <h3>Concurrency Primitives</h3>
+      <p>GC-managed <code>mutex</code> objects, <code>lock()</code>/<code>unlock()</code>, <code>atomic_add</code>/<code>atomic_inc</code>/<code>atomic_dec</code> for lock-free counters.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <h3>Metaprogramming</h3>
+      <p><code>getattr</code>, <code>setattr</code>, <code>hasattr</code>, dynamic <code>eval()</code>, and <code>type()</code>/<code>typeOf()</code> for runtime reflection and code generation.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CODE EXAMPLES TABS -->
+<section class="advanced" id="examples">
+  <p class="section-label">// Code samples</p>
+  <h2 class="section-title">See it in action</h2>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('oop')">OOP</button>
+    <button class="tab-btn" onclick="showTab('async')">Async</button>
+    <button class="tab-btn" onclick="showTab('error')">Error Handling</button>
+    <button class="tab-btn" onclick="showTab('web')">Web Server</button>
+    <button class="tab-btn" onclick="showTab('ffi')">FFI</button>
+  </div>
+  <div class="code-block">
+    <div id="tab-oop" class="tab-panel active">
+      <pre><span class="c-comment">// Object-Oriented Programming</span>
+
+<span class="c-kw2">model</span> <span class="c-id">Animal</span> {
+    <span class="c-kw2">init</span>(<span class="c-id">name</span>, <span class="c-id">species</span>) {
+        <span class="c-kw">self</span>.name    <span class="c-op">=</span> <span class="c-id">name</span>
+        <span class="c-kw">self</span>.species <span class="c-op">=</span> <span class="c-id">species</span>
+    }
+    <span class="c-kw2">task</span> <span class="c-fn">speak</span>() {
+        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" says hello!"</span>
+    }
+}
+
+<span class="c-kw2">model</span> <span class="c-id">Dog</span> <span class="c-kw">extends</span> <span class="c-id">Animal</span> {
+    <span class="c-kw2">init</span>(<span class="c-id">name</span>) {
+        <span class="c-fn">super</span>(<span class="c-id">name</span>, <span class="c-str">"Canis familiaris"</span>)
+        <span class="c-kw">self</span>.tricks <span class="c-op">=</span> []
+    }
+    <span class="c-kw2">task</span> <span class="c-fn">learn</span>(<span class="c-id">trick</span>) {
+        <span class="c-fn">push</span>(<span class="c-kw">self</span>.tricks, <span class="c-id">trick</span>)
+        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" learned: "</span> <span class="c-op">+</span> <span class="c-id">trick</span>
+    }
+    <span class="c-kw2">task</span> <span class="c-fn">speak</span>() {
+        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" says: Woof!"</span>
+    }
+}
+
+<span class="c-id">rex</span> <span class="c-op">=</span> <span class="c-kw">new</span> <span class="c-id">Dog</span>(<span class="c-str">"Rex"</span>)
+<span class="c-id">rex</span>.<span class="c-fn">speak</span>()
+<span class="c-id">rex</span>.<span class="c-fn">learn</span>(<span class="c-str">"sit"</span>)
+<span class="c-id">rex</span>.<span class="c-fn">learn</span>(<span class="c-str">"roll over"</span>)
+<span class="c-fn">out</span> <span class="c-str">"Tricks: "</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-id">rex</span>.tricks)</pre>
+    </div>
+    <div id="tab-async" class="tab-panel">
+      <pre><span class="c-comment">// Async / Await — real OS threads</span>
+
+<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchUser</span>(<span class="c-id">id</span>) {
+    <span class="c-id">url</span>  <span class="c-op">=</span> <span class="c-str">"https://api.example.com/users/"</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-id">id</span>)
+    <span class="c-id">data</span> <span class="c-op">=</span> <span class="c-fn">http_get</span>(<span class="c-id">url</span>)
+    <span class="c-kw">give</span> <span class="c-fn">parse_json</span>(<span class="c-id">data</span>)
+}
+
+<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchAll</span>(<span class="c-id">ids</span>) {
+    <span class="c-id">futures</span> <span class="c-op">=</span> []
+    <span class="c-kw">repeat</span> <span class="c-id">id</span> <span class="c-kw">in</span> <span class="c-id">ids</span> {
+        <span class="c-fn">push</span>(<span class="c-id">futures</span>, <span class="c-fn">fetchUser</span>(<span class="c-id">id</span>))
+    }
+    <span class="c-id">results</span> <span class="c-op">=</span> []
+    <span class="c-kw">repeat</span> <span class="c-id">f</span> <span class="c-kw">in</span> <span class="c-id">futures</span> {
+        <span class="c-fn">push</span>(<span class="c-id">results</span>, <span class="c-fn">await</span> <span class="c-id">f</span>)
+    }
+    <span class="c-kw">give</span> <span class="c-id">results</span>
+}
+
+<span class="c-id">users</span> <span class="c-op">=</span> <span class="c-fn">await</span> <span class="c-fn">fetchAll</span>([<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>])
+<span class="c-fn">out</span> <span class="c-str">"Fetched "</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-fn">len</span>(<span class="c-id">users</span>)) <span class="c-op">+</span> <span class="c-str">" users"</span></pre>
+    </div>
+    <div id="tab-error" class="tab-panel">
+      <pre><span class="c-comment">// Exception handling with typed errors</span>
+
+<span class="c-kw2">task</span> <span class="c-fn">divide</span>(<span class="c-id">a</span>, <span class="c-id">b</span>) {
+    <span class="c-kw">when</span> <span class="c-id">b</span> <span class="c-op">==</span> <span class="c-num">0</span> {
+        <span class="c-kw">throw</span> <span class="c-kw">new</span> <span class="c-id">ValueError</span>(<span class="c-str">"Division by zero"</span>)
+    }
+    <span class="c-kw">give</span> <span class="c-id">a</span> <span class="c-op">/</span> <span class="c-id">b</span>
+}
+
+<span class="c-kw">try</span> {
+    <span class="c-id">result</span> <span class="c-op">=</span> <span class="c-fn">divide</span>(<span class="c-num">10</span>, <span class="c-num">0</span>)
+    <span class="c-fn">out</span> <span class="c-id">result</span>
+} <span class="c-kw">catch</span> (<span class="c-id">e</span>) {
+    <span class="c-fn">out</span> <span class="c-str">"Caught: "</span> <span class="c-op">+</span> <span class="c-id">e</span>.message
+    <span class="c-comment">// Full stack trace is available</span>
+}
+
+<span class="c-comment">// Custom error types via inheritance</span>
+<span class="c-kw2">model</span> <span class="c-id">AuthError</span> <span class="c-kw">extends</span> <span class="c-id">Error</span> {
+    <span class="c-kw2">init</span>(<span class="c-id">msg</span>, <span class="c-id">code</span>) {
+        <span class="c-kw">self</span>.message <span class="c-op">=</span> <span class="c-id">msg</span>
+        <span class="c-kw">self</span>.code    <span class="c-op">=</span> <span class="c-id">code</span>
+    }
+}
+
+<span class="c-kw">throw</span> <span class="c-kw">new</span> <span class="c-id">AuthError</span>(<span class="c-str">"Forbidden"</span>, <span class="c-num">403</span>)</pre>
+    </div>
+    <div id="tab-web" class="tab-panel">
+      <pre><span class="c-comment">// Production-grade native web server</span>
+<span class="c-kw2">use</span> <span class="c-str">"serve.ez"</span>
+
+<span class="c-id">app</span> <span class="c-op">=</span> <span class="c-fn">App</span>()
+
+<span class="c-id">app</span>.<span class="c-fn">get</span>(<span class="c-str">"/"</span>, |<span class="c-id">req</span>| {
+    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">200</span>, <span class="c-str">"body"</span>: <span class="c-str">"Welcome to EZ!"</span> }
+})
+
+<span class="c-id">app</span>.<span class="c-fn">get</span>(<span class="c-str">"/api/users"</span>, |<span class="c-id">req</span>| {
+    <span class="c-id">users</span> <span class="c-op">=</span> [
+        { <span class="c-str">"id"</span>: <span class="c-num">1</span>, <span class="c-str">"name"</span>: <span class="c-str">"Alice"</span> },
+        { <span class="c-str">"id"</span>: <span class="c-num">2</span>, <span class="c-str">"name"</span>: <span class="c-str">"Bob"</span>   }
+    ]
+    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">200</span>, <span class="c-str">"json"</span>: <span class="c-id">users</span> }
+})
+
+<span class="c-id">app</span>.<span class="c-fn">post</span>(<span class="c-str">"/api/data"</span>, |<span class="c-id">req</span>| {
+    <span class="c-id">body</span> <span class="c-op">=</span> <span class="c-fn">parse_json</span>(<span class="c-id">req</span>.body)
+    <span class="c-comment">// Process body.field ...</span>
+    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">201</span>, <span class="c-str">"body"</span>: <span class="c-str">"Created"</span> }
+})
+
+<span class="c-fn">out</span> <span class="c-str">"Server running on :8080"</span>
+<span class="c-id">app</span>.<span class="c-fn">listen</span>(<span class="c-num">8080</span>)</pre>
+    </div>
+    <div id="tab-ffi" class="tab-panel">
+      <pre><span class="c-comment">// Native FFI — call Windows APIs directly</span>
+
+<span class="c-comment">// Load Kernel32 dynamically</span>
+<span class="c-id">kernel32</span> <span class="c-op">=</span> <span class="c-fn">os_load_lib</span>(<span class="c-str">"kernel32.dll"</span>)
+<span class="c-id">beep</span>     <span class="c-op">=</span> <span class="c-fn">os_get_func</span>(<span class="c-id">kernel32</span>, <span class="c-str">"Beep"</span>)
+
+<span class="c-comment">// Call Beep(freq, duration)</span>
+<span class="c-fn">os_call</span>(<span class="c-id">beep</span>, [<span class="c-num">800</span>, <span class="c-num">300</span>])
+
+<span class="c-comment">// Allocate raw memory and write to it</span>
+<span class="c-id">ptr</span> <span class="c-op">=</span> <span class="c-fn">os_alloc</span>(<span class="c-num">64</span>)
+<span class="c-fn">os_write_string</span>(<span class="c-id">ptr</span>, <span class="c-str">"Hello from EZ memory!"</span>)
+<span class="c-id">val</span> <span class="c-op">=</span> <span class="c-fn">os_read_string_ptr</span>(<span class="c-id">ptr</span>)
+<span class="c-fn">out</span> <span class="c-id">val</span>
+<span class="c-fn">os_free</span>(<span class="c-id">ptr</span>)
+
+<span class="c-comment">// Use WinAPI MessageBox</span>
+<span class="c-id">user32</span> <span class="c-op">=</span> <span class="c-fn">os_load_lib</span>(<span class="c-str">"user32.dll"</span>)
+<span class="c-id">msgbox</span> <span class="c-op">=</span> <span class="c-fn">os_get_func</span>(<span class="c-id">user32</span>, <span class="c-str">"MessageBoxA"</span>)
+<span class="c-fn">os_call</span>(<span class="c-id">msgbox</span>, [<span class="c-num">0</span>, <span class="c-str">"Hello!"</span>, <span class="c-str">"EZ FFI"</span>, <span class="c-num">0</span>])</pre>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- LIBRARIES -->
+<section class="libs" id="libs">
+  <p class="section-label">// Standard Library</p>
+  <h2 class="section-title">Batteries included</h2>
+  <p style="color:var(--muted); margin-bottom:2.5rem; font-size:0.9rem; max-width:560px;">EZ keeps the binary lean. Extended capabilities are modular packages installed via the built-in package manager.</p>
+  <div class="libs-grid">
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">🖥️</span>
+        <span class="lib-name">os.ez</span>
+        <span class="lib-install">ez install os</span>
+      </div>
+      <p>Access environment variables, clipboard read/write, and process management. Implemented in pure EZ via native FFI over Kernel32.</p>
+      <div class="lib-tags">
+        <span class="tag">env vars</span>
+        <span class="tag">clipboard</span>
+        <span class="tag">processes</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">📁</span>
+        <span class="lib-name">fs.ez</span>
+        <span class="lib-install">ez install fs</span>
+      </div>
+      <p>Hardened filesystem operations using Kernel32 — list directories, check existence, get file size, copy, move, and delete with proper error handling.</p>
+      <div class="lib-tags">
+        <span class="tag">listDir</span>
+        <span class="tag">exists</span>
+        <span class="tag">size</span>
+        <span class="tag">copy/move</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">🌐</span>
+        <span class="lib-name">serve.ez</span>
+        <span class="lib-install">ez install serve</span>
+      </div>
+      <p>DDoS-resistant, Express-style HTTP server running on native WS2_32 TCP sockets. Supports GET, POST, middleware, and JSON responses.</p>
+      <div class="lib-tags">
+        <span class="tag">HTTP</span>
+        <span class="tag">routing</span>
+        <span class="tag">middleware</span>
+        <span class="tag">native TCP</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">🔐</span>
+        <span class="lib-name">crypto.ez</span>
+        <span class="lib-install">ez install crypto</span>
+      </div>
+      <p>Cryptography primitives in pure EZ — Base64 encode/decode, RC4 symmetric cipher, and hash utilities for authentication workflows.</p>
+      <div class="lib-tags">
+        <span class="tag">base64</span>
+        <span class="tag">RC4</span>
+        <span class="tag">hashing</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">🔔</span>
+        <span class="lib-name">notify.ez</span>
+        <span class="lib-install">ez install notify</span>
+      </div>
+      <p>Windows system tray balloon notifications. Supports info, warning, and error icon types with custom title and message text.</p>
+      <div class="lib-tags">
+        <span class="tag">tray</span>
+        <span class="tag">balloon tips</span>
+        <span class="tag">icons</span>
+      </div>
+    </div>
+    <div class="lib-card">
+      <div class="lib-header">
+        <span class="lib-icon">🗄️</span>
+        <span class="lib-name">SQLite ORM</span>
+        <span class="lib-install">built-in FFI</span>
+      </div>
+      <p>Embedded SQLite3 database access via the FFI layer. Perform queries, parameterized statements, and schema migrations from EZ scripts.</p>
+      <div class="lib-tags">
+        <span class="tag">SQLite3</span>
+        <span class="tag">queries</span>
+        <span class="tag">params</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ROADMAP -->
+<section class="roadmap" id="roadmap">
+  <p class="section-label">// Where we're headed</p>
+  <h2 class="section-title">Roadmap</h2>
+  <div class="roadmap-grid">
+    <div class="roadmap-card">
+      <span class="version-tag v-done">v1.1 — Stable</span>
+      <h3>Foundation</h3>
+      <div class="roadmap-item done"><span class="check">✓</span> Native FFI Core Integration</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Modular stdlib (os, fs, net)</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Java-style stack traces</div>
+      <div class="roadmap-item done"><span class="check">✓</span> DDoS-resistant TCP server</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Metaprogramming (getattr/setattr)</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Variadic functions &amp; spread</div>
+    </div>
+    <div class="roadmap-card current">
+      <span class="version-tag v-current">v1.2 — Current</span>
+      <h3>GUI &amp; DX</h3>
+      <div class="roadmap-item done"><span class="check">✓</span> Native GUI Layer v6.0</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Windows 11 dark mode aesthetics</div>
+      <div class="roadmap-item done"><span class="check">✓</span> Concurrency primitives (mutex/atomic)</div>
+      <div class="roadmap-item"><span class="todo">○</span> Debugger support</div>
+      <div class="roadmap-item"><span class="todo">○</span> Performance profiler</div>
+      <div class="roadmap-item"><span class="todo">○</span> Package Registry</div>
+    </div>
+    <div class="roadmap-card">
+      <span class="version-tag v-future">v2.0 — Vision</span>
+      <h3>Next Horizon</h3>
+      <div class="roadmap-item"><span class="todo">○</span> Optional static typing</div>
+      <div class="roadmap-item"><span class="todo">○</span> VS Code extension</div>
+      <div class="roadmap-item"><span class="todo">○</span> Cross-platform FFI (Linux/macOS)</div>
+      <div class="roadmap-item"><span class="todo">○</span> WebAssembly target</div>
+      <div class="roadmap-item"><span class="todo">○</span> JIT compilation research</div>
+      <div class="roadmap-item"><span class="todo">○</span> Pattern matching</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CREDITS -->
+<section class="credits" id="credits">
+  <p class="section-label">// The maker</p>
+  <h2 class="section-title">Built by a builder</h2>
+  <div class="credits-inner">
+    <div class="avatar">AM</div>
+    <div class="credits-info">
+      <h3>Abdullah Masood</h3>
+      <div class="handle">@imabd645</div>
+      <p>Software engineering student at UET Lahore and the sole author of the EZ language — every lexer token, parser rule, GC cycle, and GUI binding. EZ is a testament to what deep curiosity and 9,500 lines of C++17 can produce.</p>
+      <div class="credit-links">
+        <a href="https://github.com/imabd645/EZ-language" target="_blank" class="btn-primary" style="font-size:0.78rem; padding:10px 20px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+          GitHub Profile
+        </a>
+        <a href="https://github.com/imabd645/EZ-language/issues" target="_blank" class="btn-secondary" style="font-size:0.78rem; padding:10px 20px;">
+          Report Issue
+        </a>
+      </div>
+    </div>
+    <div class="ack-row">
+      <h4>Inspired by &amp; built with</h4>
+      <div class="ack-tags">
+        <span class="ack-tag">🐍 Python — design philosophy</span>
+        <span class="ack-tag">🌙 Lua — embedding simplicity</span>
+        <span class="ack-tag">📖 Crafting Interpreters (Lox) — tree-walk pattern</span>
+        <span class="ack-tag">🗄️ SQLite3 — embedded database</span>
+        <span class="ack-tag">🌐 cURL — HTTP networking</span>
+        <span class="ack-tag">🔒 OpenSSL — crypto primitives</span>
+        <span class="ack-tag">⚙️ C++17 — the backbone</span>
+        <span class="ack-tag">🪟 WinAPI — GUI &amp; FFI layer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EZlang</div>
+  <p class="footer-copy">© 2024 Abdullah Masood · MIT License</p>
+  <ul class="footer-links">
+    <li><a href="https://github.com/imabd645/EZ-language" target="_blank">GitHub</a></li>
+    <li><a href="https://github.com/imabd645/EZ-language/issues" target="_blank">Issues</a></li>
+    <li><a href="https://github.com/imabd645/EZ-language/discussions" target="_blank">Discuss</a></li>
+    <li><a href="https://github.com/imabd645/EZ-language/blob/main/LICENSE" target="_blank">License</a></li>
+  </ul>
+</footer>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Intersection observer for scroll-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.feature-card, .lib-card, .roadmap-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
