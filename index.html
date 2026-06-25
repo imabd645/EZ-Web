@@ -3,1331 +3,2259 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EZ Language — Code Naturally</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<title>EZ Language — Documentation</title>
 <style>
-  :root {
-    --bg: #0a0c10;
-    --surface: #0f1319;
-    --card: #141820;
-    --border: #1e2530;
-    --accent: #00e5a0;
-    --accent2: #00b8ff;
-    --accent3: #ff6b35;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --dim: #374151;
-    --glow: 0 0 30px rgba(0,229,160,0.15);
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  :root {
+    --bg: #F7F8FC;
+    --surface: #FFFFFF;
+    --border: #E2E6F0;
+    --border-light: #EDF0F7;
+    --text: #1A1D2E;
+    --text-2: #4A5068;
+    --text-3: #8892AA;
+    --accent: #5B4EF8;
+    --accent-light: #EEF0FF;
+    --accent-2: #06B89A;
+    --accent-2-light: #E8FAF6;
+    --warn: #F59E0B;
+    --warn-light: #FFFBEB;
+    --danger: #EF4444;
+    --danger-light: #FEF2F2;
+    --keyword: #7C3AED;
+    --string: #059669;
+    --number: #D97706;
+    --comment: #94A3B8;
+    --builtin: #0EA5E9;
+    --type: #DB2777;
+    --shadow-sm: 0 1px 3px rgba(26,29,46,0.06), 0 1px 2px rgba(26,29,46,0.04);
+    --shadow: 0 4px 16px rgba(26,29,46,0.08), 0 1px 4px rgba(26,29,46,0.04);
+    --shadow-lg: 0 12px 40px rgba(26,29,46,0.12);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
 
+  html { scroll-behavior: smooth; }
   body {
+    font-family: 'Inter', system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
+    font-size: 15px;
     line-height: 1.6;
+    min-height: 100vh;
   }
 
-  /* Grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* NAVBAR */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+  /* ── Header ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
     z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5%;
-    height: 64px;
-    background: rgba(10,12,16,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
   }
-
-  .nav-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.4rem;
-    font-weight: 700;
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
     color: var(--accent);
-    letter-spacing: -0.03em;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    letter-spacing: -0.5px;
   }
-  .nav-logo span { color: var(--text); }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.85rem;
+  .logo span { color: var(--text); }
+  .header-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-
-  .nav-github {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    border-radius: 4px;
-    text-decoration: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    transition: all 0.2s;
-  }
-  .nav-github:hover {
-    background: var(--accent);
-    color: var(--bg);
-    box-shadow: var(--glow);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
   }
 
-  /* SECTIONS */
-  section { position: relative; z-index: 1; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 5% 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-glow {
-    position: absolute;
-    top: 20%;
-    left: 30%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute;
-    top: 40%;
-    right: 10%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0,184,255,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(0,229,160,0.08);
-    border: 1px solid rgba(0,229,160,0.25);
-    border-radius: 100px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    width: fit-content;
-  }
-  .badge-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-    max-width: 900px;
-  }
-  .hero h1 .hi { color: var(--accent); }
-  .hero h1 .h2 { color: var(--text); }
-  .hero h1 .h3 { color: var(--muted); }
-
-  .hero-sub {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 560px;
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-    font-weight: 400;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 4rem;
-  }
-
-  .btn-primary {
-    padding: 14px 28px;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    border-radius: 4px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s;
-    box-shadow: 0 0 20px rgba(0,229,160,0.3);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 40px rgba(0,229,160,0.5);
-  }
-
-  .btn-secondary {
-    padding: 14px 28px;
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .stat-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: -0.03em;
-  }
-  .stat-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  /* CODE TERMINAL */
-  .terminal-wrap {
-    padding: 80px 5%;
+  /* ── Layout ── */
+  .shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    align-items: start;
   }
 
-  .terminal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
+  /* ── Sidebar nav ── */
+  .sidebar {
+    position: sticky;
+    top: 92px;
   }
-  .terminal-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-  }
-  .t-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .t-red { background: #ff5f57; }
-  .t-yellow { background: #febc2e; }
-  .t-green { background: #28c840; }
-  .terminal-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 0.06em;
-  }
-
-  .terminal-body {
-    padding: 24px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
-    line-height: 1.9;
-    overflow-x: auto;
-  }
-
-  .c-comment { color: #4a5568; }
-  .c-kw { color: var(--accent); }
-  .c-kw2 { color: var(--accent2); }
-  .c-str { color: #f6c90e; }
-  .c-num { color: var(--accent3); }
-  .c-fn { color: #c084fc; }
-  .c-op { color: var(--muted); }
-  .c-id { color: var(--text); }
-  .c-out { color: var(--accent); }
-
-  .terminal-info h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  .terminal-info h2 em {
-    font-style: normal;
-    color: var(--accent);
-  }
-  .terminal-info p {
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-
-  .keyword-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 1.5rem;
-  }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text);
-  }
-  .pill-kw { color: var(--accent); }
-  .pill-arrow { color: var(--muted); font-size: 0.65rem; }
-
-  /* FEATURES */
-  .features {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
+  .nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    margin-bottom: 0.8rem;
+    color: var(--text-3);
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+  .nav-list { list-style: none; }
+  .nav-list li + li { margin-top: 2px; }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { background: var(--border-light); color: var(--text); }
+  .nav-btn.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+  .nav-icon { font-size: 15px; flex-shrink: 0; }
+  .nav-count {
+    margin-left: auto;
+    font-size: 11px;
+    background: var(--border);
+    color: var(--text-3);
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .nav-btn.active .nav-count { background: var(--accent); color: #fff; }
+
+  /* ── Content sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── Section header ── */
+  .section-hero {
+    background: linear-gradient(135deg, var(--accent-light) 0%, #F0F4FF 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
   }
   .section-title {
-    font-size: 2.5rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
     font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .feature-card {
-    background: var(--surface);
-    padding: 2rem;
-    transition: background 0.2s;
-    position: relative;
-  }
-  .feature-card:hover { background: var(--card); }
-  .feature-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .feature-card:hover::after { opacity: 1; }
-
-  .feature-icon {
-    width: 40px; height: 40px;
-    background: rgba(0,229,160,0.08);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(0,229,160,0.15);
-  }
-  .feature-card h3 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-  .feature-card p {
-    color: var(--muted);
-    font-size: 0.83rem;
-    line-height: 1.7;
-  }
-
-  /* LIBRARIES */
-  .libs {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .libs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-
-  .lib-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .lib-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--accent);
-    transform: scaleY(0);
-    transition: transform 0.2s;
-    transform-origin: bottom;
-  }
-  .lib-card:hover { border-color: rgba(0,229,160,0.3); transform: translateY(-2px); }
-  .lib-card:hover::before { transform: scaleY(1); }
-
-  .lib-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.8rem;
-  }
-  .lib-icon {
-    font-size: 1.2rem;
-  }
-  .lib-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .lib-install {
-    margin-left: auto;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    background: var(--card);
-    padding: 3px 8px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-  }
-  .lib-card p {
-    color: var(--muted);
-    font-size: 0.82rem;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-  }
-  .lib-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--accent2);
-    background: rgba(0,184,255,0.06);
-    border: 1px solid rgba(0,184,255,0.15);
-    padding: 2px 8px;
-    border-radius: 3px;
-  }
-
-  /* ADVANCED SECTION */
-  .advanced {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-  }
-  .tab-btn.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-  .tab-btn:hover { color: var(--text); }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  .code-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-  }
-  .code-block pre {
-    padding: 28px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
-    line-height: 1.9;
-    overflow-x: auto;
     color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
   }
+  .section-desc { color: var(--text-2); font-size: 15px; line-height: 1.6; }
 
-  /* CREDIT SECTION */
-  .credits {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .credits-inner {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 3rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .credits-inner::after {
-    content: '';
-    position: absolute;
-    top: -50%; right: -10%;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .avatar {
-    width: 110px; height: 110px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+  /* ── Navigation controls ── */
+  .section-nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--bg);
-    font-family: 'Space Mono', monospace;
-    flex-shrink: 0;
-    position: relative;
-  }
-  .avatar::after {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    z-index: -1;
-    filter: blur(8px);
-    opacity: 0.5;
-  }
-
-  .credits-info h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.3rem;
-  }
-  .credits-info .handle {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .credits-info p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    max-width: 560px;
-    margin-bottom: 1.5rem;
-  }
-  .credit-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .ack-row {
-    margin-top: 2rem;
-    padding-top: 2rem;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 24px;
     border-top: 1px solid var(--border);
-    grid-column: 1 / -1;
   }
-  .ack-row h4 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    font-family: 'Space Mono', monospace;
-  }
-  .ack-tags {
+  .nav-control {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
   }
-  .ack-tag {
-    padding: 6px 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 0.8rem;
-    color: var(--text);
-  }
-
-  /* ROADMAP */
-  .roadmap {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .roadmap-card {
+  .btn-prev {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
+    color: var(--text-2);
   }
-  .roadmap-card.current {
-    border-color: rgba(0,229,160,0.4);
-    background: rgba(0,229,160,0.04);
+  .btn-prev:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-next {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(91,78,248,0.3);
+  }
+  .btn-next:hover { background: #4A3DE8; box-shadow: 0 4px 16px rgba(91,78,248,0.35); }
+  .btn-disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+  .section-progress {
+    font-size: 12px;
+    color: var(--text-3);
+    font-weight: 500;
   }
 
-  .version-tag {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 3px 10px;
-    border-radius: 3px;
-    margin-bottom: 1rem;
+  /* ── Cards & grids ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
   }
-  .v-done { background: rgba(0,229,160,0.1); color: var(--accent); border: 1px solid rgba(0,229,160,0.2); }
-  .v-current { background: rgba(0,184,255,0.1); color: var(--accent2); border: 1px solid rgba(0,184,255,0.2); }
-  .v-future { background: rgba(255,107,53,0.1); color: var(--accent3); border: 1px solid rgba(255,107,53,0.2); }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
 
-  .roadmap-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  /* ── Code blocks ── */
+  .code-block {
+    background: #1E2235;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
   }
-  .roadmap-item {
+  .code-bar {
+    background: #252940;
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .code-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .code-dot.red { background: #FF5F57; }
+  .code-dot.yellow { background: #FFBD2E; }
+  .code-dot.green { background: #28CA41; }
+  .code-filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-left: 4px;
+  }
+  .code-body {
+    padding: 18px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #CDD6F4;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  /* Syntax colors */
+  .kw { color: #CBA6F7; font-weight: 500; }
+  .str { color: #A6E3A1; }
+  .num { color: #FAB387; }
+  .cmt { color: #6C7086; font-style: italic; }
+  .fn { color: #89B4FA; }
+  .type { color: #F38BA8; }
+  .op { color: #89DCEB; }
+  .var { color: #CDD6F4; }
+  .interp { color: #F9E2AF; }
+
+  /* ── Keyword tags ── */
+  .kw-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .kw-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+    cursor: default;
+  }
+  .kw-tag.control { background: #F3F0FF; color: #6D28D9; border: 1px solid #DDD6FE; }
+  .kw-tag.oop { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
+  .kw-tag.async { background: #F0FDF4; color: #15803D; border: 1px solid #BBF7D0; }
+  .kw-tag.contract { background: #FFF1F2; color: #BE123C; border: 1px solid #FECDD3; }
+  .kw-tag.literal { background: #F0F9FF; color: #0369A1; border: 1px solid #BAE6FD; }
+  .kw-tag.module { background: #FAFAF5; color: #713F12; border: 1px solid #FEF08A; }
+  .kw-tag.error { background: #FFF7ED; color: #B45309; border: 1px solid #FDE68A; }
+
+  /* ── Operator table ── */
+  .op-table { width: 100%; border-collapse: collapse; }
+  .op-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .op-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 13.5px;
+    vertical-align: top;
+  }
+  .op-table tr:last-child td { border-bottom: none; }
+  .op-table tr:hover td { background: var(--bg); }
+  .op-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ── Feature pills ── */
+  .feature-list { list-style: none; }
+  .feature-list li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    padding: 6px 0;
-    font-size: 0.82rem;
-    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
   }
-  .roadmap-item.done { color: var(--text); }
-  .check { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
-  .todo { color: var(--dim); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 3rem 5%;
-    max-width: 1200px;
-    margin: 0 auto;
+  /* ── Info / warn / tip boxes ── */
+  .info-box {
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 14px 0;
+    display: flex;
+    gap: 12px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .info-box.tip { background: var(--accent-2-light); border-left: 3px solid var(--accent-2); }
+  .info-box.warn { background: var(--warn-light); border-left: 3px solid var(--warn); }
+  .info-box.new { background: var(--accent-light); border-left: 3px solid var(--accent); }
+  .info-box.danger { background: var(--danger-light); border-left: 3px solid var(--danger); }
+  .info-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .info-box strong { font-weight: 700; display: block; margin-bottom: 3px; }
+
+  /* ── Inline code ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    background: var(--border-light);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* ── Section subtitle ── */
+  .sub-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 28px 0 12px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: gap;
-    gap: 1rem;
+    gap: 8px;
   }
-
-  .footer-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .footer-copy {
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-  }
-  .footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: color 0.2s;
-    font-family: 'Space Mono', monospace;
-  }
-  .footer-links a:hover { color: var(--accent); }
-
-  /* DIVIDER */
-  .section-divider {
+  .sub-title::after {
+    content: '';
+    flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    max-width: 1200px;
-    margin: 0 auto;
+    background: var(--border);
+    margin-left: 8px;
   }
 
-  /* ANIMATIONS */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* ── Badge ── */
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    vertical-align: middle;
   }
-  .hero > * {
-    animation: fadeInUp 0.6s ease both;
-  }
-  .hero-badge { animation-delay: 0.1s; }
-  .hero h1 { animation-delay: 0.2s; }
-  .hero-sub { animation-delay: 0.3s; }
-  .hero-ctas { animation-delay: 0.4s; }
-  .hero-stats { animation-delay: 0.5s; }
+  .badge.new { background: var(--accent); color: #fff; }
+  .badge.improved { background: var(--accent-2); color: #fff; }
+  .badge.deprecated { background: var(--warn); color: #fff; }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .terminal-wrap { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr 1fr; }
-    .roadmap-grid { grid-template-columns: 1fr; }
-    .credits-inner { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .hero h1 { font-size: 3rem; }
+  /* ── Builtins grid ── */
+  .builtin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .builtin-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 6px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--builtin);
+    font-weight: 500;
+    text-align: center;
   }
-  @media (max-width: 600px) {
-    .features-grid { grid-template-columns: 1fr; }
+  .builtin-tag:hover { border-color: var(--accent); background: var(--accent-light); }
+
+  /* ── Progress dots ── */
+  .progress-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
   }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.3); }
+
+  p { color: var(--text-2); margin-bottom: 12px; font-size: 14px; }
+  h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  ul { padding-left: 20px; color: var(--text-2); font-size: 14px; }
+  ul li { margin-bottom: 5px; }
+  .mt-4 { margin-top: 16px; }
+  .mb-4 { margin-bottom: 16px; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">EZ<span>lang</span></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#syntax">Syntax</a></li>
-    <li><a href="#libs">Libraries</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#credits">Credits</a></li>
-  </ul>
-  <a href="https://github.com/imabd645/EZ-language" target="_blank" class="nav-github">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-    GitHub
-  </a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-badge">
-    <span class="badge-dot"></span>
-    v1.2 — Actively Developed
+<header>
+  <div class="header-inner">
+    <div class="logo">EZ<span> Language</span></div>
+    <div class="header-badge">v2.0 — Windows</div>
   </div>
-  <h1>
-    <span class="hi">Code</span><br>
-    <span class="h2">Naturally.</span><br>
-    <span class="h3">Think Freely.</span>
-  </h1>
-  <p class="hero-sub">
-    EZ is a dynamically-typed scripting language with English-like syntax, a full OOP system, async/await, garbage collection, native FFI, and a built-in package manager — all backed by a tight C++17 interpreter.
-  </p>
-  <div class="hero-ctas">
-    <a href="https://github.com/imabd645/EZ-language" target="_blank" class="btn-primary">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-      View on GitHub
-    </a>
-    <a href="#syntax" class="btn-secondary">Explore Syntax →</a>
-     <a href="https://ez-lang.site/guide.html" target="_blank" class="btn-primary">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-      View Detailed Guide
-    </a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">194</span><span class="stat-label">Built-in functions</span></div>
-    <div class="stat"><span class="stat-num">9.5K</span><span class="stat-label">Lines of C++17</span></div>
-    <div class="stat"><span class="stat-num">5</span><span class="stat-label">Standard libraries</span></div>
-    <div class="stat"><span class="stat-num">MIT</span><span class="stat-label">License</span></div>
-  </div>
-</section>
+</header>
 
-<div class="section-divider"></div>
+<div class="shell">
 
-<!-- TERMINAL / SYNTAX INTRO -->
-<div class="terminal-wrap" id="syntax">
-  <div class="terminal">
-    <div class="terminal-bar">
-      <div class="t-dot t-red"></div>
-      <div class="t-dot t-yellow"></div>
-      <div class="t-dot t-green"></div>
-      <span class="terminal-title">hello.ez</span>
-    </div>
-    <div class="terminal-body"><pre><span class="c-comment">// EZ — readable by design</span>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="nav-label">Documentation</div>
+    <ul class="nav-list">
+      <li><button class="nav-btn active" onclick="goTo(0)"><span class="nav-icon">🏠</span> Overview</button></li>
+      <li><button class="nav-btn" onclick="goTo(1)"><span class="nav-icon">🔑</span> Keywords <span class="nav-count">44</span></button></li>
+      <li><button class="nav-btn" onclick="goTo(2)"><span class="nav-icon">⚡</span> Operators <span class="nav-count">30+</span></button></li>
+      <li><button class="nav-btn" onclick="goTo(3)"><span class="nav-icon">📝</span> Basic Syntax</button></li>
+      <li><button class="nav-btn" onclick="goTo(4)"><span class="nav-icon">🔁</span> Loops</button></li>
+      <li><button class="nav-btn" onclick="goTo(5)"><span class="nav-icon">🧩</span> Functions</button></li>
+      <li><button class="nav-btn" onclick="goTo(6)"><span class="nav-icon">🏗️</span> OOP</button></li>
+      <li><button class="nav-btn" onclick="goTo(7)"><span class="nav-icon">📦</span> Modules</button></li>
+      <li><button class="nav-btn" onclick="goTo(8)"><span class="nav-icon">⚠️</span> Error Handling</button></li>
+      <li><button class="nav-btn" onclick="goTo(9)"><span class="nav-icon">🔀</span> Async & Concurrency</button></li>
+      <li><button class="nav-btn" onclick="goTo(10)"><span class="nav-icon">📋</span> Type System</button></li>
+      <li><button class="nav-btn" onclick="goTo(11)"><span class="nav-icon">🛡️</span> Contracts</button></li>
+      <li><button class="nav-btn" onclick="goTo(12)"><span class="nav-icon">🧱</span> Structs</button></li>
+      <li><button class="nav-btn" onclick="goTo(13)"><span class="nav-icon">🔧</span> Built-ins</button></li>
+      <li><button class="nav-btn" onclick="goTo(14)"><span class="nav-icon">🖥️</span> GUI</button></li>
+      <li><button class="nav-btn" onclick="goTo(15)"><span class="nav-icon">🔌</span> FFI</button></li>
+      <li><button class="nav-btn" onclick="goTo(16)"><span class="nav-icon">🛠️</span> CLI Tools</button></li>
+      <li><button class="nav-btn" onclick="goTo(17)"><span class="nav-icon">📚</span> Standard Library</button></li>
+      <li><button class="nav-btn" onclick="goTo(18)"><span class="nav-icon">🎨</span> Decorators <span class="nav-count">new</span></button></li>
+      <li><button class="nav-btn" onclick="goTo(19)"><span class="nav-icon">🔍</span> What's New v2.0</button></li>
+    </ul>
+  </nav>
 
-<span class="c-comment">// Variables — no keywords needed</span>
-<span class="c-id">name</span> <span class="c-op">=</span> <span class="c-str">"Alice"</span>
-<span class="c-id">score</span> <span class="c-op">=</span> <span class="c-num">95</span>
+  <!-- Content -->
+  <main>
 
-<span class="c-comment">// Conditionals use 'when' / 'other'</span>
-<span class="c-kw">when</span> <span class="c-id">score</span> <span class="c-op">>=</span> <span class="c-num">90</span> {
-    <span class="c-fn">out</span> <span class="c-str">"Grade: A — Well done, "</span> <span class="c-op">+</span> <span class="c-id">name</span>
-} <span class="c-kw">other</span> {
-    <span class="c-fn">out</span> <span class="c-str">"Keep going!"</span>
+    <!-- ═══════════════ 0: OVERVIEW ═══════════════ -->
+    <section class="section active" id="s0">
+      <div class="section-hero">
+        <div class="section-eyebrow">EZ Language Documentation</div>
+        <div class="section-title">A Modern Scripting Language for Windows</div>
+        <div class="section-desc">Bytecode-compiled, dynamically typed with optional gradual type hints, built-in GUI, SQLite, async/await, closures, Design by Contract, and a standalone bundler. Built from scratch in 6 months.</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">What EZ Is</div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">⚡</span> Bytecode VM with computed goto dispatch</li>
+            <li><span class="feature-icon">🗑️</span> Stop-the-world tri-color mark-sweep GC</li>
+            <li><span class="feature-icon">🔒</span> Gradual optional type system</li>
+            <li><span class="feature-icon">🛡️</span> Design by Contract (requires/ensures)</li>
+            <li><span class="feature-icon">🔁</span> Tail call optimization (TCO)</li>
+            <li><span class="feature-icon">🧵</span> Async/await + spawn threads</li>
+            <li><span class="feature-icon">📦</span> Standalone .exe bundler</li>
+            <li><span class="feature-icon">🖥️</span> Win32 GUI layer (60+ functions)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">New in v2.0</div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✨</span> Template strings with <code>`{expr}`</code> <span class="badge new">new</span></li>
+            <li><span class="feature-icon">🔗</span> Null coalescing <code>??</code> and optional chaining <code>?.</code> <span class="badge new">new</span></li>
+            <li><span class="feature-icon">📐</span> Struct keyword <span class="badge new">new</span></li>
+            <li><span class="feature-icon">🔢</span> Destructuring assignment <span class="badge new">new</span></li>
+            <li><span class="feature-icon">🚶</span> repeat...step (with negative step) <span class="badge new">new</span></li>
+            <li><span class="feature-icon">💾</span> .ezc bytecode compilation & caching <span class="badge new">new</span></li>
+            <li><span class="feature-icon">🩺</span> TypeChecker with warnings <span class="badge improved">improved</span></li>
+            <li><span class="feature-icon">🐛</span> Source snippets in error output <span class="badge improved">improved</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-title">Hello, EZ</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">hello.ez</div></div>
+        <div class="code-body"><span class="cmt"># Template strings — backtick syntax</span>
+name = <span class="str">"World"</span>
+<span class="kw">out</span> <span class="str">`Hello, <span class="interp">{name}</span>! 2 + 2 = <span class="interp">{2 + 2}</span>`</span>
+
+<span class="cmt"># Functions with type hints and contracts</span>
+<span class="kw">task</span> <span class="fn">divide</span>(a: <span class="type">int</span>, b: <span class="type">int</span>) -> <span class="type">int</span>
+    <span class="kw">requires</span> b != <span class="num">0</span>, <span class="str">"Cannot divide by zero"</span>
+    <span class="kw">ensures</span> result >= <span class="num">0</span>, <span class="str">"Result must be non-negative"</span>
+{
+    <span class="kw">give</span> a / b
 }
 
-<span class="c-comment">// Functions are 'task'</span>
-<span class="c-kw2">task</span> <span class="c-fn">greet</span>(<span class="c-id">person</span>) {
-    <span class="c-kw">give</span> <span class="c-str">"Hello, "</span> <span class="c-op">+</span> <span class="c-id">person</span> <span class="c-op">+</span> <span class="c-str">"!"</span>
+<span class="cmt"># OOP with inheritance</span>
+<span class="kw">model</span> Animal {
+    <span class="kw">init</span>(name) { <span class="kw">self</span>.name = name }
+    <span class="kw">task</span> <span class="fn">speak</span>() { <span class="kw">give</span> <span class="str">"..."</span> }
+}
+<span class="kw">model</span> Dog <span class="kw">extends</span> Animal {
+    <span class="kw">task</span> <span class="fn">speak</span>() { <span class="kw">give</span> <span class="str">`<span class="interp">{self.name}</span> says Woof!`</span> }
 }
 
-<span class="c-fn">out</span> <span class="c-fn">greet</span>(<span class="c-str">"World"</span>)
+dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>)
+<span class="kw">out</span> dog.<span class="fn">speak</span>()  <span class="cmt"># → Rex says Woof!</span></div>
+      </div>
 
-<span class="c-comment">// Async is native</span>
-<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchData</span>(<span class="c-id">url</span>) {
-    <span class="c-id">resp</span> <span class="c-op">=</span> <span class="c-fn">http_get</span>(<span class="c-id">url</span>)
-    <span class="c-kw">give</span> <span class="c-fn">parse_json</span>(<span class="c-id">resp</span>)
+      <div class="section-nav">
+        <button class="nav-control btn-prev btn-disabled">← Previous</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots"></div>
+          <div class="section-progress" id="progress-text">Section 1 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Keywords →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 1: KEYWORDS ═══════════════ -->
+    <section class="section" id="s1">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Keywords</div>
+        <div class="section-desc">EZ has 44 reserved keywords organised by category. Keywords cannot be used as variable or function names.</div>
+      </div>
+
+      <div class="sub-title">Control Flow</div>
+      <div class="kw-grid">
+        <span class="kw-tag control">when</span>
+        <span class="kw-tag control">other</span>
+        <span class="kw-tag control">while</span>
+        <span class="kw-tag control">repeat</span>
+        <span class="kw-tag control">to</span>
+        <span class="kw-tag control">step</span>
+        <span class="kw-tag control">get</span>
+        <span class="kw-tag control">in</span>
+        <span class="kw-tag control">escape</span>
+        <span class="kw-tag control">skip</span>
+        <span class="kw-tag control">match</span>
+        <span class="kw-tag control">give</span>
+      </div>
+
+      <div class="sub-title">Functions & Tasks</div>
+      <div class="kw-grid">
+        <span class="kw-tag control">task</span>
+        <span class="kw-tag control">out</span>
+        <span class="kw-tag control">new</span>
+      </div>
+
+      <div class="sub-title">OOP</div>
+      <div class="kw-grid">
+        <span class="kw-tag oop">model</span>
+        <span class="kw-tag oop">init</span>
+        <span class="kw-tag oop">self</span>
+        <span class="kw-tag oop">extends</span>
+        <span class="kw-tag oop">super</span>
+        <span class="kw-tag oop">hidden</span>
+        <span class="kw-tag oop">shown</span>
+        <span class="kw-tag oop">static</span>
+        <span class="kw-tag oop">interface</span>
+        <span class="kw-tag oop">implements</span>
+        <span class="kw-tag oop">struct</span>
+        <span class="kw-tag oop">export</span>
+      </div>
+
+      <div class="sub-title">Async & Concurrency</div>
+      <div class="kw-grid">
+        <span class="kw-tag async">async</span>
+        <span class="kw-tag async">await</span>
+      </div>
+
+      <div class="sub-title">Design by Contract</div>
+      <div class="kw-grid">
+        <span class="kw-tag contract">requires</span>
+        <span class="kw-tag contract">ensures</span>
+      </div>
+
+      <div class="sub-title">Error Handling</div>
+      <div class="kw-grid">
+        <span class="kw-tag error">try</span>
+        <span class="kw-tag error">catch</span>
+        <span class="kw-tag error">throw</span>
+      </div>
+
+      <div class="sub-title">Modules</div>
+      <div class="kw-grid">
+        <span class="kw-tag module">use</span>
+        <span class="kw-tag module">export</span>
+      </div>
+
+      <div class="sub-title">Literals & Logic</div>
+      <div class="kw-grid">
+        <span class="kw-tag literal">true</span>
+        <span class="kw-tag literal">false</span>
+        <span class="kw-tag literal">yes</span>
+        <span class="kw-tag literal">no</span>
+        <span class="kw-tag literal">nil</span>
+        <span class="kw-tag literal">and</span>
+        <span class="kw-tag literal">or</span>
+        <span class="kw-tag literal">not</span>
+      </div>
+
+      <div class="info-box tip mt-4">
+        <span class="info-icon">💡</span>
+        <div><strong>yes / no</strong> are aliases for <code>true</code> / <code>false</code> — use whichever reads more naturally in context.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Overview</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots1"></div>
+          <div class="section-progress">Section 2 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Operators →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 2: OPERATORS ═══════════════ -->
+    <section class="section" id="s2">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Operators</div>
+        <div class="section-desc">EZ supports arithmetic, comparison, logical, bitwise, and special operators. Operator overloading is supported via method names on models.</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Arithmetic</div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th><th>Example</th></tr>
+            <tr><td><span class="op-mono">+</span></td><td>Add / Concatenate</td><td><code>a + b</code></td></tr>
+            <tr><td><span class="op-mono">-</span></td><td>Subtract</td><td><code>a - b</code></td></tr>
+            <tr><td><span class="op-mono">*</span></td><td>Multiply</td><td><code>a * b</code></td></tr>
+            <tr><td><span class="op-mono">/</span></td><td>Divide</td><td><code>a / b</code></td></tr>
+            <tr><td><span class="op-mono">%</span></td><td>Modulo</td><td><code>a % b</code></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Comparison</div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th><th>Example</th></tr>
+            <tr><td><span class="op-mono">==</span></td><td>Equal</td><td><code>a == b</code></td></tr>
+            <tr><td><span class="op-mono">!=</span></td><td>Not equal</td><td><code>a != b</code></td></tr>
+            <tr><td><span class="op-mono">&lt;</span></td><td>Less than</td><td><code>a &lt; b</code></td></tr>
+            <tr><td><span class="op-mono">&lt;=</span></td><td>Less or equal</td><td><code>a &lt;= b</code></td></tr>
+            <tr><td><span class="op-mono">&gt;</span></td><td>Greater than</td><td><code>a &gt; b</code></td></tr>
+            <tr><td><span class="op-mono">&gt;=</span></td><td>Greater or equal</td><td><code>a &gt;= b</code></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Logical</div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th><th>Example</th></tr>
+            <tr><td><span class="op-mono">and</span></td><td>Logical AND</td><td><code>a and b</code></td></tr>
+            <tr><td><span class="op-mono">or</span></td><td>Logical OR</td><td><code>a or b</code></td></tr>
+            <tr><td><span class="op-mono">not</span></td><td>Logical NOT</td><td><code>not a</code></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Bitwise</div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th><th>Example</th></tr>
+            <tr><td><span class="op-mono">&amp;</span></td><td>Bitwise AND</td><td><code>a &amp; b</code></td></tr>
+            <tr><td><span class="op-mono">|</span></td><td>Bitwise OR</td><td><code>a | b</code></td></tr>
+            <tr><td><span class="op-mono">^</span></td><td>Bitwise XOR</td><td><code>a ^ b</code></td></tr>
+            <tr><td><span class="op-mono">~</span></td><td>Bitwise NOT</td><td><code>~a</code></td></tr>
+            <tr><td><span class="op-mono">&lt;&lt;</span></td><td>Left shift</td><td><code>a &lt;&lt; 2</code></td></tr>
+            <tr><td><span class="op-mono">&gt;&gt;</span></td><td>Right shift</td><td><code>a &gt;&gt; 2</code></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Assignment</div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th></tr>
+            <tr><td><span class="op-mono">=</span></td><td>Assign</td></tr>
+            <tr><td><span class="op-mono">+=</span></td><td>Add and assign</td></tr>
+            <tr><td><span class="op-mono">-=</span></td><td>Subtract and assign</td></tr>
+            <tr><td><span class="op-mono">*=</span></td><td>Multiply and assign</td></tr>
+            <tr><td><span class="op-mono">/=</span></td><td>Divide and assign</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Special <span class="badge new">new</span></div>
+          <table class="op-table">
+            <tr><th>Op</th><th>Description</th></tr>
+            <tr><td><span class="op-mono">??</span></td><td>Null coalescing</td></tr>
+            <tr><td><span class="op-mono">?.</span></td><td>Optional chaining</td></tr>
+            <tr><td><span class="op-mono">? :</span></td><td>Ternary conditional</td></tr>
+            <tr><td><span class="op-mono">...</span></td><td>Spread operator</td></tr>
+            <tr><td><span class="op-mono">-&gt;</span></td><td>Return type annotation</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub-title">Operator Overloading</div>
+      <p>Define methods on models with operator names to overload them:</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">overloading.ez</div></div>
+        <div class="code-body"><span class="kw">model</span> Vector {
+    <span class="kw">init</span>(x, y) { <span class="kw">self</span>.x = x  <span class="kw">self</span>.y = y }
+
+    <span class="kw">task</span> +(other)  { <span class="kw">give</span> Vector(<span class="kw">self</span>.x + other.x, <span class="kw">self</span>.y + other.y) }
+    <span class="kw">task</span> ==(other) { <span class="kw">give</span> <span class="kw">self</span>.x == other.x <span class="kw">and</span> <span class="kw">self</span>.y == other.y }
+    <span class="kw">task</span> neg()     { <span class="kw">give</span> Vector(-<span class="kw">self</span>.x, -<span class="kw">self</span>.y) }
 }
 
-<span class="c-id">result</span> <span class="c-op">=</span> <span class="c-fn">await</span> <span class="c-fn">fetchData</span>(<span class="c-str">"https://api.example.com"</span>)</pre></div>
-  </div>
+v1 = Vector(<span class="num">10</span>, <span class="num">20</span>)
+v2 = Vector(<span class="num">5</span>, <span class="num">5</span>)
+v3 = v1 + v2    <span class="cmt"># → Vector(15, 25)</span>
+neg = -v2       <span class="cmt"># → Vector(-5, -5) via neg()</span></div>
+      </div>
 
-  <div class="terminal-info">
-    <h2>Keywords that <em>speak</em> to you</h2>
-    <p>EZ replaces cryptic programmer shorthand with plain English. Loops, conditionals, functions, and returns all map to words you already know.</p>
-    <p>Under the hood it's a full tree-walk interpreter with TCO, closures, a mark-and-sweep GC, and real OS threading — zero compromises on capability.</p>
-    <div class="keyword-pills">
-      <span class="pill"><span class="pill-kw">when</span> <span class="pill-arrow">→</span> if</span>
-      <span class="pill"><span class="pill-kw">other</span> <span class="pill-arrow">→</span> else</span>
-      <span class="pill"><span class="pill-kw">task</span> <span class="pill-arrow">→</span> function</span>
-      <span class="pill"><span class="pill-kw">give</span> <span class="pill-arrow">→</span> return</span>
-      <span class="pill"><span class="pill-kw">out</span> <span class="pill-arrow">→</span> print</span>
-      <span class="pill"><span class="pill-kw">repeat…to</span> <span class="pill-arrow">→</span> for</span>
-      <span class="pill"><span class="pill-kw">in</span> <span class="pill-arrow">→</span> for-each</span>
-      <span class="pill"><span class="pill-kw">escape</span> <span class="pill-arrow">→</span> break</span>
-      <span class="pill"><span class="pill-kw">skip</span> <span class="pill-arrow">→</span> continue</span>
-      <span class="pill"><span class="pill-kw">model</span> <span class="pill-arrow">→</span> class</span>
-    </div>
-  </div>
+      <div class="sub-title">Null Coalescing &amp; Optional Chaining</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">special_ops.ez</div></div>
+        <div class="code-body"><span class="cmt"># ?? returns left if not nil, otherwise right</span>
+name = user.name <span class="op">??</span> <span class="str">"Anonymous"</span>
+count = getValue() <span class="op">??</span> <span class="num">0</span>
+
+<span class="cmt"># ?. returns nil if any link in chain is nil</span>
+city = user<span class="op">?.</span>address<span class="op">?.</span>city         <span class="cmt"># nil if user or address is nil</span>
+age  = user<span class="op">?.</span>profile<span class="op">?.</span>age <span class="op">??</span> <span class="num">0</span>   <span class="cmt"># 0 if chain breaks</span></div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Keywords</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots2"></div>
+          <div class="section-progress">Section 3 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Basic Syntax →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 3: BASIC SYNTAX ═══════════════ -->
+    <section class="section" id="s3">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Basic Syntax</div>
+        <div class="section-desc">EZ uses indentation-friendly syntax with newline-aware parsing. No semicolons required. Variables are dynamically typed by default.</div>
+      </div>
+
+      <div class="sub-title">Variables & Types</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">variables.ez</div></div>
+        <div class="code-body"><span class="cmt"># Dynamic (no annotation)</span>
+name = <span class="str">"Abdullah"</span>
+age  = <span class="num">20</span>
+pi   = <span class="num">3.14159</span>
+flag = <span class="kw">true</span>
+empty = <span class="kw">nil</span>
+
+<span class="cmt"># With type hints (optional)</span>
+count: <span class="type">int</span> = <span class="num">0</span>
+label: <span class="type">string</span> = <span class="str">"hello"</span>
+ratio: <span class="type">float</span> = <span class="num">0.5</span>
+
+<span class="cmt"># Arrays</span>
+nums   = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+mixed  = [<span class="str">"a"</span>, <span class="num">1</span>, <span class="kw">true</span>, <span class="kw">nil</span>]
+
+<span class="cmt"># Dictionaries</span>
+user = { <span class="str">"name"</span>: <span class="str">"Ali"</span>, <span class="str">"age"</span>: <span class="num">20</span> }
+
+<span class="cmt"># Destructuring</span>
+a, b = [<span class="num">10</span>, <span class="num">20</span>]
+<span class="kw">out</span> a  <span class="cmt"># → 10</span>
+<span class="kw">out</span> b  <span class="cmt"># → 20</span></div>
+      </div>
+
+      <div class="sub-title">Strings</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">strings.ez</div></div>
+        <div class="code-body"><span class="cmt"># Regular strings</span>
+s1 = <span class="str">"Hello, World!"</span>
+s2 = <span class="str">'Single quotes work too'</span>
+
+<span class="cmt"># Template strings — backtick syntax (NEW)</span>
+name = <span class="str">"EZ"</span>
+s3 = <span class="str">`Hello from <span class="interp">{name}</span>!`</span>
+s4 = <span class="str">`2 + 2 = <span class="interp">{2 + 2}</span>`</span>
+s5 = <span class="str">`Upper: <span class="interp">{upper(name)}</span>`</span>
+
+<span class="cmt"># Multi-line strings (NEW)</span>
+query = <span class="str">"""
+    SELECT *
+    FROM users
+    WHERE age > 18
+"""</span>
+
+<span class="cmt"># Hex escapes in strings</span>
+tab   = <span class="str">"\t"</span>
+newln = <span class="str">"\n"</span>
+hex   = <span class="str">"\x41"</span>  <span class="cmt"># → "A"</span></div>
+      </div>
+
+      <div class="sub-title">Conditionals</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">conditionals.ez</div></div>
+        <div class="code-body"><span class="cmt"># when / other when / other</span>
+<span class="kw">when</span> age >= <span class="num">18</span> {
+    <span class="kw">out</span> <span class="str">"Adult"</span>
+} <span class="kw">other when</span> age >= <span class="num">13</span> {
+    <span class="kw">out</span> <span class="str">"Teenager"</span>
+} <span class="kw">other</span> {
+    <span class="kw">out</span> <span class="str">"Child"</span>
+}
+
+<span class="cmt"># Ternary operator</span>
+label = age >= <span class="num">18</span> ? <span class="str">"Adult"</span> : <span class="str">"Minor"</span>
+
+<span class="cmt"># match statement</span>
+<span class="kw">match</span> status {
+    <span class="num">200</span>  => <span class="kw">out</span> <span class="str">"OK"</span>
+    <span class="num">404</span>  => <span class="kw">out</span> <span class="str">"Not Found"</span>
+    <span class="num">500</span>  => <span class="kw">out</span> <span class="str">"Server Error"</span>
+    other => <span class="kw">out</span> <span class="str">"Unknown"</span>
+}</div>
+      </div>
+
+      <div class="sub-title">Output</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">output.ez</div></div>
+        <div class="code-body"><span class="kw">out</span> <span class="str">"Simple string"</span>
+<span class="kw">out</span> <span class="num">42</span>
+<span class="kw">out</span> <span class="str">"Name: "</span> + name
+<span class="kw">out</span> <span class="str">`Result: <span class="interp">{a + b}</span>`</span>
+
+print(<span class="str">"Also works"</span>)  <span class="cmt"># print is an alias</span></div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Operators</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots3"></div>
+          <div class="section-progress">Section 4 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Loops →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 4: LOOPS ═══════════════ -->
+    <section class="section" id="s4">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Loops</div>
+        <div class="section-desc">EZ provides four loop constructs covering all common iteration patterns. Use <code>escape</code> to break and <code>skip</code> to continue.</div>
+      </div>
+
+      <div class="sub-title">while — condition loop</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">while</span> x > <span class="num">0</span> {
+    <span class="kw">out</span> x
+    x -= <span class="num">1</span>
+}</div>
+      </div>
+
+      <div class="sub-title">repeat...to — numeric range loop</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Basic: 0 to 9</span>
+<span class="kw">repeat</span> i = <span class="num">0</span> <span class="kw">to</span> <span class="num">9</span> {
+    <span class="kw">out</span> i
+}
+
+<span class="cmt"># With step (NEW) — every 2</span>
+<span class="kw">repeat</span> i = <span class="num">0</span> <span class="kw">to</span> <span class="num">10</span> <span class="kw">step</span> <span class="num">2</span> {
+    <span class="kw">out</span> i  <span class="cmt"># 0, 2, 4, 6, 8, 10</span>
+}
+
+<span class="cmt"># Negative step — countdown</span>
+<span class="kw">repeat</span> i = <span class="num">10</span> <span class="kw">to</span> <span class="num">0</span> <span class="kw">step</span> -<span class="num">1</span> {
+    <span class="kw">out</span> i  <span class="cmt"># 10, 9, 8 ... 0</span>
+}</div>
+      </div>
+
+      <div class="sub-title">get...in — iterator loop</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Iterate array</span>
+fruits = [<span class="str">"apple"</span>, <span class="str">"banana"</span>, <span class="str">"cherry"</span>]
+<span class="kw">get</span> fruit <span class="kw">in</span> fruits {
+    <span class="kw">out</span> fruit
+}
+
+<span class="cmt"># Iterate dictionary</span>
+scores = { <span class="str">"Ali"</span>: <span class="num">95</span>, <span class="str">"Sara"</span>: <span class="num">88</span> }
+<span class="kw">get</span> name <span class="kw">in</span> scores {
+    <span class="kw">out</span> <span class="str">`<span class="interp">{name}</span>: <span class="interp">{scores[name]}</span>`</span>
+}
+
+<span class="cmt"># Iterate string characters</span>
+<span class="kw">get</span> ch <span class="kw">in</span> <span class="str">"hello"</span> {
+    <span class="kw">out</span> ch
+}</div>
+      </div>
+
+      <div class="sub-title">escape & skip — break & continue</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">repeat</span> i = <span class="num">0</span> <span class="kw">to</span> <span class="num">10</span> {
+    <span class="kw">when</span> i == <span class="num">3</span> { <span class="kw">skip</span> }    <span class="cmt"># continue — skip 3</span>
+    <span class="kw">when</span> i == <span class="num">7</span> { <span class="kw">escape</span> }  <span class="cmt"># break — stop at 7</span>
+    <span class="kw">out</span> i
+}
+<span class="cmt"># prints: 0, 1, 2, 4, 5, 6</span></div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Basic Syntax</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots4"></div>
+          <div class="section-progress">Section 5 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Functions →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 5: FUNCTIONS ═══════════════ -->
+    <section class="section" id="s5">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Functions (Tasks)</div>
+        <div class="section-desc">Functions are called <strong>tasks</strong> in EZ. They support closures, default parameters, variadic args, lambdas, TCO, and optional type annotations.</div>
+      </div>
+
+      <div class="sub-title">Basic Tasks</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Basic task</span>
+<span class="kw">task</span> <span class="fn">greet</span>(name) {
+    <span class="kw">out</span> <span class="str">`Hello, <span class="interp">{name}</span>!`</span>
+}
+
+<span class="cmt"># With type annotations</span>
+<span class="kw">task</span> <span class="fn">add</span>(a: <span class="type">int</span>, b: <span class="type">int</span>) -> <span class="type">int</span> {
+    <span class="kw">give</span> a + b
+}
+
+<span class="cmt"># Default parameters</span>
+<span class="kw">task</span> <span class="fn">power</span>(base, exp = <span class="num">2</span>) {
+    <span class="kw">give</span> pow(base, exp)
+}
+power(<span class="num">3</span>)     <span class="cmt"># → 9</span>
+power(<span class="num">2</span>, <span class="num">8</span>)  <span class="cmt"># → 256</span>
+
+<span class="cmt"># Variadic</span>
+<span class="kw">task</span> <span class="fn">sumAll</span>(...nums) {
+    total = <span class="num">0</span>
+    <span class="kw">get</span> n <span class="kw">in</span> nums { total += n }
+    <span class="kw">give</span> total
+}
+sumAll(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)  <span class="cmt"># → 10</span></div>
+      </div>
+
+      <div class="sub-title">Lambdas</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Single expression lambda</span>
+double = |x| x * <span class="num">2</span>
+
+<span class="cmt"># Multi-param lambda</span>
+add = |a, b| a + b
+
+<span class="cmt"># Lambda with body block</span>
+process = |x| {
+    result = x * <span class="num">2</span>
+    <span class="kw">when</span> result > <span class="num">100</span> { result = <span class="num">100</span> }
+    <span class="kw">give</span> result
+}
+
+<span class="cmt"># Typed lambda</span>
+square = |x: <span class="type">int</span>| -> <span class="type">int</span>  x * x
+
+<span class="cmt"># Higher-order functions</span>
+nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+evens = filter(nums, |x| x % <span class="num">2</span> == <span class="num">0</span>)
+doubled = map(nums, |x| x * <span class="num">2</span>)</div>
+      </div>
+
+      <div class="sub-title">Closures & Static Locals</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Closures capture surrounding scope</span>
+<span class="kw">task</span> <span class="fn">makeCounter</span>() {
+    count = <span class="num">0</span>
+    <span class="kw">give</span> || {
+        count += <span class="num">1</span>
+        <span class="kw">give</span> count
+    }
+}
+counter = makeCounter()
+<span class="kw">out</span> counter()  <span class="cmt"># 1</span>
+<span class="kw">out</span> counter()  <span class="cmt"># 2</span>
+
+<span class="cmt"># Static local — persists across calls</span>
+<span class="kw">task</span> <span class="fn">inc</span>() {
+    <span class="kw">static</span> x = <span class="num">0</span>
+    x += <span class="num">1</span>
+    <span class="kw">give</span> x
+}
+inc()  <span class="cmt"># 1</span>
+inc()  <span class="cmt"># 2</span></div>
+      </div>
+
+      <div class="sub-title">Tail Call Optimization</div>
+      <div class="info-box tip">
+        <span class="info-icon">⚡</span>
+        <div><strong>TCO is built-in</strong> — recursive tail calls are automatically optimized. Recursion to 20,000+ levels works without stack overflow.</div>
+      </div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># This won't overflow — TCO kicks in automatically</span>
+<span class="kw">task</span> <span class="fn">factorial</span>(n, acc = <span class="num">1</span>) {
+    <span class="kw">when</span> n <= <span class="num">1</span> { <span class="kw">give</span> acc }
+    <span class="kw">give</span> factorial(n - <span class="num">1</span>, n * acc)  <span class="cmt"># tail call</span>
+}</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Loops</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots5"></div>
+          <div class="section-progress">Section 6 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">OOP →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 6: OOP ═══════════════ -->
+    <section class="section" id="s6">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Object-Oriented Programming</div>
+        <div class="section-desc">EZ supports full OOP via <code>model</code> — classes with inheritance, interfaces, static members, access modifiers, and operator overloading.</div>
+      </div>
+
+      <div class="sub-title">Models</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">model</span> Person {
+    <span class="kw">hidden</span> _age      <span class="cmt"># private field</span>
+    <span class="kw">shown</span>  name      <span class="cmt"># public field</span>
+
+    <span class="kw">init</span>(name, age) {
+        <span class="kw">self</span>.name = name
+        <span class="kw">self</span>._age = age
+    }
+
+    <span class="kw">task</span> <span class="fn">greet</span>() {
+        <span class="kw">give</span> <span class="str">`Hi, I'm <span class="interp">{self.name}</span>!`</span>
+    }
+
+    <span class="kw">task</span> <span class="fn">getAge</span>() { <span class="kw">give</span> <span class="kw">self</span>._age }
+
+    <span class="kw">static</span> species = <span class="str">"Human"</span>
+    <span class="kw">static</span> <span class="kw">task</span> <span class="fn">create</span>(n, a) { <span class="kw">give</span> <span class="kw">new</span> Person(n, a) }
+}
+
+p = <span class="kw">new</span> Person(<span class="str">"Ali"</span>, <span class="num">20</span>)
+<span class="kw">out</span> p.<span class="fn">greet</span>()            <span class="cmt"># Hi, I'm Ali!</span>
+<span class="kw">out</span> Person.species       <span class="cmt"># Human</span>
+q = Person.<span class="fn">create</span>(<span class="str">"Sara"</span>, <span class="num">22</span>)</div>
+      </div>
+
+      <div class="sub-title">Inheritance</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">model</span> Animal {
+    <span class="kw">init</span>(name) { <span class="kw">self</span>.name = name }
+    <span class="kw">task</span> <span class="fn">speak</span>() { <span class="kw">give</span> <span class="str">"..."</span> }
+}
+
+<span class="kw">model</span> Dog <span class="kw">extends</span> Animal {
+    <span class="kw">init</span>(name, breed) {
+        <span class="kw">super</span>(name)
+        <span class="kw">self</span>.breed = breed
+    }
+    <span class="kw">task</span> <span class="fn">speak</span>() { <span class="kw">give</span> <span class="str">"Woof!"</span> }
+}
+
+dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>, <span class="str">"Labrador"</span>)
+<span class="kw">out</span> dog.<span class="fn">speak</span>()  <span class="cmt"># Woof!</span></div>
+      </div>
+
+      <div class="sub-title">Interfaces</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">interface</span> Drawable {
+    <span class="kw">task</span> <span class="fn">draw</span>()
+    <span class="kw">task</span> <span class="fn">resize</span>(factor)
+}
+
+<span class="kw">model</span> Circle <span class="kw">implements</span> Drawable {
+    <span class="kw">init</span>(r) { <span class="kw">self</span>.r = r }
+    <span class="kw">task</span> <span class="fn">draw</span>()         { <span class="kw">out</span> <span class="str">`Drawing circle r=<span class="interp">{self.r}</span>`</span> }
+    <span class="kw">task</span> <span class="fn">resize</span>(factor) { <span class="kw">self</span>.r *= factor }
+}</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Functions</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots6"></div>
+          <div class="section-progress">Section 7 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Modules →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 7: MODULES ═══════════════ -->
+    <section class="section" id="s7">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Modules & Imports</div>
+        <div class="section-desc">EZ has a file-based module system with AST-level caching, circular import detection, namespace imports, and selective exports.</div>
+      </div>
+
+      <div class="sub-title">Importing</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Basic import — all exports become local</span>
+<span class="kw">use</span> <span class="str">"ezdb"</span>
+<span class="kw">use</span> <span class="str">"ezcrypto"</span>
+
+<span class="cmt"># Import local file</span>
+<span class="kw">use</span> <span class="str">"./utils.ez"</span>
+
+<span class="cmt"># Namespaced import</span>
+<span class="kw">use</span> <span class="str">"ezmath"</span> <span class="kw">as</span> math
+result = math.sin(<span class="num">3.14</span>)</div>
+      </div>
+
+      <div class="sub-title">Exporting</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">mylib.ez</div></div>
+        <div class="code-body"><span class="cmt"># Mark individual declarations as exported</span>
+<span class="kw">export</span> <span class="kw">task</span> <span class="fn">add</span>(a, b) { <span class="kw">give</span> a + b }
+<span class="kw">export</span> <span class="kw">task</span> <span class="fn">multiply</span>(a, b) { <span class="kw">give</span> a * b }
+
+<span class="kw">export</span> <span class="kw">model</span> Calculator {
+    <span class="kw">init</span>() { <span class="kw">self</span>.history = [] }
+    <span class="kw">task</span> <span class="fn">compute</span>(op, a, b) {
+        result = op(a, b)
+        push(<span class="kw">self</span>.history, result)
+        <span class="kw">give</span> result
+    }
+}
+
+<span class="cmt"># Internal helper — not exported</span>
+<span class="kw">task</span> <span class="fn">_validate</span>(x) { <span class="kw">give</span> type(x) == <span class="str">"integer"</span> }</div>
+      </div>
+
+      <div class="info-box new">
+        <span class="info-icon">💾</span>
+        <div><strong>Bytecode Caching</strong> — compile once with <code>ez file.ez --compile</code> to produce <code>file.ezc</code>. Run the cached bytecode directly with <code>ez file.ezc</code>. Skips lexing, parsing, and compilation on subsequent runs.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← OOP</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots7"></div>
+          <div class="section-progress">Section 8 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Error Handling →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 8: ERROR HANDLING ═══════════════ -->
+    <section class="section" id="s8">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Error Handling</div>
+        <div class="section-desc">EZ uses try/catch/throw for exception handling with typed catches, rich stack traces, local variable dumps, and source snippet highlighting.</div>
+      </div>
+
+      <div class="sub-title">try / catch / throw</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Basic try/catch</span>
+<span class="kw">try</span> {
+    result = divide(<span class="num">10</span>, <span class="num">0</span>)
+} <span class="kw">catch</span> e {
+    <span class="kw">out</span> <span class="str">"Error: "</span> + e
+}
+
+<span class="cmt"># Throw a string</span>
+<span class="kw">task</span> <span class="fn">validate</span>(age) {
+    <span class="kw">when</span> age < <span class="num">0</span> {
+        <span class="kw">throw</span> <span class="str">"Age cannot be negative"</span>
+    }
+}
+
+<span class="cmt"># Throw an object</span>
+<span class="kw">throw</span> { code: <span class="num">404</span>, message: <span class="str">"Not found"</span> }
+
+<span class="cmt"># Typed catch — catch specific models</span>
+<span class="kw">try</span> {
+    riskyOperation()
+} <span class="kw">catch</span> (NetworkError e) {
+    <span class="kw">out</span> <span class="str">"Network failed: "</span> + e.message
+} <span class="kw">catch</span> e {
+    <span class="kw">out</span> <span class="str">"Unknown error: "</span> + e
+}</div>
+      </div>
+
+      <div class="sub-title">Error Output (Improved)</div>
+      <div class="info-box tip">
+        <span class="info-icon">🐛</span>
+        <div><strong>Rich diagnostics</strong> — runtime errors now show the source line with a <code>^^^</code> pointer, local variable values at the point of failure, and a full call stack trace with file and line numbers.</div>
+      </div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal output</div></div>
+        <div class="code-body">Error: Precondition failed: Cannot divide by zero
+  hash.ez:10
+
+<span class="num">10</span> |  divide(<span class="num">10</span>, <span class="num">0</span>)
+      ^^^
+
+Traceback (most recent call last):
+  File <span class="str">"hash.ez"</span>, line <span class="num">10</span>, in &lt;main&gt;
+    divide(<span class="num">10</span>, <span class="num">0</span>)
+  File <span class="str">"hash.ez"</span>, line <span class="num">3</span>, in divide
+    requires b != <span class="num">0</span>, <span class="str">"Cannot divide by zero"</span>
+    Local variables:
+      a = <span class="num">10</span>
+      b = <span class="num">0</span></div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Modules</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots8"></div>
+          <div class="section-progress">Section 9 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Async →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 9: ASYNC ═══════════════ -->
+    <section class="section" id="s9">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Async & Concurrency</div>
+        <div class="section-desc">EZ provides cooperative async/await on a single-threaded event loop, plus OS-level thread spawning for true parallelism. Atomics and mutexes for shared state.</div>
+      </div>
+
+      <div class="sub-title">async / await</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Define an async task</span>
+<span class="kw">async</span> <span class="kw">task</span> <span class="fn">fetchData</span>(url) {
+    response = <span class="kw">await</span> http.<span class="fn">get</span>(url)
+    <span class="kw">give</span> response.body
+}
+
+<span class="cmt"># Await a future</span>
+<span class="kw">async</span> <span class="kw">task</span> <span class="fn">main</span>() {
+    data = <span class="kw">await</span> fetchData(<span class="str">"https://api.example.com"</span>)
+    <span class="kw">out</span> data
+}
+
+<span class="cmt"># Async lambda</span>
+worker = <span class="kw">async</span> |url| { <span class="kw">give</span> <span class="kw">await</span> http.<span class="fn">get</span>(url) }</div>
+      </div>
+
+      <div class="sub-title">spawn — OS Threads</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># spawn creates a real OS thread</span>
+<span class="cmt"># Each thread gets its own VM instance</span>
+future = spawn(|| {
+    <span class="cmt"># Heavy computation in background</span>
+    result = <span class="num">0</span>
+    <span class="kw">repeat</span> i = <span class="num">0</span> <span class="kw">to</span> <span class="num">1000000</span> { result += i }
+    <span class="kw">give</span> result
+})
+
+doOtherWork()          <span class="cmt"># runs while thread runs</span>
+result = <span class="kw">await</span> future  <span class="cmt"># block until thread done</span>
+<span class="kw">out</span> result</div>
+      </div>
+
+      <div class="sub-title">Mutex & Atomic</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Mutex for shared state</span>
+m = <span class="fn">mutex</span>()
+shared = <span class="num">0</span>
+
+<span class="kw">task</span> <span class="fn">increment</span>() {
+    lock(m)
+    shared += <span class="num">1</span>
+    unlock(m)
+}
+
+<span class="cmt"># Atomic counter</span>
+counter = Atomic(<span class="num">0</span>)
+counter.<span class="fn">increment</span>()
+counter.<span class="fn">add</span>(<span class="num">5</span>)
+<span class="kw">out</span> counter.<span class="fn">get</span>()</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Error Handling</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots9"></div>
+          <div class="section-progress">Section 10 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Type System →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 10: TYPE SYSTEM ═══════════════ -->
+    <section class="section" id="s10">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Type System</div>
+        <div class="section-desc">EZ has an optional gradual type system. Unannotated code stays dynamic. Annotated code is checked at compile time. <code>any</code> is the implicit type for unannotated variables.</div>
+      </div>
+
+      <div class="sub-title">Primitive Types</div>
+      <div class="grid-3">
+        <div class="card"><div class="card-title">int</div><code>x: int = 42</code></div>
+        <div class="card"><div class="card-title">float</div><code>x: float = 3.14</code></div>
+        <div class="card"><div class="card-title">string</div><code>x: string = "hi"</code></div>
+        <div class="card"><div class="card-title">bool</div><code>x: bool = true</code></div>
+        <div class="card"><div class="card-title">nil</div><code>x: nil = nil</code></div>
+        <div class="card"><div class="card-title">any</div><code>x: any = anything</code></div>
+      </div>
+
+      <div class="sub-title">Generic Types</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Typed arrays</span>
+nums:   <span class="type">Array[int]</span>    = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+names:  <span class="type">Array[string]</span> = [<span class="str">"Ali"</span>, <span class="str">"Sara"</span>]
+
+<span class="cmt"># Typed functions</span>
+<span class="kw">task</span> <span class="fn">process</span>(items: <span class="type">Array[int]</span>) -> <span class="type">int</span> {
+    total = <span class="num">0</span>
+    <span class="kw">get</span> x <span class="kw">in</span> items { total += x }
+    <span class="kw">give</span> total
+}
+
+<span class="cmt"># Instance type</span>
+<span class="kw">task</span> <span class="fn">greetPerson</span>(p: <span class="type">Person</span>) -> <span class="type">string</span> {
+    <span class="kw">give</span> p.<span class="fn">greet</span>()
+}</div>
+      </div>
+
+      <div class="sub-title">How Gradual Typing Works</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Unannotated — any, no checking, works as before</span>
+x = <span class="num">5</span>
+x = <span class="str">"now a string"</span>  <span class="cmt"># fine</span>
+
+<span class="cmt"># Annotated — type checked at compile time</span>
+y: <span class="type">int</span> = <span class="num">5</span>
+y = <span class="str">"string"</span>  <span class="cmt"># TYPE ERROR: string not assignable to int</span>
+
+<span class="cmt"># Function with annotations — checked</span>
+<span class="kw">task</span> <span class="fn">double</span>(n: <span class="type">int</span>) -> <span class="type">int</span> {
+    <span class="kw">give</span> n * <span class="num">2</span>
+}
+double(<span class="str">"hello"</span>)  <span class="cmt"># TYPE ERROR: string not assignable to int</span>
+
+<span class="cmt"># Unannotated — not checked, any goes anywhere</span>
+<span class="kw">task</span> <span class="fn">process</span>(x) {
+    <span class="kw">give</span> x + <span class="num">1</span>  <span class="cmt"># no check on x</span>
+}</div>
+      </div>
+
+      <div class="info-box tip">
+        <span class="info-icon">✅</span>
+        <div><strong>any is contagious</strong> — if either operand in an operation is <code>any</code>, the result is <code>any</code>. This lets unannotated code flow freely through typed code at boundaries.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Async</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots10"></div>
+          <div class="section-progress">Section 11 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Contracts →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 11: CONTRACTS ═══════════════ -->
+    <section class="section" id="s11">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Design by Contract</div>
+        <div class="section-desc">EZ implements Design by Contract (DbC) with <code>requires</code> (preconditions), <code>ensures</code> (postconditions), and <code>old()</code> for capturing pre-call values. Disable with <code>--no-contracts</code>.</div>
+      </div>
+
+      <div class="sub-title">requires & ensures</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">task</span> <span class="fn">divide</span>(a, b)
+    <span class="kw">requires</span> b != <span class="num">0</span>,  <span class="str">"Cannot divide by zero"</span>
+    <span class="kw">requires</span> a >= <span class="num">0</span>, <span class="str">"Numerator must be non-negative"</span>
+    <span class="kw">ensures</span>  result >= <span class="num">0</span>, <span class="str">"Result must be non-negative"</span>
+{
+    <span class="kw">give</span> a / b
+}
+
+divide(<span class="num">10</span>, <span class="num">2</span>)  <span class="cmt"># → 5 ✓</span>
+divide(<span class="num">10</span>, <span class="num">0</span>)  <span class="cmt"># Error: Precondition failed: Cannot divide by zero</span></div>
+      </div>
+
+      <div class="sub-title">old() — Capture Pre-call Values</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># old() captures the value of an expression BEFORE the function runs</span>
+<span class="kw">task</span> <span class="fn">withdraw</span>(balance, amount)
+    <span class="kw">requires</span> amount > <span class="num">0</span>,          <span class="str">"Amount must be positive"</span>
+    <span class="kw">requires</span> amount <= balance,    <span class="str">"Insufficient funds"</span>
+    <span class="kw">ensures</span>  result == old(balance) - amount, <span class="str">"Balance must decrease exactly"</span>
+{
+    <span class="kw">give</span> balance - amount
+}
+
+<span class="kw">out</span> withdraw(<span class="num">100</span>, <span class="num">30</span>)  <span class="cmt"># → 70 ✓</span>
+withdraw(<span class="num">50</span>, <span class="num">200</span>)      <span class="cmt"># Error: Precondition failed: Insufficient funds</span></div>
+      </div>
+
+      <div class="sub-title">Multiple Clauses</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">task</span> <span class="fn">clamp</span>(value, lo, hi)
+    <span class="kw">requires</span> lo <= hi,       <span class="str">"lo must be <= hi"</span>
+    <span class="kw">requires</span> value >= lo,    <span class="str">"value below minimum"</span>
+    <span class="kw">requires</span> value <= hi,    <span class="str">"value above maximum"</span>
+{
+    <span class="kw">give</span> value
+}</div>
+      </div>
+
+      <div class="grid-2 mt-4">
+        <div class="info-box tip">
+          <span class="info-icon">🛡️</span>
+          <div><strong>requires</strong> — checked when the function is called. Failure means the <em>caller</em> is at fault.</div>
+        </div>
+        <div class="info-box warn">
+          <span class="info-icon">⚠️</span>
+          <div><strong>ensures</strong> — checked when the function returns. Failure means the <em>implementation</em> is at fault.</div>
+        </div>
+      </div>
+
+      <div class="info-box new mt-4">
+        <span class="info-icon">⚡</span>
+        <div><strong>--no-contracts</strong> — run with <code>ez file.ez --no-contracts</code> to strip all contract checks for production performance. Contracts add zero overhead when disabled.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Type System</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots11"></div>
+          <div class="section-progress">Section 12 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Structs →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 12: STRUCTS ═══════════════ -->
+    <section class="section" id="s12">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Structs <span class="badge new">new</span></div>
+        <div class="section-desc">Structs are lightweight data containers — like models but without methods. They support typed fields, default values, and are ideal for plain data records.</div>
+      </div>
+
+      <div class="sub-title">Defining Structs</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Basic struct</span>
+<span class="kw">struct</span> Point { x, y }
+
+p = Point(<span class="num">10</span>, <span class="num">20</span>)
+<span class="kw">out</span> p.x   <span class="cmt"># → 10</span>
+p.x = <span class="num">100</span>
+<span class="kw">out</span> p.x   <span class="cmt"># → 100</span>
+
+<span class="cmt"># Struct with types</span>
+<span class="kw">struct</span> Person {
+    name: <span class="type">string</span>,
+    age:  <span class="type">int</span>,
+    email: <span class="type">string</span>
+}
+
+<span class="cmt"># Struct with defaults</span>
+<span class="kw">struct</span> Config {
+    host = <span class="str">"localhost"</span>,
+    port = <span class="num">8080</span>,
+    debug = <span class="kw">false</span>
+}
+
+cfg = Config()
+<span class="kw">out</span> cfg.host  <span class="cmt"># → localhost</span>
+<span class="kw">out</span> cfg.port  <span class="cmt"># → 8080</span></div>
+      </div>
+
+      <div class="sub-title">Struct vs Model</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">struct — data only</div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✅</span> Named fields with types</li>
+            <li><span class="feature-icon">✅</span> Default values</li>
+            <li><span class="feature-icon">✅</span> Lightweight, simple syntax</li>
+            <li><span class="feature-icon">❌</span> No methods</li>
+            <li><span class="feature-icon">❌</span> No inheritance</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">model — full OOP</div>
+          <ul class="feature-list">
+            <li><span class="feature-icon">✅</span> Fields + methods</li>
+            <li><span class="feature-icon">✅</span> Inheritance & interfaces</li>
+            <li><span class="feature-icon">✅</span> Static members</li>
+            <li><span class="feature-icon">✅</span> Operator overloading</li>
+            <li><span class="feature-icon">✅</span> Access control</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Contracts</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots12"></div>
+          <div class="section-progress">Section 13 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Built-ins →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 13: BUILTINS ═══════════════ -->
+    <section class="section" id="s13">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Built-in Functions</div>
+        <div class="section-desc">EZ ships with a comprehensive set of built-in functions covering core operations, string manipulation, math, IO, data structures, concurrency, and networking.</div>
+      </div>
+
+      <div class="sub-title">Core</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">out()</div>
+        <div class="builtin-tag">print()</div>
+        <div class="builtin-tag">input()</div>
+        <div class="builtin-tag">type()</div>
+        <div class="builtin-tag">str()</div>
+        <div class="builtin-tag">num()</div>
+        <div class="builtin-tag">len()</div>
+        <div class="builtin-tag">bool()</div>
+        <div class="builtin-tag">clock()</div>
+        <div class="builtin-tag">stop()</div>
+        <div class="builtin-tag">panic()</div>
+        <div class="builtin-tag">exit()</div>
+      </div>
+
+      <div class="sub-title">String</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">upper()</div>
+        <div class="builtin-tag">lower()</div>
+        <div class="builtin-tag">trim()</div>
+        <div class="builtin-tag">split()</div>
+        <div class="builtin-tag">join()</div>
+        <div class="builtin-tag">replace()</div>
+        <div class="builtin-tag">substr()</div>
+        <div class="builtin-tag">indexOf()</div>
+        <div class="builtin-tag">startsWith()</div>
+        <div class="builtin-tag">endsWith()</div>
+        <div class="builtin-tag">ord()</div>
+        <div class="builtin-tag">chr()</div>
+        <div class="builtin-tag">repeat()</div>
+        <div class="builtin-tag">regex()</div>
+      </div>
+
+      <div class="sub-title">Array</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">push()</div>
+        <div class="builtin-tag">pop()</div>
+        <div class="builtin-tag">shift()</div>
+        <div class="builtin-tag">unshift()</div>
+        <div class="builtin-tag">slice()</div>
+        <div class="builtin-tag">splice()</div>
+        <div class="builtin-tag">reverse()</div>
+        <div class="builtin-tag">sort()</div>
+        <div class="builtin-tag">map()</div>
+        <div class="builtin-tag">filter()</div>
+        <div class="builtin-tag">reduce()</div>
+        <div class="builtin-tag">find()</div>
+        <div class="builtin-tag">contains()</div>
+        <div class="builtin-tag">flat()</div>
+      </div>
+
+      <div class="sub-title">Dictionary</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">keys()</div>
+        <div class="builtin-tag">values()</div>
+        <div class="builtin-tag">contains()</div>
+        <div class="builtin-tag">remove()</div>
+        <div class="builtin-tag">merge()</div>
+      </div>
+
+      <div class="sub-title">Math</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">sin()</div>
+        <div class="builtin-tag">cos()</div>
+        <div class="builtin-tag">tan()</div>
+        <div class="builtin-tag">sqrt()</div>
+        <div class="builtin-tag">pow()</div>
+        <div class="builtin-tag">abs()</div>
+        <div class="builtin-tag">floor()</div>
+        <div class="builtin-tag">ceil()</div>
+        <div class="builtin-tag">round()</div>
+        <div class="builtin-tag">min()</div>
+        <div class="builtin-tag">max()</div>
+        <div class="builtin-tag">log()</div>
+        <div class="builtin-tag">random()</div>
+        <div class="builtin-tag">pi()</div>
+      </div>
+
+      <div class="sub-title">Concurrency</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">spawn()</div>
+        <div class="builtin-tag">mutex()</div>
+        <div class="builtin-tag">lock()</div>
+        <div class="builtin-tag">unlock()</div>
+        <div class="builtin-tag">sleep()</div>
+        <div class="builtin-tag">Atomic()</div>
+      </div>
+
+      <div class="sub-title">IO & Buffer</div>
+      <div class="builtin-grid">
+        <div class="builtin-tag">readFile()</div>
+        <div class="builtin-tag">writeFile()</div>
+        <div class="builtin-tag">appendFile()</div>
+        <div class="builtin-tag">readLines()</div>
+        <div class="builtin-tag">buffer()</div>
+        <div class="builtin-tag">bufRead()</div>
+        <div class="builtin-tag">bufWrite()</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Structs</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots13"></div>
+          <div class="section-progress">Section 14 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">GUI →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 14: GUI ═══════════════ -->
+    <section class="section" id="s14">
+      <div class="section-hero">
+        <div class="section-eyebrow">Platform Features</div>
+        <div class="section-title">GUI Layer</div>
+        <div class="section-desc">EZ has 60+ built-in Win32 GUI functions. Build full desktop applications — windows, widgets, menus, toolbars, drawing — all from EZ with no external dependencies.</div>
+      </div>
+
+      <div class="sub-title">Hello GUI</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">app.ez</div></div>
+        <div class="code-body">gui_create_window(<span class="str">"My App"</span>, <span class="num">800</span>, <span class="num">600</span>)
+gui_set_title(<span class="str">"EZ App"</span>)
+
+btn = gui_create_button(<span class="str">"Click Me"</span>, <span class="num">10</span>, <span class="num">10</span>, <span class="num">120</span>, <span class="num">36</span>)
+lbl = gui_create_label(<span class="str">"Result:"</span>,   <span class="num">10</span>, <span class="num">60</span>, <span class="num">300</span>, <span class="num">24</span>)
+
+gui_on(btn, <span class="str">"click"</span>, || {
+    gui_set_text(lbl, <span class="str">"Button clicked!"</span>)
+})
+
+gui_on(<span class="str">"window"</span>, <span class="str">"close"</span>, || exit(<span class="num">0</span>))
+gui_run()</div>
+      </div>
+
+      <div class="sub-title">Widget Types</div>
+      <div class="grid-3">
+        <div class="card"><div class="card-title">Input</div><code>gui_create_button</code><br><code>gui_create_input</code><br><code>gui_create_dropdown</code><br><code>gui_create_checkbox</code><br><code>gui_create_slider</code></div>
+        <div class="card"><div class="card-title">Display</div><code>gui_create_label</code><br><code>gui_create_textarea</code><br><code>gui_create_progress</code><br><code>gui_create_listview</code><br><code>gui_create_treeview</code></div>
+        <div class="card"><div class="card-title">Layout</div><code>gui_create_panel</code><br><code>gui_create_tabs</code><br><code>gui_create_groupbox</code><br><code>gui_create_scroll_panel</code><br><code>gui_create_separator</code></div>
+        <div class="card"><div class="card-title">Menus</div><code>gui_create_menubar</code><br><code>gui_add_menu</code><br><code>gui_add_menu_item</code><br><code>gui_create_context_menu</code><br><code>gui_show_context_menu</code></div>
+        <div class="card"><div class="card-title">Chrome</div><code>gui_create_toolbar</code><br><code>gui_create_statusbar</code><br><code>gui_set_status_text</code><br><code>gui_add_toolbar_button</code></div>
+        <div class="card"><div class="card-title">Window</div><code>gui_resize</code><br><code>gui_center_window</code><br><code>gui_set_opacity</code><br><code>gui_set_icon</code><br><code>gui_accept_drop</code></div>
+      </div>
+
+      <div class="info-box tip mt-4">
+        <span class="info-icon">🎮</span>
+        <div><strong>Game support</strong> — use <code>use "ezgame"</code> for a game loop with FPS control, drawing primitives, keyboard/mouse input. Snake and Flappy Bird demos included.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Built-ins</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots14"></div>
+          <div class="section-progress">Section 15 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">FFI →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 15: FFI ═══════════════ -->
+    <section class="section" id="s15">
+      <div class="section-hero">
+        <div class="section-eyebrow">Platform Features</div>
+        <div class="section-title">Foreign Function Interface (FFI)</div>
+        <div class="section-desc">EZ can load any Windows DLL and call its functions directly. Crash-protected via SEH/VEH — a bad native call won't kill the EZ process.</div>
+      </div>
+
+      <div class="sub-title">Loading & Calling DLLs</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Load a DLL</span>
+handle = os_load_lib(<span class="str">"sqlite3.dll"</span>)
+
+<span class="cmt"># Get a function pointer</span>
+fn_open = os_get_func(handle, <span class="str">"sqlite3_open"</span>)
+
+<span class="cmt"># Call it — return type first, then args</span>
+result = os_call(fn_open, <span class="str">"int"</span>, db_path, db_handle_ptr)
+
+<span class="cmt"># Windows API example</span>
+kernel32  = os_load_lib(<span class="str">"kernel32.dll"</span>)
+beep_fn   = os_get_func(kernel32, <span class="str">"Beep"</span>)
+os_call(beep_fn, <span class="str">"int"</span>, <span class="num">1000</span>, <span class="num">500</span>)  <span class="cmt"># 1000Hz for 500ms</span></div>
+      </div>
+
+      <div class="sub-title">Memory Management</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="cmt"># Allocate raw memory for FFI</span>
+buf = os_alloc(<span class="num">256</span>)
+
+<span class="cmt"># Write / read values</span>
+os_write_byte(buf, <span class="num">0</span>, <span class="num">42</span>)
+os_write_uint64(buf, <span class="num">0</span>, <span class="num">12345678</span>)
+val = os_read_uint64(buf, <span class="num">0</span>)
+
+<span class="cmt"># Always free when done</span>
+os_free(buf)</div>
+      </div>
+
+      <div class="sub-title">Supported Return Types</div>
+      <div class="grid-3">
+        <div class="card" style="text-align:center;padding:14px"><code>"int"</code><br><span style="font-size:12px;color:var(--text-3)">32-bit integer</span></div>
+        <div class="card" style="text-align:center;padding:14px"><code>"float"</code><br><span style="font-size:12px;color:var(--text-3)">64-bit double</span></div>
+        <div class="card" style="text-align:center;padding:14px"><code>"void"</code><br><span style="font-size:12px;color:var(--text-3)">no return</span></div>
+      </div>
+
+      <div class="info-box tip mt-4">
+        <span class="info-icon">🛡️</span>
+        <div><strong>Crash protection</strong> — access violations and illegal instructions in native code are caught by SEH (MSVC) or VEH + setjmp (MinGW) and converted to EZ exceptions. The VM survives a bad FFI call.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← GUI</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots15"></div>
+          <div class="section-progress">Section 16 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">CLI Tools →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 16: CLI ═══════════════ -->
+    <section class="section" id="s16">
+      <div class="section-hero">
+        <div class="section-eyebrow">Tooling</div>
+        <div class="section-title">CLI Tools</div>
+        <div class="section-desc">The <code>ez</code> binary is the all-in-one toolchain — run, compile, bundle, disassemble, manage packages, and launch the REPL from a single command.</div>
+      </div>
+
+      <div class="sub-title">Commands</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal</div></div>
+        <div class="code-body"><span class="cmt"># Run a script</span>
+ez script.ez
+
+<span class="cmt"># Run with execution tracing</span>
+ez script.ez --trace
+
+<span class="cmt"># Disable contracts for production</span>
+ez script.ez --no-contracts
+
+<span class="cmt"># Compile to .ezc bytecode cache (NEW)</span>
+ez script.ez --compile
+ez script.ez -c
+ez script.ez --ezc
+
+<span class="cmt"># Run pre-compiled bytecode directly</span>
+ez script.ezc
+
+<span class="cmt"># Dump bytecode disassembly (NEW)</span>
+ez script.ez --dump
+ez script.ez -d
+ez script.ez --ezasm
+
+<span class="cmt"># Bundle to standalone .exe</span>
+ez bundle app.ez
+ez bundle app.ez output.exe
+ez bundle app.ez --gui            <span class="cmt"># hide console window</span>
+ez bundle app.ez --icon app.ico   <span class="cmt"># set .exe icon</span>
+
+<span class="cmt"># Package manager</span>
+ez install ezdb
+ez install ezcrypto
+
+<span class="cmt"># Launch REPL</span>
+ez</div>
+      </div>
+
+      <div class="sub-title">Bytecode Compilation</div>
+      <div class="info-box new">
+        <span class="info-icon">💾</span>
+        <div><strong>New in v2.0</strong> — <code>ez file.ez --compile</code> compiles to <code>file.ezc</code>. The <code>.ezc</code> format (magic: <code>EZC1</code>) skips lexing, parsing, and type checking on subsequent runs. Ideal for production deployments where startup time matters.</div>
+      </div>
+
+      <div class="sub-title">Bytecode Disassembly</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal</div></div>
+        <div class="code-body">$ ez hello.ez --dump
+
+== main ==
+<span class="num">0000</span>  LOAD_CONSTANT  <span class="num">0</span>     <span class="str">'Hello, World!'</span>
+<span class="num">0003</span>  PRINT
+<span class="num">0004</span>  LOAD_NIL
+<span class="num">0005</span>  RETURN</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← FFI</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots16"></div>
+          <div class="section-progress">Section 17 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Standard Library →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 17: STDLIB ═══════════════ -->
+    <section class="section" id="s17">
+      <div class="section-hero">
+        <div class="section-eyebrow">Ecosystem</div>
+        <div class="section-title">Standard Library (ezlib)</div>
+        <div class="section-desc">EZ ships with 19+ library packages installable via <code>ez install</code>. From SQLite to AI to HTTP to crypto — the ecosystem covers the most common scripting needs.</div>
+      </div>
+
+      <div class="sub-title">Database</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">db_example.ez</div></div>
+        <div class="code-body"><span class="kw">use</span> <span class="str">"ezdb"</span>
+
+db = Database(<span class="str">"myapp.sqlite"</span>)
+db.<span class="fn">execute</span>(<span class="str">"CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)"</span>)
+db.<span class="fn">execute</span>(<span class="str">"INSERT INTO users (name) VALUES (?)"</span>, [<span class="str">"Ali"</span>])
+
+rows = db.<span class="fn">query</span>(<span class="str">"SELECT * FROM users WHERE name = ?"</span>, [<span class="str">"Ali"</span>])
+<span class="kw">get</span> row <span class="kw">in</span> rows { <span class="kw">out</span> row[<span class="str">"name"</span>] }</div>
+      </div>
+
+      <div class="sub-title">Cryptography</div>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">crypto_example.ez</div></div>
+        <div class="code-body"><span class="kw">use</span> <span class="str">"ezcrypto"</span>
+
+<span class="cmt"># Hash</span>
+hash = Crypto.<span class="fn">sha256</span>(<span class="str">"hello"</span>)
+
+<span class="cmt"># AES-256-CBC encryption</span>
+key = <span class="str">"12345678901234567890123456789012"</span>
+iv  = <span class="str">"1234567890123456"</span>
+enc = Crypto.<span class="fn">aesEncrypt</span>(key, iv, <span class="str">"secret"</span>)
+dec = Crypto.<span class="fn">aesDecrypt</span>(key, iv, enc)
+
+<span class="cmt"># UUID</span>
+id = Crypto.<span class="fn">uuid</span>()
+
+<span class="cmt"># PBKDF2 key derivation</span>
+key = PBKDF2.<span class="fn">derive</span>(<span class="str">"password"</span>, <span class="str">"salt"</span>, <span class="num">100000</span>, <span class="num">32</span>)</div>
+      </div>
+
+      <div class="sub-title">All Packages</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">Data & Storage</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezdb</code> — SQLite</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezorm</code> — ORM</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezjson</code> — JSON</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Network</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezhttp</code> — HTTP client</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezweb</code> — HTTP server</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezemail</code> — Email SMTP</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Security</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezcrypto</code> — AES, SHA, HMAC</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezjwt</code> — JWT tokens</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezauth</code> — Auth helpers</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">AI & Data</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezai</code> — OpenAI/Gemini</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezcsv</code> — CSV parsing</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezxml</code> — XML</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">System</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezfs</code> — Filesystem</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezlog</code> — Logging</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezenv</code> — Environment</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">GUI & Game</div>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezgame</code> — Game loop</li>
+            <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezpdf</code> — PDF</li>
+            <li style="padding:5px 0;font-size:13px"><code>ezdate</code> — DateTime</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← CLI Tools</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots17"></div>
+          <div class="section-progress">Section 18 of 18</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">Decorators →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 18: DECORATORS ═══════════════ -->
+    <section class="section" id="s18">
+      <div class="section-hero">
+        <div class="section-eyebrow">Language Reference</div>
+        <div class="section-title">Decorators <span class="badge new">new</span></div>
+        <div class="section-desc">EZ has six built-in decorators that add cross-cutting behaviour to tasks and models — caching, rate limiting, audit logging, persistence, snapshots, and validation. Zero boilerplate.</div>
+      </div>
+
+      <div class="sub-title">@cached — Memoize method results</div>
+      <p>The result is stored on the instance. Subsequent calls return the cached value without re-executing the body. Ideal for expensive computed properties.</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body"><span class="kw">model</span> Report {
+    <span class="kw">init</span>(data) { <span class="kw">self</span>.data = data }
+
+    @cached
+    <span class="kw">task</span> <span class="fn">compute</span>() {
+        total = <span class="num">0</span>
+        <span class="kw">get</span> x <span class="kw">in</span> <span class="kw">self</span>.data { total += x }
+        <span class="kw">give</span> total
+    }
+}
+
+r = Report([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>])
+<span class="kw">out</span> r.<span class="fn">compute</span>()  <span class="cmt"># computes once → 15</span>
+<span class="kw">out</span> r.<span class="fn">compute</span>()  <span class="cmt"># returns cached 15</span></div>
+      </div>
+
+      <div class="sub-title">@ratelimit(n, "unit") — Throttle call frequency</div>
+      <p>Limits the task to at most <code>n</code> calls per time unit. Throws <code>RateLimitError</code> with retry-after ms if exceeded. Units: <code>"second"</code>, <code>"minute"</code>, <code>"hour"</code>, <code>"day"</code>.</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body">@ratelimit(<span class="num">5</span>, <span class="str">"minute"</span>)
+<span class="kw">task</span> <span class="fn">sendEmail</span>(to, subject, body) {
+    <span class="cmt"># Max 5 calls per minute — auto enforced</span>
+}
+
+@ratelimit(<span class="num">100</span>, <span class="str">"second"</span>)
+<span class="kw">task</span> <span class="fn">apiCall</span>(endpoint) {
+    <span class="kw">give</span> http.<span class="fn">get</span>(endpoint)
+}</div>
+      </div>
+
+      <div class="sub-title">Model Decorators</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">@audited</div>
+          <p style="font-size:13px;color:var(--text-2)">Every property write is logged to an audit trail with timestamp and old/new values automatically.</p>
+          <div class="code-block">
+            <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+            <div class="code-body">@audited
+<span class="kw">model</span> BankAccount {
+    <span class="kw">init</span>(b) { <span class="kw">self</span>.balance = b }
+}
+<span class="cmt"># balance changes auto-logged</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">@snapshot</div>
+          <p style="font-size:13px;color:var(--text-2)">Captures model state on each mutation enabling undo via <code>restore()</code>.</p>
+          <div class="code-block">
+            <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+            <div class="code-body">@snapshot
+<span class="kw">model</span> Editor {
+    <span class="kw">init</span>() { <span class="kw">self</span>.text = <span class="str">""</span> }
+}
+e.<span class="fn">restore</span>()  <span class="cmt"># undo last change</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title">@persist("file") — Automatic persistence</div>
+      <p>Model state is saved to a JSON file on every property write and restored at startup. Zero-code persistence.</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+        <div class="code-body">@persist(<span class="str">"settings.json"</span>)
+<span class="kw">model</span> AppSettings {
+    <span class="kw">init</span>() {
+        <span class="kw">self</span>.theme    = <span class="str">"light"</span>
+        <span class="kw">self</span>.fontSize = <span class="num">14</span>
+    }
+}
+
+settings = AppSettings()
+settings.theme = <span class="str">"dark"</span>  <span class="cmt"># → saved to settings.json</span>
+<span class="cmt"># Next program run: theme is still "dark"</span></div>
+      </div>
+
+      <div class="info-box tip mt-4">
+        <span class="info-icon">💡</span>
+        <div><strong>Decorators are compiled</strong> — not runtime wrappers. <code>@ratelimit</code> emits a <code>RATELIMIT_CHECK</code> opcode at function entry. <code>@cached</code> emits <code>GET_CACHED_RESULT</code>/<code>STORE_CACHED_RESULT</code> around the body. Zero reflection overhead.</div>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Standard Library</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots18"></div>
+          <div class="section-progress">Section 19 of 20</div>
+        </div>
+        <button class="nav-control btn-next" onclick="next()">What's New →</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 19: WHAT'S NEW ═══════════════ -->
+    <section class="section" id="s19">
+      <div class="section-hero">
+        <div class="section-eyebrow">v2.0 Changelog</div>
+        <div class="section-title">What's New in v2.0</div>
+        <div class="section-desc">Deep analysis of the latest commit reveals 9 new features, 8 significant improvements, and 3 new source files totalling ~1,300 new lines of C++ compared to the original build.</div>
+      </div>
+
+      <div class="sub-title">New Features</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">✨ Template Strings</div>
+          <p>Backtick <code>`Hello {name}!`</code> with full expressions in <code>{}</code>. Implemented at the lexer level — produces a token stream compiled to string concatenation. Nested calls and operators work inside braces.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🔗 ?? and ?. Operators</div>
+          <p>New <code>QUESTION_QUESTION</code> and <code>QUESTION_DOT</code> token types in the lexer. <code>??</code> handled in a new <code>nullCoalescing()</code> parser precedence level. <code>?.</code> integrated into the call chain parser.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🔢 Destructuring Assignment</div>
+          <p>New <code>DestructureAssignExpr</code> AST node. Parser detects comma-separated LHS via <code>isDestructuring()</code> check and wraps targets into the new node. VM unpacks array RHS into each target slot.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">📐 struct Keyword</div>
+          <p>New <code>StructStmt</code> AST node with typed fields and default values. TypeChecker has a dedicated <code>checkStruct()</code> handler. Desugars to a model at compile time.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🚶 repeat...step</div>
+          <p><code>step</code> added as a keyword and to <code>RepeatStmt</code>'s AST. Zero step throws a runtime error. Negative step iterates in reverse. The compiler emits a conditional increment/decrement.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">💾 .ezc Bytecode Cache</div>
+          <p>New <code>BytecodeSerializer.cpp</code> (260 lines). Serializes the entire function tree to a binary <code>EZC1</code> format including constants, opcodes, upvalue info, and nested functions. Deserialized directly into the VM.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🎨 6 Decorators</div>
+          <p><code>@cached</code>, <code>@ratelimit</code>, <code>@audited</code>, <code>@snapshot</code>, <code>@persist</code>, <code>@validate</code>. New token types, parsed before task/model declarations, compiled to 3 new opcodes. Fully first-class — not macro tricks.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Multi-line Strings</div>
+          <p>Triple-quoted <code>"""..."""</code> strings. Lexer detects triple opening quote, enters multiline mode, consumes until closing triple. Escape sequences still work inside.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🔧 TypeChecker (914 lines)</div>
+          <p>Complete compile-time type checker. Scoped environments, function signature registry, model type tracking, warning vs error distinction, column-accurate caret diagnostics, hint messages, and full AST visitor coverage.</p>
+        </div>
+      </div>
+
+      <div class="sub-title">Improvements</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🛡️ FRAMES_MAX Enforced</div>
+          <p>Was declared (512) but never checked. <code>dispatchCall()</code> now throws a clean <code>Stack overflow</code> error instead of silently exhausting OS stack memory.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">📍 Source Snippets in Errors</div>
+          <p><code>EZ_RegisterSource()</code> stores source lines at load time. Runtime errors now print the fault line with <code>^^^</code> caret. Contracts show local variable values at failure.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🧵 Rope Strings (EZConcatString)</div>
+          <p>String <code>+</code> now builds a lazy tree instead of allocating immediately. Only flattened on demand. Eliminates O(n²) string building. 10,000 concatenations now takes milliseconds.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🔤 ShortString Inline (14 bytes)</div>
+          <p>Strings ≤14 bytes stored inline in the <code>Value</code> variant — no heap allocation, no <code>shared_ptr</code>. Property names, short identifiers, keywords all benefit.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🛡️ Contract old() Support</div>
+          <p>Pre-call value capture fully implemented. Compiler scans <code>ensures</code> clauses for <code>old()</code>, emits captures into hidden locals at function entry, substitutes them in postcondition checks.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">⚙️ --no-contracts Flag</div>
+          <p>Global <code>g_disableContracts</code> strips all contract compilation. Zero overhead in production. Works with <code>ez run</code> and <code>ez bundle</code>.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🔍 --dump / --ezasm</div>
+          <p>New CLI flag dumps human-readable bytecode disassembly for every function. Shows opcode names, operands, and constant pool values. Invaluable for debugging.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">🏗️ MiniJson.h</div>
+          <p>New lightweight header-only JSON parser/builder. Used internally by <code>@persist</code>. No external dependency — pure C++ with full object/array/string support.</p>
+        </div>
+      </div>
+
+      <div class="sub-title">Codebase Summary</div>
+      <div class="card">
+        <table class="op-table">
+          <tr><th>File</th><th>Lines</th><th>Change</th></tr>
+          <tr><td><code>BytecodeVM.cpp</code></td><td>2,769</td><td>+520</td></tr>
+          <tr><td><code>BytecodeCompiler.cpp</code></td><td>2,355</td><td>+583</td></tr>
+          <tr><td><code>Parser.cpp</code></td><td>1,659</td><td>+417</td></tr>
+          <tr><td><code>TypeChecker.cpp</code></td><td>914</td><td><span class="badge new">new</span></td></tr>
+          <tr><td><code>Value.h</code></td><td>787</td><td>+229</td></tr>
+          <tr><td><code>AST.h</code></td><td>772</td><td>+222</td></tr>
+          <tr><td><code>BytecodeSerializer.cpp</code></td><td>260</td><td><span class="badge new">new</span></td></tr>
+          <tr><td><code>MiniJson.h</code></td><td>~120</td><td><span class="badge new">new</span></td></tr>
+        </table>
+      </div>
+
+      <div class="section-nav">
+        <button class="nav-control btn-prev" onclick="prev()">← Decorators</button>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="progress-dots" id="dots19"></div>
+          <div class="section-progress">Section 20 of 20</div>
+        </div>
+        <button class="nav-control btn-next btn-disabled">Complete ✓</button>
+      </div>
+    </section>
+
+  </main>
 </div>
 
-<div class="section-divider"></div>
-
-<!-- FEATURES -->
-<section class="features" id="features">
-  <p class="section-label">// What EZ brings</p>
-  <h2 class="section-title">A complete language ecosystem</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">⚙️</div>
-      <h3>Tree-Walk Interpreter</h3>
-      <p>Built in C++17 with a recursive-descent parser, AST node visitor, and a 50,000-threshold mark-and-sweep garbage collector.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔄</div>
-      <h3>Tail Call Optimization</h3>
-      <p>Parser marks tail-position calls; interpreter uses an exception-based trampoline so deeply recursive EZ programs never blow the stack.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>Async / Await</h3>
-      <p>Async functions spawn real OS threads via <code>std::async</code>, returning futures. <code>await</code> blocks until resolved. <code>spawn()</code> is fire-and-forget.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🏛️</div>
-      <h3>Full OOP System</h3>
-      <p>Classes (<code>model</code>), single inheritance (<code>extends</code>), <code>super</code>, <code>self</code>, visibility (<code>hidden</code>/<code>shown</code>), <code>static</code> members, and interfaces.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔌</div>
-      <h3>Native FFI</h3>
-      <p>Load any DLL, resolve function pointers, and call into system APIs directly from EZ. Full raw memory read/write with pointer arithmetic.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🖼️</div>
-      <h3>GUI Framework v6</h3>
-      <p>50+ WinAPI wrappers: windows, buttons, inputs, listviews, tabs, timers, drag-and-drop, color picker, canvas drawing, Windows 11 dark mode.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📦</div>
-      <h3>Built-in Package Manager</h3>
-      <p>Install, list, and init packages directly via <code>ez install</code>. Packages live on GitHub under the <code>EZ</code> prefix. JSON manifest format.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔐</div>
-      <h3>Concurrency Primitives</h3>
-      <p>GC-managed <code>mutex</code> objects, <code>lock()</code>/<code>unlock()</code>, <code>atomic_add</code>/<code>atomic_inc</code>/<code>atomic_dec</code> for lock-free counters.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🧠</div>
-      <h3>Metaprogramming</h3>
-      <p><code>getattr</code>, <code>setattr</code>, <code>hasattr</code>, dynamic <code>eval()</code>, and <code>type()</code>/<code>typeOf()</code> for runtime reflection and code generation.</p>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CODE EXAMPLES TABS -->
-<section class="advanced" id="examples">
-  <p class="section-label">// Code samples</p>
-  <h2 class="section-title">See it in action</h2>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('oop')">OOP</button>
-    <button class="tab-btn" onclick="showTab('async')">Async</button>
-    <button class="tab-btn" onclick="showTab('error')">Error Handling</button>
-    <button class="tab-btn" onclick="showTab('web')">Web Server</button>
-    <button class="tab-btn" onclick="showTab('ffi')">FFI</button>
-  </div>
-  <div class="code-block">
-    <div id="tab-oop" class="tab-panel active">
-      <pre><span class="c-comment">// Object-Oriented Programming</span>
-
-<span class="c-kw2">model</span> <span class="c-id">Animal</span> {
-    <span class="c-kw2">init</span>(<span class="c-id">name</span>, <span class="c-id">species</span>) {
-        <span class="c-kw">self</span>.name    <span class="c-op">=</span> <span class="c-id">name</span>
-        <span class="c-kw">self</span>.species <span class="c-op">=</span> <span class="c-id">species</span>
-    }
-    <span class="c-kw2">task</span> <span class="c-fn">speak</span>() {
-        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" says hello!"</span>
-    }
-}
-
-<span class="c-kw2">model</span> <span class="c-id">Dog</span> <span class="c-kw">extends</span> <span class="c-id">Animal</span> {
-    <span class="c-kw2">init</span>(<span class="c-id">name</span>) {
-        <span class="c-fn">super</span>(<span class="c-id">name</span>, <span class="c-str">"Canis familiaris"</span>)
-        <span class="c-kw">self</span>.tricks <span class="c-op">=</span> []
-    }
-    <span class="c-kw2">task</span> <span class="c-fn">learn</span>(<span class="c-id">trick</span>) {
-        <span class="c-fn">push</span>(<span class="c-kw">self</span>.tricks, <span class="c-id">trick</span>)
-        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" learned: "</span> <span class="c-op">+</span> <span class="c-id">trick</span>
-    }
-    <span class="c-kw2">task</span> <span class="c-fn">speak</span>() {
-        <span class="c-fn">out</span> <span class="c-kw">self</span>.name <span class="c-op">+</span> <span class="c-str">" says: Woof!"</span>
-    }
-}
-
-<span class="c-id">rex</span> <span class="c-op">=</span> <span class="c-kw">new</span> <span class="c-id">Dog</span>(<span class="c-str">"Rex"</span>)
-<span class="c-id">rex</span>.<span class="c-fn">speak</span>()
-<span class="c-id">rex</span>.<span class="c-fn">learn</span>(<span class="c-str">"sit"</span>)
-<span class="c-id">rex</span>.<span class="c-fn">learn</span>(<span class="c-str">"roll over"</span>)
-<span class="c-fn">out</span> <span class="c-str">"Tricks: "</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-id">rex</span>.tricks)</pre>
-    </div>
-    <div id="tab-async" class="tab-panel">
-      <pre><span class="c-comment">// Async / Await — real OS threads</span>
-
-<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchUser</span>(<span class="c-id">id</span>) {
-    <span class="c-id">url</span>  <span class="c-op">=</span> <span class="c-str">"https://api.example.com/users/"</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-id">id</span>)
-    <span class="c-id">data</span> <span class="c-op">=</span> <span class="c-fn">http_get</span>(<span class="c-id">url</span>)
-    <span class="c-kw">give</span> <span class="c-fn">parse_json</span>(<span class="c-id">data</span>)
-}
-
-<span class="c-kw2">async</span> <span class="c-kw2">task</span> <span class="c-fn">fetchAll</span>(<span class="c-id">ids</span>) {
-    <span class="c-id">futures</span> <span class="c-op">=</span> []
-    <span class="c-kw">repeat</span> <span class="c-id">id</span> <span class="c-kw">in</span> <span class="c-id">ids</span> {
-        <span class="c-fn">push</span>(<span class="c-id">futures</span>, <span class="c-fn">fetchUser</span>(<span class="c-id">id</span>))
-    }
-    <span class="c-id">results</span> <span class="c-op">=</span> []
-    <span class="c-kw">repeat</span> <span class="c-id">f</span> <span class="c-kw">in</span> <span class="c-id">futures</span> {
-        <span class="c-fn">push</span>(<span class="c-id">results</span>, <span class="c-fn">await</span> <span class="c-id">f</span>)
-    }
-    <span class="c-kw">give</span> <span class="c-id">results</span>
-}
-
-<span class="c-id">users</span> <span class="c-op">=</span> <span class="c-fn">await</span> <span class="c-fn">fetchAll</span>([<span class="c-num">1</span>, <span class="c-num">2</span>, <span class="c-num">3</span>, <span class="c-num">4</span>])
-<span class="c-fn">out</span> <span class="c-str">"Fetched "</span> <span class="c-op">+</span> <span class="c-fn">str</span>(<span class="c-fn">len</span>(<span class="c-id">users</span>)) <span class="c-op">+</span> <span class="c-str">" users"</span></pre>
-    </div>
-    <div id="tab-error" class="tab-panel">
-      <pre><span class="c-comment">// Exception handling with typed errors</span>
-
-<span class="c-kw2">task</span> <span class="c-fn">divide</span>(<span class="c-id">a</span>, <span class="c-id">b</span>) {
-    <span class="c-kw">when</span> <span class="c-id">b</span> <span class="c-op">==</span> <span class="c-num">0</span> {
-        <span class="c-kw">throw</span> <span class="c-kw">new</span> <span class="c-id">ValueError</span>(<span class="c-str">"Division by zero"</span>)
-    }
-    <span class="c-kw">give</span> <span class="c-id">a</span> <span class="c-op">/</span> <span class="c-id">b</span>
-}
-
-<span class="c-kw">try</span> {
-    <span class="c-id">result</span> <span class="c-op">=</span> <span class="c-fn">divide</span>(<span class="c-num">10</span>, <span class="c-num">0</span>)
-    <span class="c-fn">out</span> <span class="c-id">result</span>
-} <span class="c-kw">catch</span> (<span class="c-id">e</span>) {
-    <span class="c-fn">out</span> <span class="c-str">"Caught: "</span> <span class="c-op">+</span> <span class="c-id">e</span>.message
-    <span class="c-comment">// Full stack trace is available</span>
-}
-
-<span class="c-comment">// Custom error types via inheritance</span>
-<span class="c-kw2">model</span> <span class="c-id">AuthError</span> <span class="c-kw">extends</span> <span class="c-id">Error</span> {
-    <span class="c-kw2">init</span>(<span class="c-id">msg</span>, <span class="c-id">code</span>) {
-        <span class="c-kw">self</span>.message <span class="c-op">=</span> <span class="c-id">msg</span>
-        <span class="c-kw">self</span>.code    <span class="c-op">=</span> <span class="c-id">code</span>
-    }
-}
-
-<span class="c-kw">throw</span> <span class="c-kw">new</span> <span class="c-id">AuthError</span>(<span class="c-str">"Forbidden"</span>, <span class="c-num">403</span>)</pre>
-    </div>
-    <div id="tab-web" class="tab-panel">
-      <pre><span class="c-comment">// Production-grade native web server</span>
-<span class="c-kw2">use</span> <span class="c-str">"serve.ez"</span>
-
-<span class="c-id">app</span> <span class="c-op">=</span> <span class="c-fn">App</span>()
-
-<span class="c-id">app</span>.<span class="c-fn">get</span>(<span class="c-str">"/"</span>, |<span class="c-id">req</span>| {
-    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">200</span>, <span class="c-str">"body"</span>: <span class="c-str">"Welcome to EZ!"</span> }
-})
-
-<span class="c-id">app</span>.<span class="c-fn">get</span>(<span class="c-str">"/api/users"</span>, |<span class="c-id">req</span>| {
-    <span class="c-id">users</span> <span class="c-op">=</span> [
-        { <span class="c-str">"id"</span>: <span class="c-num">1</span>, <span class="c-str">"name"</span>: <span class="c-str">"Alice"</span> },
-        { <span class="c-str">"id"</span>: <span class="c-num">2</span>, <span class="c-str">"name"</span>: <span class="c-str">"Bob"</span>   }
-    ]
-    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">200</span>, <span class="c-str">"json"</span>: <span class="c-id">users</span> }
-})
-
-<span class="c-id">app</span>.<span class="c-fn">post</span>(<span class="c-str">"/api/data"</span>, |<span class="c-id">req</span>| {
-    <span class="c-id">body</span> <span class="c-op">=</span> <span class="c-fn">parse_json</span>(<span class="c-id">req</span>.body)
-    <span class="c-comment">// Process body.field ...</span>
-    <span class="c-kw">give</span> { <span class="c-str">"status"</span>: <span class="c-num">201</span>, <span class="c-str">"body"</span>: <span class="c-str">"Created"</span> }
-})
-
-<span class="c-fn">out</span> <span class="c-str">"Server running on :8080"</span>
-<span class="c-id">app</span>.<span class="c-fn">listen</span>(<span class="c-num">8080</span>)</pre>
-    </div>
-    <div id="tab-ffi" class="tab-panel">
-      <pre><span class="c-comment">// Native FFI — call Windows APIs directly</span>
-
-<span class="c-comment">// Load Kernel32 dynamically</span>
-<span class="c-id">kernel32</span> <span class="c-op">=</span> <span class="c-fn">os_load_lib</span>(<span class="c-str">"kernel32.dll"</span>)
-<span class="c-id">beep</span>     <span class="c-op">=</span> <span class="c-fn">os_get_func</span>(<span class="c-id">kernel32</span>, <span class="c-str">"Beep"</span>)
-
-<span class="c-comment">// Call Beep(freq, duration)</span>
-<span class="c-fn">os_call</span>(<span class="c-id">beep</span>, [<span class="c-num">800</span>, <span class="c-num">300</span>])
-
-<span class="c-comment">// Allocate raw memory and write to it</span>
-<span class="c-id">ptr</span> <span class="c-op">=</span> <span class="c-fn">os_alloc</span>(<span class="c-num">64</span>)
-<span class="c-fn">os_write_string</span>(<span class="c-id">ptr</span>, <span class="c-str">"Hello from EZ memory!"</span>)
-<span class="c-id">val</span> <span class="c-op">=</span> <span class="c-fn">os_read_string_ptr</span>(<span class="c-id">ptr</span>)
-<span class="c-fn">out</span> <span class="c-id">val</span>
-<span class="c-fn">os_free</span>(<span class="c-id">ptr</span>)
-
-<span class="c-comment">// Use WinAPI MessageBox</span>
-<span class="c-id">user32</span> <span class="c-op">=</span> <span class="c-fn">os_load_lib</span>(<span class="c-str">"user32.dll"</span>)
-<span class="c-id">msgbox</span> <span class="c-op">=</span> <span class="c-fn">os_get_func</span>(<span class="c-id">user32</span>, <span class="c-str">"MessageBoxA"</span>)
-<span class="c-fn">os_call</span>(<span class="c-id">msgbox</span>, [<span class="c-num">0</span>, <span class="c-str">"Hello!"</span>, <span class="c-str">"EZ FFI"</span>, <span class="c-num">0</span>])</pre>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- LIBRARIES -->
-<section class="libs" id="libs">
-  <p class="section-label">// Standard Library</p>
-  <h2 class="section-title">Batteries included</h2>
-  <p style="color:var(--muted); margin-bottom:2.5rem; font-size:0.9rem; max-width:560px;">EZ keeps the binary lean. Extended capabilities are modular packages installed via the built-in package manager.</p>
-  <div class="libs-grid">
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">🖥️</span>
-        <span class="lib-name">os.ez</span>
-        <span class="lib-install">ez install os</span>
-      </div>
-      <p>Access environment variables, clipboard read/write, and process management. Implemented in pure EZ via native FFI over Kernel32.</p>
-      <div class="lib-tags">
-        <span class="tag">env vars</span>
-        <span class="tag">clipboard</span>
-        <span class="tag">processes</span>
-      </div>
-    </div>
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">📁</span>
-        <span class="lib-name">fs.ez</span>
-        <span class="lib-install">ez install fs</span>
-      </div>
-      <p>Hardened filesystem operations using Kernel32 — list directories, check existence, get file size, copy, move, and delete with proper error handling.</p>
-      <div class="lib-tags">
-        <span class="tag">listDir</span>
-        <span class="tag">exists</span>
-        <span class="tag">size</span>
-        <span class="tag">copy/move</span>
-      </div>
-    </div>
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">🌐</span>
-        <span class="lib-name">serve.ez</span>
-        <span class="lib-install">ez install serve</span>
-      </div>
-      <p>DDoS-resistant, Express-style HTTP server running on native WS2_32 TCP sockets. Supports GET, POST, middleware, and JSON responses.</p>
-      <div class="lib-tags">
-        <span class="tag">HTTP</span>
-        <span class="tag">routing</span>
-        <span class="tag">middleware</span>
-        <span class="tag">native TCP</span>
-      </div>
-    </div>
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">🔐</span>
-        <span class="lib-name">crypto.ez</span>
-        <span class="lib-install">ez install crypto</span>
-      </div>
-      <p>Cryptography primitives in pure EZ — Base64 encode/decode, RC4 symmetric cipher, and hash utilities for authentication workflows.</p>
-      <div class="lib-tags">
-        <span class="tag">base64</span>
-        <span class="tag">RC4</span>
-        <span class="tag">hashing</span>
-      </div>
-    </div>
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">🔔</span>
-        <span class="lib-name">notify.ez</span>
-        <span class="lib-install">ez install notify</span>
-      </div>
-      <p>Windows system tray balloon notifications. Supports info, warning, and error icon types with custom title and message text.</p>
-      <div class="lib-tags">
-        <span class="tag">tray</span>
-        <span class="tag">balloon tips</span>
-        <span class="tag">icons</span>
-      </div>
-    </div>
-    <div class="lib-card">
-      <div class="lib-header">
-        <span class="lib-icon">🗄️</span>
-        <span class="lib-name">SQLite ORM</span>
-        <span class="lib-install">built-in FFI</span>
-      </div>
-      <p>Embedded SQLite3 database access via the FFI layer. Perform queries, parameterized statements, and schema migrations from EZ scripts.</p>
-      <div class="lib-tags">
-        <span class="tag">SQLite3</span>
-        <span class="tag">queries</span>
-        <span class="tag">params</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ROADMAP -->
-<section class="roadmap" id="roadmap">
-  <p class="section-label">// Where we're headed</p>
-  <h2 class="section-title">Roadmap</h2>
-  <div class="roadmap-grid">
-    <div class="roadmap-card">
-      <span class="version-tag v-done">v1.1 — Stable</span>
-      <h3>Foundation</h3>
-      <div class="roadmap-item done"><span class="check">✓</span> Native FFI Core Integration</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Modular stdlib (os, fs, net)</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Java-style stack traces</div>
-      <div class="roadmap-item done"><span class="check">✓</span> DDoS-resistant TCP server</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Metaprogramming (getattr/setattr)</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Variadic functions &amp; spread</div>
-    </div>
-    <div class="roadmap-card current">
-      <span class="version-tag v-current">v1.2 — Current</span>
-      <h3>GUI &amp; DX</h3>
-      <div class="roadmap-item done"><span class="check">✓</span> Native GUI Layer v6.0</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Windows 11 dark mode aesthetics</div>
-      <div class="roadmap-item done"><span class="check">✓</span> Concurrency primitives (mutex/atomic)</div>
-      <div class="roadmap-item"><span class="todo">○</span> Debugger support</div>
-      <div class="roadmap-item"><span class="todo">○</span> Performance profiler</div>
-      <div class="roadmap-item"><span class="todo">○</span> Package Registry</div>
-    </div>
-    <div class="roadmap-card">
-      <span class="version-tag v-future">v2.0 — Vision</span>
-      <h3>Next Horizon</h3>
-      <div class="roadmap-item"><span class="todo">○</span> Optional static typing</div>
-      <div class="roadmap-item"><span class="todo">○</span> VS Code extension</div>
-      <div class="roadmap-item"><span class="todo">○</span> Cross-platform FFI (Linux/macOS)</div>
-      <div class="roadmap-item"><span class="todo">○</span> WebAssembly target</div>
-      <div class="roadmap-item"><span class="todo">○</span> JIT compilation research</div>
-      <div class="roadmap-item"><span class="todo">○</span> Pattern matching</div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CREDITS -->
-<section class="credits" id="credits">
-  <p class="section-label">// The maker</p>
-  <h2 class="section-title">Built by a builder</h2>
-  <div class="credits-inner">
-    <div class="avatar">AM</div>
-    <div class="credits-info">
-      <h3>Abdullah Masood</h3>
-      <div class="handle">@imabd645</div>
-      <p>Software engineering student at UET Lahore and the sole author of the EZ language — every lexer token, parser rule, GC cycle, and GUI binding. EZ is a testament to what deep curiosity and 9,500 lines of C++17 can produce.</p>
-      <div class="credit-links">
-        <a href="https://github.com/imabd645/EZ-language" target="_blank" class="btn-primary" style="font-size:0.78rem; padding:10px 20px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-          GitHub Profile
-        </a>
-        <a href="https://github.com/imabd645/EZ-language/issues" target="_blank" class="btn-secondary" style="font-size:0.78rem; padding:10px 20px;">
-          Report Issue
-        </a>
-      </div>
-    </div>
-    <div class="ack-row">
-      <h4>Inspired by &amp; built with</h4>
-      <div class="ack-tags">
-        <span class="ack-tag">🐍 Python — design philosophy</span>
-        <span class="ack-tag">🌙 Lua — embedding simplicity</span>
-        <span class="ack-tag">📖 Crafting Interpreters (Lox) — tree-walk pattern</span>
-        <span class="ack-tag">🗄️ SQLite3 — embedded database</span>
-        <span class="ack-tag">🌐 cURL — HTTP networking</span>
-        <span class="ack-tag">🔒 OpenSSL — crypto primitives</span>
-        <span class="ack-tag">⚙️ C++17 — the backbone</span>
-        <span class="ack-tag">🪟 WinAPI — GUI &amp; FFI layer</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">EZlang</div>
-  <p class="footer-copy">© 2024 Abdullah Masood · MIT License</p>
-  <ul class="footer-links">
-    <li><a href="https://github.com/imabd645/EZ-language" target="_blank">GitHub</a></li>
-    <li><a href="https://github.com/imabd645/EZ-language/issues" target="_blank">Issues</a></li>
-    <li><a href="https://github.com/imabd645/EZ-language/discussions" target="_blank">Discuss</a></li>
-    <li><a href="https://github.com/imabd645/EZ-language/blob/main/LICENSE" target="_blank">License</a></li>
-  </ul>
-</footer>
-
 <script>
-  function showTab(name) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
+  const TOTAL = 20;
+  let current = 0;
+
+  const sections = document.querySelectorAll('.section');
+  const navBtns  = document.querySelectorAll('.nav-btn');
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= TOTAL) return;
+    sections[current].classList.remove('active');
+    navBtns[current].classList.remove('active');
+    current = idx;
+    sections[current].classList.add('active');
+    navBtns[current].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateDots();
   }
 
-  // Intersection observer for scroll-in animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
 
-  document.querySelectorAll('.feature-card, .lib-card, .roadmap-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+  function updateDots() {
+    // Update all dot containers
+    for (let s = 0; s < TOTAL; s++) {
+      const container = document.getElementById('dots' + s);
+      if (!container) continue;
+      container.innerHTML = '';
+      const show = Math.min(TOTAL, 18);
+      for (let i = 0; i < show; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === current ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        container.appendChild(dot);
+      }
+    }
+    // Also the main dots
+    const mainDots = document.getElementById('dots');
+    if (mainDots) {
+      mainDots.innerHTML = '';
+      for (let i = 0; i < TOTAL; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === current ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        mainDots.appendChild(dot);
+      }
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
   });
+
+  updateDots();
 </script>
+
 </body>
 </html>
