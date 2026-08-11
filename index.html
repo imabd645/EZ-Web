@@ -818,7 +818,7 @@
     <div class="logo" onclick="showHome()">EZ<span> Language</span></div>
     <div style="display:flex;align-items:center;gap:12px;">
       <button class="header-docs-btn" id="headerDocsBtn" onclick="showDocs()">📖 Docs</button>
-      <div class="header-badge">v2.0 &mdash; Windows</div>
+      <div class="header-badge">v4.0 &mdash; Windows</div>
       <a class="btn-download primary" style="padding:7px 16px;font-size:12px;" href="ez_setup.exe" target="_blank">&#11015; Download</a>
     </div>
   </div>
@@ -835,7 +835,7 @@
       <div class="hero-particle" style="left:70%;top:60%;animation-delay:1.5s;"></div>
       <div class="hero-particle" style="left:85%;top:30%;animation-delay:3s;"></div>
     </div>
-    <div class="hero-badge">Now available &mdash; v2.0 with Tuples &amp; Keyword Args</div>
+    <div class="hero-badge">Now available &mdash; v4.0</div>
     <h1 class="hero-title">Code Without the <span>Complexity</span></h1>
     <p class="hero-desc">EZ is a fast, expressive scripting language for Windows &mdash; with built-in GUI, database support, async/await, OOP, and a one-click bundler to .exe. Free and open source.</p>
     <div class="hero-actions">
@@ -864,11 +864,11 @@ coords = (<span class="num">10</span>, <span class="num">20</span>)
 <span class="kw">out</span> <span class="str">`Position: <span class="interp">{x}</span>, <span class="interp">{y}</span>`</span></div>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><span class="hero-stat-num">44</span>Keywords</div>
+      <div class="hero-stat"><span class="hero-stat-num">46</span>Keywords</div>
       <div class="hero-stat"><span class="hero-stat-num">60+</span>GUI Functions</div>
-      <div class="hero-stat"><span class="hero-stat-num">100+</span>Builtins</div>
-      <div class="hero-stat"><span class="hero-stat-num">19+</span>Libraries</div>
-      <div class="hero-stat"><span class="hero-stat-num">6</span>Decorators</div>
+      <div class="hero-stat"><span class="hero-stat-num">169</span>Builtins</div>
+      <div class="hero-stat"><span class="hero-stat-num">38</span>Libraries</div>
+      <div class="hero-stat"><span class="hero-stat-num">5</span>Decorators</div>
     </div>
   </div>
   <!-- Feature strip -->
@@ -884,7 +884,7 @@ coords = (<span class="num">10</span>, <span class="num">20</span>)
   </div>
   <!-- Download bar -->
   <div class="download-bar">
-    <span class="download-bar-text">&#128640; <strong>EZ Language v2.0</strong> is out &mdash; free and open source!</span>
+    <span class="download-bar-text">&#128640; <strong>EZ Language v4.0</strong> is out &mdash; free and open source!</span>
     <a class="btn-download primary" href="ez_setup.exe" target="_blank">&#11015; Download Installer (.exe)</a>
     <a class="btn-download secondary" href="vscode-ez-language.vsix" target="_blank">&#129513; VS Code Extension</a>
     <a class="btn-download secondary" href="https://github.com/imabd645/EZ-language" target="_blank">&#9733; GitHub</a>
@@ -904,7 +904,7 @@ coords = (<span class="num">10</span>, <span class="num">20</span>)
       <div class="nav-label">Documentation</div>
       <ul class="nav-list">
         <li><button class="nav-btn active" onclick="goTo(0)"><span class="nav-icon">🏠</span> Overview</button></li>
-        <li><button class="nav-btn" onclick="goTo(1)"><span class="nav-icon">🔑</span> Keywords <span class="nav-count">44</span></button></li>
+        <li><button class="nav-btn" onclick="goTo(1)"><span class="nav-icon">🔑</span> Keywords <span class="nav-count">46</span></button></li>
         <li><button class="nav-btn" onclick="goTo(2)"><span class="nav-icon">⚡</span> Operators <span class="nav-count">30+</span></button></li>
         <li><button class="nav-btn" onclick="goTo(3)"><span class="nav-icon">📝</span> Basic Syntax</button></li>
         <li><button class="nav-btn" onclick="goTo(4)"><span class="nav-icon">🔁</span> Loops</button></li>
@@ -920,9 +920,10 @@ coords = (<span class="num">10</span>, <span class="num">20</span>)
         <li><button class="nav-btn" onclick="goTo(14)"><span class="nav-icon">🖥️</span> GUI</button></li>
         <li><button class="nav-btn" onclick="goTo(15)"><span class="nav-icon">🔌</span> FFI</button></li>
         <li><button class="nav-btn" onclick="goTo(16)"><span class="nav-icon">🛠️</span> CLI Tools</button></li>
-        <li><button class="nav-btn" onclick="goTo(17)"><span class="nav-icon">📚</span> Standard Library</button></li>
-        <li><button class="nav-btn" onclick="goTo(18)"><span class="nav-icon">🎨</span> Decorators <span class="nav-count">new</span></button></li>
-        <li><button class="nav-btn" onclick="goTo(19)"><span class="nav-icon">🔍</span> What's New v2.0</button></li>
+        <li><button class="nav-btn" onclick="goTo(17)"><span class="nav-icon">📦</span> Package Manager <span class="nav-count">new</span></button></li>
+        <li><button class="nav-btn" onclick="goTo(18)"><span class="nav-icon">📚</span> Standard Library</button></li>
+        <li><button class="nav-btn" onclick="goTo(19)"><span class="nav-icon">🎨</span> Decorators <span class="nav-count">new</span></button></li>
+        <li><button class="nav-btn" onclick="goTo(20)"><span class="nav-icon">🔍</span> What's New v2.0</button></li>
       </ul>
       <div class="nav-download-section">
         <div class="nav-label">Downloads</div>
@@ -980,7 +981,7 @@ name = <span class="str">"World"</span>
 <span class="kw">out</span> <span class="str">`Hello, <span class="interp">{name}</span>! 2 + 2 = <span class="interp">{2 + 2}</span>`</span>
 
 <span class="cmt"># Functions with type hints and contracts</span>
-<span class="kw">task</span> <span class="fn">divide</span>(a: <span class="type">int</span>, b: <span class="type">int</span>) -> <span class="type">int</span>
+<span class="kw">task</span> <span class="fn">divide</span>(a: <span class="type">number</span>, b: <span class="type">number</span>) -> <span class="type">number</span>
     <span class="kw">requires</span> b != <span class="num">0</span>, <span class="str">"Cannot divide by zero"</span>
     <span class="kw">ensures</span> result >= <span class="num">0</span>, <span class="str">"Result must be non-negative"</span>
 {
@@ -1004,7 +1005,7 @@ dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>)
           <button class="nav-control btn-prev btn-disabled">← Previous</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots0"></div>
-            <div class="section-progress">Section 1 of 20</div>
+            <div class="section-progress">Section 1 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Keywords →</button>
         </div>
@@ -1103,7 +1104,7 @@ dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>)
           <button class="nav-control btn-prev" onclick="prev()">← Overview</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots1"></div>
-            <div class="section-progress">Section 2 of 20</div>
+            <div class="section-progress">Section 2 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Operators →</button>
         </div>
@@ -1193,8 +1194,8 @@ dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>)
           <div class="code-body"><span class="kw">model</span> Vector {
     <span class="kw">init</span>(x, y) { <span class="kw">self</span>.x = x  <span class="kw">self</span>.y = y }
 
-    <span class="kw">task</span> +(other)  { <span class="kw">give</span> Vector(<span class="kw">self</span>.x + other.x, <span class="kw">self</span>.y + other.y) }
-    <span class="kw">task</span> ==(other) { <span class="kw">give</span> <span class="kw">self</span>.x == other.x <span class="kw">and</span> <span class="kw">self</span>.y == other.y }
+    <span class="kw">task</span> +(rhs)  { <span class="kw">give</span> Vector(<span class="kw">self</span>.x + rhs.x, <span class="kw">self</span>.y + rhs.y) }
+    <span class="kw">task</span> ==(rhs) { <span class="kw">give</span> <span class="kw">self</span>.x == rhs.x <span class="kw">and</span> <span class="kw">self</span>.y == rhs.y }
     <span class="kw">task</span> neg()     { <span class="kw">give</span> Vector(-<span class="kw">self</span>.x, -<span class="kw">self</span>.y) }
 }
 
@@ -1220,7 +1221,7 @@ age  = user<span class="op">?.</span>profile<span class="op">?.</span>age <span 
           <button class="nav-control btn-prev" onclick="prev()">← Keywords</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots2"></div>
-            <div class="section-progress">Section 3 of 20</div>
+            <div class="section-progress">Section 3 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Basic Syntax →</button>
         </div>
@@ -1245,9 +1246,9 @@ flag = <span class="kw">true</span>
 empty = <span class="kw">nil</span>
 
 <span class="cmt"># With type hints (optional)</span>
-count: <span class="type">int</span> = <span class="num">0</span>
+count: <span class="type">number</span> = <span class="num">0</span>
 label: <span class="type">string</span> = <span class="str">"hello"</span>
-ratio: <span class="type">float</span> = <span class="num">0.5</span>
+ratio: <span class="type">number</span> = <span class="num">0.5</span>
 
 <span class="cmt"># Arrays</span>
 nums   = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
@@ -1257,7 +1258,7 @@ mixed  = [<span class="str">"a"</span>, <span class="num">1</span>, <span class=
 user = { <span class="str">"name"</span>: <span class="str">"Ali"</span>, <span class="str">"age"</span>: <span class="num">20</span> }
 
 <span class="cmt"># Destructuring</span>
-a, b = [<span class="num">10</span>, <span class="num">20</span>]
+(a, b) = [<span class="num">10</span>, <span class="num">20</span>]
 <span class="kw">out</span> a  <span class="cmt"># → 10</span>
 <span class="kw">out</span> b  <span class="cmt"># → 20</span></div>
         </div>
@@ -1327,7 +1328,7 @@ print(<span class="str">"Also works"</span>)  <span class="cmt"># print is an al
           <button class="nav-control btn-prev" onclick="prev()">← Operators</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots3"></div>
-            <div class="section-progress">Section 4 of 20</div>
+            <div class="section-progress">Section 4 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Loops →</button>
         </div>
@@ -1405,7 +1406,7 @@ scores = { <span class="str">"Ali"</span>: <span class="num">95</span>, <span cl
           <button class="nav-control btn-prev" onclick="prev()">← Basic Syntax</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots4"></div>
-            <div class="section-progress">Section 5 of 20</div>
+            <div class="section-progress">Section 5 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Functions →</button>
         </div>
@@ -1428,7 +1429,7 @@ scores = { <span class="str">"Ali"</span>: <span class="num">95</span>, <span cl
 }
 
 <span class="cmt"># With type annotations</span>
-<span class="kw">task</span> <span class="fn">add</span>(a: <span class="type">int</span>, b: <span class="type">int</span>) -> <span class="type">int</span> {
+<span class="kw">task</span> <span class="fn">add</span>(a: <span class="type">number</span>, b: <span class="type">number</span>) -> <span class="type">number</span> {
     <span class="kw">give</span> a + b
 }
 
@@ -1464,8 +1465,9 @@ process = |x| {
     <span class="kw">give</span> result
 }
 
-<span class="cmt"># Typed lambda</span>
-square = |x: <span class="type">int</span>| -> <span class="type">int</span>  x * x
+<span class="cmt"># Lambdas are always dynamic &mdash; parameters and return</span>
+<span class="cmt"># values cannot be annotated. Use a task for typed code.</span>
+square = |x| x * x
 
 <span class="cmt"># Higher-order functions</span>
 nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
@@ -1516,7 +1518,7 @@ inc()  <span class="cmt"># 2</span></div>
           <button class="nav-control btn-prev" onclick="prev()">← Loops</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots5"></div>
-            <div class="section-progress">Section 6 of 20</div>
+            <div class="section-progress">Section 6 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">OOP →</button>
         </div>
@@ -1597,7 +1599,7 @@ dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>, <span clas
           <button class="nav-control btn-prev" onclick="prev()">← Functions</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots6"></div>
-            <div class="section-progress">Section 7 of 20</div>
+            <div class="section-progress">Section 7 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Modules →</button>
         </div>
@@ -1615,14 +1617,14 @@ dog = <span class="kw">new</span> Dog(<span class="str">"Rex"</span>, <span clas
         <div class="code-block">
           <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
           <div class="code-body"><span class="cmt"># Basic import — all exports become local</span>
-<span class="kw">use</span> <span class="str">"ezdb"</span>
-<span class="kw">use</span> <span class="str">"ezcrypto"</span>
+<span class="kw">use</span> <span class="str">"db"</span>
+<span class="kw">use</span> <span class="str">"crypto"</span>
 
 <span class="cmt"># Import local file</span>
 <span class="kw">use</span> <span class="str">"./utils.ez"</span>
 
 <span class="cmt"># Namespaced import</span>
-<span class="kw">use</span> <span class="str">"ezmath"</span> <span class="kw">as</span> math
+<span class="kw">use</span> <span class="str">"math"</span> <span class="kw">as</span> math
 result = math.sin(<span class="num">3.14</span>)</div>
         </div>
 
@@ -1655,7 +1657,7 @@ result = math.sin(<span class="num">3.14</span>)</div>
           <button class="nav-control btn-prev" onclick="prev()">← OOP</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots7"></div>
-            <div class="section-progress">Section 8 of 20</div>
+            <div class="section-progress">Section 8 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Error Handling →</button>
         </div>
@@ -1726,7 +1728,7 @@ Traceback (most recent call last):
           <button class="nav-control btn-prev" onclick="prev()">← Modules</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots8"></div>
-            <div class="section-progress">Section 9 of 20</div>
+            <div class="section-progress">Section 9 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Async →</button>
         </div>
@@ -1800,7 +1802,7 @@ counter.<span class="fn">add</span>(<span class="num">5</span>)
           <button class="nav-control btn-prev" onclick="prev()">← Error Handling</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots9"></div>
-            <div class="section-progress">Section 10 of 20</div>
+            <div class="section-progress">Section 10 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Type System →</button>
         </div>
@@ -1816,23 +1818,30 @@ counter.<span class="fn">add</span>(<span class="num">5</span>)
 
         <div class="sub-title">Primitive Types</div>
         <div class="grid-3">
-          <div class="card"><div class="card-title">int</div><code>x: int = 42</code></div>
-          <div class="card"><div class="card-title">float</div><code>x: float = 3.14</code></div>
+          <div class="card"><div class="card-title">number</div><code>x: number = 42</code></div>
           <div class="card"><div class="card-title">string</div><code>x: string = "hi"</code></div>
           <div class="card"><div class="card-title">bool</div><code>x: bool = true</code></div>
-          <div class="card"><div class="card-title">nil</div><code>x: nil = nil</code></div>
-          <div class="card"><div class="card-title">any</div><code>x: any = anything</code></div>
+        </div>
+
+        <div class="info-box warn">
+          <span class="info-icon">🔢</span>
+          <div><strong>One numeric type.</strong> Annotations use <code>number</code> for every numeric value — there is no <code>int</code> or <code>float</code> annotation. Integers and floats are still distinct at runtime, and <code>typeOf()</code> reports <code>"integer"</code> or <code>"float"</code> accordingly; the distinction simply is not expressed in the type syntax.</div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="info-icon">💡</span>
+          <div>To leave a value dynamic, write no annotation at all. There is no <code>any</code> keyword to spell it with.</div>
         </div>
 
         <div class="sub-title">Generic Types</div>
         <div class="code-block">
           <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
           <div class="code-body"><span class="cmt"># Typed arrays</span>
-nums:   <span class="type">Array[int]</span>    = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+nums:   <span class="type">Array[number]</span>    = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
 names:  <span class="type">Array[string]</span> = [<span class="str">"Ali"</span>, <span class="str">"Sara"</span>]
 
 <span class="cmt"># Typed functions</span>
-<span class="kw">task</span> <span class="fn">process</span>(items: <span class="type">Array[int]</span>) -> <span class="type">int</span> {
+<span class="kw">task</span> <span class="fn">process</span>(items: <span class="type">Array[number]</span>) -> <span class="type">number</span> {
     total = <span class="num">0</span>
     <span class="kw">get</span> x <span class="kw">in</span> items { total += x }
     <span class="kw">give</span> total
@@ -1852,14 +1861,14 @@ x = <span class="num">5</span>
 x = <span class="str">"now a string"</span>  <span class="cmt"># fine</span>
 
 <span class="cmt"># Annotated — type checked at compile time</span>
-y: <span class="type">int</span> = <span class="num">5</span>
-y = <span class="str">"string"</span>  <span class="cmt"># TYPE ERROR: string not assignable to int</span>
+y: <span class="type">number</span> = <span class="num">5</span>
+y = <span class="str">"string"</span>  <span class="cmt"># TYPE ERROR: string not assignable to number</span>
 
 <span class="cmt"># Function with annotations — checked</span>
-<span class="kw">task</span> <span class="fn">double</span>(n: <span class="type">int</span>) -> <span class="type">int</span> {
+<span class="kw">task</span> <span class="fn">double</span>(n: <span class="type">number</span>) -> <span class="type">number</span> {
     <span class="kw">give</span> n * <span class="num">2</span>
 }
-double(<span class="str">"hello"</span>)  <span class="cmt"># TYPE ERROR: string not assignable to int</span>
+double(<span class="str">"hello"</span>)  <span class="cmt"># TYPE ERROR: string not assignable to number</span>
 
 <span class="cmt"># Unannotated — not checked, any goes anywhere</span>
 <span class="kw">task</span> <span class="fn">process</span>(x) {
@@ -1876,7 +1885,7 @@ double(<span class="str">"hello"</span>)  <span class="cmt"># TYPE ERROR: string
           <button class="nav-control btn-prev" onclick="prev()">← Async</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots10"></div>
-            <div class="section-progress">Section 11 of 20</div>
+            <div class="section-progress">Section 11 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Contracts →</button>
         </div>
@@ -1953,7 +1962,7 @@ withdraw(<span class="num">50</span>, <span class="num">200</span>)      <span c
           <button class="nav-control btn-prev" onclick="prev()">← Type System</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots11"></div>
-            <div class="section-progress">Section 12 of 20</div>
+            <div class="section-progress">Section 12 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Structs →</button>
         </div>
@@ -1981,7 +1990,7 @@ p.x = <span class="num">100</span>
 <span class="cmt"># Struct with types</span>
 <span class="kw">struct</span> Person {
     name: <span class="type">string</span>,
-    age:  <span class="type">int</span>,
+    age:  <span class="type">number</span>,
     email: <span class="type">string</span>
 }
 
@@ -2025,7 +2034,7 @@ cfg = Config()
           <button class="nav-control btn-prev" onclick="prev()">← Contracts</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots12"></div>
-            <div class="section-progress">Section 13 of 20</div>
+            <div class="section-progress">Section 13 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Built-ins →</button>
         </div>
@@ -2119,7 +2128,7 @@ cfg = Config()
           <button class="nav-control btn-prev" onclick="prev()">← Structs</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots13"></div>
-            <div class="section-progress">Section 14 of 20</div>
+            <div class="section-progress">Section 14 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">GUI →</button>
         </div>
@@ -2162,14 +2171,14 @@ gui_run()</div>
 
         <div class="info-box tip mt-4">
           <span class="info-icon">🎮</span>
-          <div><strong>Game support</strong> — use <code>use "ezgame"</code> for a game loop with FPS control, drawing primitives, keyboard/mouse input. Snake and Flappy Bird demos included.</div>
+          <div><strong>Game support</strong> — use <code>use "game"</code> for a game loop with FPS control, drawing primitives, keyboard/mouse input. Snake and Flappy Bird demos included.</div>
         </div>
 
         <div class="section-nav">
           <button class="nav-control btn-prev" onclick="prev()">← Built-ins</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots14"></div>
-            <div class="section-progress">Section 15 of 20</div>
+            <div class="section-progress">Section 15 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">FFI →</button>
         </div>
@@ -2232,7 +2241,7 @@ os_free(buf)</div>
           <button class="nav-control btn-prev" onclick="prev()">← GUI</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots15"></div>
-            <div class="section-progress">Section 16 of 20</div>
+            <div class="section-progress">Section 16 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">CLI Tools →</button>
         </div>
@@ -2277,12 +2286,28 @@ ez bundle app.ez output.exe
 ez bundle app.ez --gui            <span class="cmt"># hide console window</span>
 ez bundle app.ez --icon app.ico   <span class="cmt"># set .exe icon</span>
 
-<span class="cmt"># Package manager</span>
-ez install ezdb
-ez install ezcrypto
+<span class="cmt"># Package manager &mdash; see the Package Manager section</span>
+ez install crypto                 <span class="cmt"># install from the registry</span>
+ez uninstall crypto
+ez list                           <span class="cmt"># what is installed</span>
+ez search http                    <span class="cmt"># search the registry</span>
+ez info crypto                    <span class="cmt"># show package details</span>
+
+<span class="cmt"># Publishing</span>
+ez register                       <span class="cmt"># create a registry account</span>
+ez login / ez logout / ez whoami
+ez init my-package                <span class="cmt"># scaffold a package</span>
+ez publish                        <span class="cmt"># publish the current directory</span>
+ez yank my-package@1.0.0          <span class="cmt"># withdraw a release</span>
+ez config registry &lt;url&gt;          <span class="cmt"># point at another registry</span>
 
 <span class="cmt"># Launch REPL</span>
 ez</div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="info-icon">📦</span>
+          <div>Packages install into the shared library root (<code>C:\ezlib</code>), which is where <code>use "name"</code> resolves from — so an installed package works in every project. See <a href="#" onclick="goTo(17);return false;"><strong>Package Manager</strong></a> for the full workflow.</div>
         </div>
 
         <div class="sub-title">Bytecode Compilation</div>
@@ -2307,24 +2332,166 @@ ez</div>
           <button class="nav-control btn-prev" onclick="prev()">← FFI</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <div class="progress-dots" id="dots16"></div>
-            <div class="section-progress">Section 17 of 20</div>
+            <div class="section-progress">Section 17 of 21</div>
+          </div>
+          <button class="nav-control btn-next" onclick="next()">Package Manager →</button>
+        </div>
+      </section>
+
+      <!-- ═══════════════ 17: PACKAGE MANAGER ═══════════════ -->
+      <section class="section" id="s17">
+        <div class="section-hero">
+          <div class="section-eyebrow">Ecosystem</div>
+          <div class="section-title">Package Manager &amp; Registry</div>
+          <div class="section-desc">EZ has a public package registry at <a href="https://packages.ez-lang.site" target="_blank"><strong>packages.ez-lang.site</strong></a>. Install packages with one command, publish your own, and get dependency resolution with SHA-256 integrity verification.</div>
+        </div>
+
+        <div class="sub-title">Installing Packages</div>
+        <div class="code-block">
+          <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal</div></div>
+          <div class="code-body"><span class="cmt"># Install the latest version</span>
+ez install crypto
+
+<span class="cmt"># Pin a version or a range</span>
+ez install crypto@1.0.1
+ez install web@^1.0.0
+
+<span class="cmt"># Install several at once</span>
+ez install fs json datetime
+
+<span class="cmt"># Install everything package.ez declares</span>
+ez install
+
+<span class="cmt"># Remove a package</span>
+ez uninstall crypto
+
+<span class="cmt"># Show what is installed</span>
+ez list</div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="info-icon">📁</span>
+          <div><strong>Where packages land</strong> — installs go into the shared library root (<code>C:\ezlib</code>, or wherever <code>EZLIB_PATH</code> points). That is the same directory <code>use "name"</code> resolves from, so anything you install is importable from <em>every</em> project on the machine — no per-project copies, no duplicated dependencies.</div>
+        </div>
+
+        <div class="info-box warn">
+          <span class="info-icon">🛡️</span>
+          <div><strong>Local packages are protected</strong> — if a directory already exists and <code>ez.lock</code> does not record it, the install refuses rather than overwriting what could be hand-written source. Pass <code>--force</code> to replace it deliberately.</div>
+        </div>
+
+        <div class="sub-title">Finding Packages</div>
+        <div class="code-block">
+          <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal</div></div>
+          <div class="code-body">$ ez search crypto
+  crypto                <span class="num">1.0.1</span>       AES-256 Encryption, SHA Hashing, and Base64 bindings
+
+1 of 1 package(s).
+
+$ ez info crypto
+crypto  <span class="num">1.0.1</span>
+AES-256 Encryption, SHA Hashing, and Base64 bindings for EZ Language
+
+  downloads    <span class="num">2</span>
+  owners       imabd645
+  versions     <span class="num">1.0.1</span>, <span class="num">1.0.0</span></div>
+        </div>
+
+        <div class="sub-title">The package.ez Manifest</div>
+        <div class="code-block">
+          <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">package.ez</div></div>
+          <div class="code-body">{
+  <span class="str">"name"</span>: <span class="str">"my-package"</span>,
+  <span class="str">"version"</span>: <span class="str">"1.0.0"</span>,
+  <span class="str">"description"</span>: <span class="str">"What this package does"</span>,
+  <span class="str">"author"</span>: <span class="str">"Your Name"</span>,
+  <span class="str">"main"</span>: <span class="str">"main.ez"</span>,
+  <span class="str">"license"</span>: <span class="str">"MIT"</span>,
+  <span class="str">"keywords"</span>: [<span class="str">"example"</span>],
+  <span class="str">"dependencies"</span>: {
+    <span class="str">"fs"</span>: <span class="str">"^1.0.0"</span>,
+    <span class="str">"json"</span>: <span class="str">"*"</span>
+  }
+}</div>
+        </div>
+
+        <div class="info-box warn">
+          <span class="info-icon">⚠️</span>
+          <div>The package name must match its directory name. <code>use "name"</code> resolves by <strong>directory</strong>, so a package named <code>mylib</code> living in <code>mylib/</code> is importable — a mismatch produces a package that installs but can never be imported. The entry point must be <code>&lt;name&gt;.ez</code> or <code>main.ez</code>; the <code>main</code> field is metadata and does not change resolution.</div>
+        </div>
+
+        <div class="sub-title">Publishing Your Own</div>
+        <div class="code-block">
+          <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">terminal</div></div>
+          <div class="code-body"><span class="cmt"># One-time: create an account (or sign in)</span>
+ez register
+ez login
+ez whoami
+
+<span class="cmt"># Scaffold a new package</span>
+ez init my-package
+
+<span class="cmt"># Publish from the package directory</span>
+cd my-package
+ez publish
+
+<span class="cmt"># Withdraw a bad release (and undo it)</span>
+ez yank my-package@1.0.0
+ez unyank my-package@1.0.0</div>
+        </div>
+
+        <div class="info-box new">
+          <span class="info-icon">🔒</span>
+          <div><strong>Published versions are immutable.</strong> A version can never be overwritten — republishing the same number is refused. This is what makes <code>ez.lock</code> checksums meaningful: code you locked cannot change underneath you. To ship a fix, publish a new version. <code>yank</code> hides a release from new resolutions without breaking anyone who already locked it.</div>
+        </div>
+
+        <div class="sub-title">Dependency Resolution &amp; Integrity</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">How resolution works</div>
+            <p style="font-size:13px;color:var(--text-2)">The registry resolves the whole graph server-side and returns a flat install plan, ordered so dependencies install first. Exactly one version of each package is chosen — constraints from every dependent are unified, so two packages cannot pull in conflicting copies. An unsatisfiable set is reported as an error rather than silently guessed.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">How integrity works</div>
+            <p style="font-size:13px;color:var(--text-2)">Every tarball is SHA-256 hashed at publish time. On install the hash is recomputed and compared before anything is unpacked; a mismatch aborts the install. <code>ez.lock</code> records the version and checksum of everything installed, so a later install reproduces the exact same bytes.</p>
+          </div>
+        </div>
+
+        <div class="sub-title">Version Ranges</div>
+        <table class="op-table">
+          <tr><th>Range</th><th>Matches</th><th>Example</th></tr>
+          <tr><td><code>1.2.3</code></td><td>That exact version, nothing else</td><td>1.2.3</td></tr>
+          <tr><td><code>^1.2.3</code></td><td>Compatible: patch and minor updates</td><td>1.2.3 → 1.9.0</td></tr>
+          <tr><td><code>~1.2.3</code></td><td>Patch updates only</td><td>1.2.3 → 1.2.9</td></tr>
+          <tr><td><code>*</code></td><td>Any published version</td><td>latest</td></tr>
+        </table>
+
+        <div class="info-box tip mt-4">
+          <span class="info-icon">🌐</span>
+          <div>Point the client at a different registry with <code>ez config registry &lt;url&gt;</code> — useful for a private or self-hosted instance. Credentials are stored per registry, so you can stay logged in to several at once.</div>
+        </div>
+
+        <div class="section-nav">
+          <button class="nav-control btn-prev" onclick="prev()">← CLI Tools</button>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+            <div class="progress-dots" id="dots17"></div>
+            <div class="section-progress">Section 18 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Standard Library →</button>
         </div>
       </section>
 
-      <!-- ═══════════════ 17: STDLIB ═══════════════ -->
-      <section class="section" id="s17">
+      <!-- ═══════════════ 18: STDLIB ═══════════════ -->
+      <section class="section" id="s18">
         <div class="section-hero">
           <div class="section-eyebrow">Ecosystem</div>
           <div class="section-title">Standard Library (ezlib)</div>
-          <div class="section-desc">EZ ships with 19+ library packages installable via <code>ez install</code>. From SQLite to AI to HTTP to crypto — the ecosystem covers the most common scripting needs.</div>
+          <div class="section-desc">EZ has 38 packages on the public registry, installable with <code>ez install</code>. From SQLite to AI to HTTP to crypto — the ecosystem covers the most common scripting needs.</div>
         </div>
 
         <div class="sub-title">Database</div>
         <div class="code-block">
           <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">db_example.ez</div></div>
-          <div class="code-body"><span class="kw">use</span> <span class="str">"ezdb"</span>
+          <div class="code-body"><span class="kw">use</span> <span class="str">"db"</span>
 
 db = Database(<span class="str">"myapp.sqlite"</span>)
 db.<span class="fn">execute</span>(<span class="str">"CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)"</span>)
@@ -2337,7 +2504,7 @@ rows = db.<span class="fn">query</span>(<span class="str">"SELECT * FROM users W
         <div class="sub-title">Cryptography</div>
         <div class="code-block">
           <div class="code-bar"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div><div class="code-filename">crypto_example.ez</div></div>
-          <div class="code-body"><span class="kw">use</span> <span class="str">"ezcrypto"</span>
+          <div class="code-body"><span class="kw">use</span> <span class="str">"crypto"</span>
 
 <span class="cmt"># Hash</span>
 hash = Crypto.<span class="fn">sha256</span>(<span class="str">"hello"</span>)
@@ -2355,70 +2522,90 @@ id = Crypto.<span class="fn">uuid</span>()
 key = PBKDF2.<span class="fn">derive</span>(<span class="str">"password"</span>, <span class="str">"salt"</span>, <span class="num">100000</span>, <span class="num">32</span>)</div>
         </div>
 
-        <div class="sub-title">All Packages</div>
+        <div class="sub-title">All 38 Packages</div>
         <div class="grid-3">
           <div class="card">
             <div class="card-title">Data & Storage</div>
             <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezdb</code> — SQLite</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezorm</code> — ORM</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezjson</code> — JSON</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>db</code> — SQLite framework</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>sqlite</code> — SQLite over FFI</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>orm</code> — SQLAlchemy-style ORM</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>json</code> — JSON parse/stringify</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>csv</code> — RFC 4180 CSV</li>
+              <li style="padding:5px 0;font-size:13px"><code>collections</code> — Set, Map, Deque</li>
             </ul>
           </div>
           <div class="card">
-            <div class="card-title">Network</div>
+            <div class="card-title">Network & Web</div>
             <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezhttp</code> — HTTP client</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezweb</code> — HTTP server</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezemail</code> — Email SMTP</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>web</code> — Web framework</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>serve</code> — Web framework (legacy)</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>http</code> — HTTP client</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>socket</code> — TCP/UDP sockets</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>email</code> — SMTP email</li>
+              <li style="padding:5px 0;font-size:13px"><code>mailer</code> — HTML mail templates</li>
             </ul>
           </div>
           <div class="card">
             <div class="card-title">Security</div>
             <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezcrypto</code> — AES, SHA, HMAC</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezjwt</code> — JWT tokens</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezauth</code> — Auth helpers</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="card-title">AI & Data</div>
-            <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezai</code> — OpenAI/Gemini</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezcsv</code> — CSV parsing</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezxml</code> — XML</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>crypto</code> — AES, SHA, HMAC</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>jwt</code> — JWT HS256</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>auth</code> — Sessions, CSRF</li>
+              <li style="padding:5px 0;font-size:13px"><code>env</code> — .env loading</li>
             </ul>
           </div>
           <div class="card">
             <div class="card-title">System</div>
             <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezfs</code> — Filesystem</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezlog</code> — Logging</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezenv</code> — Environment</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>fs</code> — Filesystem</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>os</code> — Env, paths, processes</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>log</code> — Logging with sinks</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>thread</code> — Multithreading</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ffi</code> — Native FFI</li>
+              <li style="padding:5px 0;font-size:13px"><code>taskschd</code> — Windows Task Scheduler</li>
             </ul>
           </div>
           <div class="card">
-            <div class="card-title">GUI & Game</div>
+            <div class="card-title">Desktop & Media</div>
             <ul style="list-style:none;padding:0">
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezgame</code> — Game loop</li>
-              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ezpdf</code> — PDF</li>
-              <li style="padding:5px 0;font-size:13px"><code>ezdate</code> — DateTime</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>gui</code> — Native Win32 GUI</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>game</code> — Game engine</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>audio</code> — mp3/wav playback</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>webcam</code> — Capture &amp; stream</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>notify</code> — Notifications</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>clipboard</code> — Clipboard</li>
+              <li style="padding:5px 0;font-size:13px"><code>auto</code> — Keyboard/mouse automation</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Utilities</div>
+            <ul style="list-style:none;padding:0">
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>ai</code> — OpenAI, Anthropic, Gemini</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>math</code> — Numeric utilities</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>regex</code> — Regular expressions</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>datetime</code> — Dates and times</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>calendar</code> — Calendar rendering</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>pdf</code> — PDF generation</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>qr</code> — QR codes</li>
+              <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>testing</code> — Unit testing</li>
+              <li style="padding:5px 0;font-size:13px"><code>whatsapp</code> — WhatsApp Web client</li>
             </ul>
           </div>
         </div>
 
         <div class="section-nav">
-          <button class="nav-control btn-prev" onclick="prev()">← CLI Tools</button>
+          <button class="nav-control btn-prev" onclick="prev()">← Package Manager</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-            <div class="progress-dots" id="dots17"></div>
-            <div class="section-progress">Section 18 of 20</div>
+            <div class="progress-dots" id="dots18"></div>
+            <div class="section-progress">Section 19 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">Decorators →</button>
         </div>
       </section>
 
       <!-- ═══════════════ 18: DECORATORS ═══════════════ -->
-      <section class="section" id="s18">
+      <section class="section" id="s19">
         <div class="section-hero">
           <div class="section-eyebrow">Language Reference</div>
           <div class="section-title">Decorators <span class="badge new">new</span></div>
@@ -2513,15 +2700,15 @@ settings.theme = <span class="str">"dark"</span>  <span class="cmt"># → saved 
         <div class="section-nav">
           <button class="nav-control btn-prev" onclick="prev()">← Standard Library</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-            <div class="progress-dots" id="dots18"></div>
-            <div class="section-progress">Section 19 of 20</div>
+            <div class="progress-dots" id="dots19"></div>
+            <div class="section-progress">Section 20 of 21</div>
           </div>
           <button class="nav-control btn-next" onclick="next()">What's New →</button>
         </div>
       </section>
 
       <!-- ═══════════════ 19: WHAT'S NEW ═══════════════ -->
-      <section class="section" id="s19">
+      <section class="section" id="s20">
         <div class="section-hero">
           <div class="section-eyebrow">v2.0 Changelog</div>
           <div class="section-title">What's New in v2.0</div>
@@ -2634,8 +2821,8 @@ settings.theme = <span class="str">"dark"</span>  <span class="cmt"># → saved 
         <div class="section-nav">
           <button class="nav-control btn-prev" onclick="prev()">← Decorators</button>
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-            <div class="progress-dots" id="dots19"></div>
-            <div class="section-progress">Section 20 of 20</div>
+            <div class="progress-dots" id="dots20"></div>
+            <div class="section-progress">Section 21 of 21</div>
           </div>
           <button class="nav-control btn-next btn-disabled">Complete ✓</button>
         </div>
@@ -2646,7 +2833,13 @@ settings.theme = <span class="str">"dark"</span>  <span class="cmt"># → saved 
 </div>
 
 <script>
-  const TOTAL = 20;
+  // Everything is derived from the DOM, so adding or removing a section
+  // needs no changes here: the count, the progress dots and the
+  // "Section N of M" labels all follow automatically. A hardcoded total
+  // silently breaks the last section's navigation when one is added.
+  const sections = document.querySelectorAll('#docsView .section');
+  const navBtns  = document.querySelectorAll('#docsView .nav-list .nav-btn');
+  const TOTAL    = sections.length;
   let current = 0;
 
   function showDocs() {
@@ -2663,40 +2856,54 @@ settings.theme = <span class="str">"dark"</span>  <span class="cmt"># → saved 
 
   function goTo(idx) {
     if (idx < 0 || idx >= TOTAL) return;
-    const sections = document.querySelectorAll('#docsView .section');
-    const navBtns  = document.querySelectorAll('#docsView .nav-list .nav-btn');
     sections[current].classList.remove('active');
     navBtns[current].classList.remove('active');
     current = idx;
     sections[current].classList.add('active');
     navBtns[current].classList.add('active');
     updateDots();
+    // Long sections otherwise leave the reader stranded mid-page.
+    window.scrollTo(0, 0);
   }
 
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
 
+  // Found by class rather than by numbered id: ids would have to be kept in
+  // lockstep with section order, and a gap silently drops a section's dots.
   function updateDots() {
-    for (let s = 0; s < TOTAL; s++) {
-      const container = document.getElementById('dots' + s);
-      if (!container) continue;
+    document.querySelectorAll('#docsView .progress-dots').forEach(container => {
       container.innerHTML = '';
       for (let i = 0; i < TOTAL; i++) {
         const dot = document.createElement('div');
         dot.className = 'dot' + (i === current ? ' active' : '');
+        dot.title = 'Section ' + (i + 1);
         dot.onclick = () => goTo(i);
         container.appendChild(dot);
       }
-    }
+    });
+  }
+
+  // Written from the real section order so the counts cannot drift out of
+  // date the way hardcoded "Section 4 of 20" labels do.
+  function labelSections() {
+    sections.forEach((sec, idx) => {
+      const label = sec.querySelector('.section-progress');
+      if (label) label.textContent = 'Section ' + (idx + 1) + ' of ' + TOTAL;
+    });
   }
 
   // Keyboard navigation (only active while docs view is visible)
   document.addEventListener('keydown', e => {
     if (document.getElementById('docsView').style.display === 'none') return;
+    // Leave the arrow keys alone while the reader is typing or selecting.
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
   });
 
+  labelSections();
   updateDots();
 </script>
 
