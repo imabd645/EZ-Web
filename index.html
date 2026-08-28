@@ -1283,6 +1283,7 @@
       <div class="logo" onclick="showHome()"><span class="mark">ez</span>Language</div>
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="header-docs-btn" id="headerDocsBtn" onclick="showDocs()">📖 Docs</button>
+        <a class="header-docs-btn" href="creator.html">👤 Creator</a>
         <div class="header-badge">v5.0.0 — Windows</div>
         <a class="btn-download primary" style="padding:7px 16px;font-size:12px;" href="ez_setup.exe" target="_blank">⬇
           Download</a>
@@ -1301,10 +1302,12 @@
         <div class="hero-particle" style="left:70%;top:60%;animation-delay:1.5s;"></div>
         <div class="hero-particle" style="left:85%;top:30%;animation-delay:3s;"></div>
       </div>
-      <div class="hero-badge">Now available — v4.0</div>
+      <div class="hero-badge">Now available — v5.0.0</div>
       <h1 class="hero-title">Code Without the <span>Complexity</span></h1>
       <p class="hero-desc">EZ is a fast, expressive scripting language for Windows — with built-in GUI, database
-        support, async/await, OOP, and a one-click bundler to .exe. Free and open source.</p>
+        support, async/await, OOP, and a one-click bundler to .exe. Free, open source, and built from first principles
+        by <a href="creator.html" style="color:var(--accent-2);border-bottom:1px solid rgba(95,212,196,0.4)">Abdullah
+          Masood (@imabd645)</a>.</p>
       <div class="hero-actions">
         <a class="hero-btn primary" href="ez_setup.exe" target="_blank">⬇ Download for Windows</a>
         <button class="hero-btn featured" onclick="showDocs()">📖 Read the Docs</button>
@@ -1375,7 +1378,7 @@
     </div>
     <!-- Download bar -->
     <div class="download-bar">
-      <span class="download-bar-text">🚀 <strong>EZ Language v4.0</strong> is out — free and open source!</span>
+      <span class="download-bar-text">🚀 <strong>EZ Language v5.0</strong> is out — free and open source!</span>
       <a class="btn-download primary" href="ez_setup.exe" target="_blank">⬇ Download Installer (.exe)</a>
       <a class="btn-download secondary" href="vscode-ez-language.vsix" target="_blank">🧩 VS Code Extension</a>
       <a class="btn-download secondary" href="https://github.com/imabd645/EZ-language" target="_blank">★ GitHub</a>
@@ -1422,9 +1425,10 @@
                 class="nav-count">new</span></button></li>
         </ul>
         <div class="nav-download-section">
-          <div class="nav-label">Downloads</div>
+          <div class="nav-label">Downloads &amp; Links</div>
           <a class="nav-download-btn" href="ez_setup.exe" target="_blank">⬇ Installer (.exe)</a>
           <a class="nav-download-btn" href="vscode-ez-language.vsix" target="_blank">🧩 VS Code Extension</a>
+          <a class="nav-download-btn" href="creator.html">👤 Creator Profile</a>
           <a class="nav-download-btn" href="https://github.com/imabd645/EZ-language" target="_blank">★ View on
             GitHub</a>
         </div>
@@ -1452,7 +1456,8 @@
                 <li><span class="feature-icon">🧹</span> Automatic memory management — no memory leaks</li>
                 <li><span class="feature-icon">🔒</span> Optional type hints for safer code</li>
                 <li><span class="feature-icon">🛡️</span> Built-in safety rules with <code>requires</code> /
-                  <code>ensures</code></li>
+                  <code>ensures</code>
+                </li>
                 <li><span class="feature-icon">🔁</span> Recursive functions with unlimited depth</li>
                 <li><span class="feature-icon">🧵</span> Async/await for smooth concurrent code</li>
                 <li><span class="feature-icon">📦</span> Package your script as a standalone .exe</li>
@@ -1465,7 +1470,8 @@
                 <li><span class="feature-icon">✨</span> Template strings with <code>`{expr}`</code> <span
                     class="badge new">new</span></li>
                 <li><span class="feature-icon">🔗</span> Null coalescing <code>??</code> and optional chaining
-                  <code>?.</code> <span class="badge new">new</span></li>
+                  <code>?.</code> <span class="badge new">new</span>
+                </li>
                 <li><span class="feature-icon">📐</span> Struct keyword <span class="badge new">new</span></li>
                 <li><span class="feature-icon">🔢</span> Tuple values — <code>(x, y) = t</code> <span
                     class="badge new">new</span></li>
@@ -2024,7 +2030,8 @@
             <div class="section-eyebrow">Language Reference</div>
             <div class="section-title">Loops</div>
             <div class="section-desc">EZ provides four loop constructs covering all common iteration patterns. Use
-              <code>escape</code> to break and <code>skip</code> to continue.</div>
+              <code>escape</code> to break and <code>skip</code> to continue.
+            </div>
           </div>
 
           <div class="sub-title">while — condition loop</div>
@@ -2433,7 +2440,8 @@
             <span class="info-icon">💾</span>
             <div><strong>Bytecode Caching</strong> — compile once with <code>ez file.ez --compile</code> to produce
               <code>file.ezc</code>. Run the cached bytecode directly with <code>ez file.ezc</code>. Skips lexing,
-              parsing, and compilation on subsequent runs.</div>
+              parsing, and compilation on subsequent runs.
+            </div>
           </div>
 
           <div class="section-nav">
@@ -2747,7 +2755,8 @@
             <div class="section-title">Design by Contract</div>
             <div class="section-desc">EZ implements Design by Contract (DbC) with <code>requires</code> (preconditions),
               <code>ensures</code> (postconditions), and <code>old()</code> for capturing pre-call values. Disable with
-              <code>--no-contracts</code>.</div>
+              <code>--no-contracts</code>.
+            </div>
           </div>
 
           <div class="sub-title">requires & ensures</div>
@@ -2824,7 +2833,8 @@
             </div>
             <div class="info-box warn"><span class="info-icon">⚠️</span>
               <div><strong>ensures</strong> — checked when the function returns. Failure means the
-                <em>implementation</em> is at fault.</div>
+                <em>implementation</em> is at fault.
+              </div>
             </div>
           </div>
 
@@ -3052,7 +3062,8 @@
 
               gui_on(<span class="str">"window"</span>, <span class="str">"close"</span>, || exit(<span
                 class="num">0</span>))
-              gui_run()</div>
+              gui_run()
+            </div>
           </div>
 
           <div class="sub-title">Widget Types</div>
@@ -3252,7 +3263,8 @@
               <code>use "name"</code> resolves from — so an installed package works in every project. See <a href="#"
                 onclick="goTo(17);return false;"
                 style="color:var(--accent-2);border-bottom:1px solid rgba(95,212,196,0.4);"><strong>Package
-                  Manager</strong></a> for the full workflow.</div>
+                  Manager</strong></a> for the full workflow.
+            </div>
           </div>
 
           <div class="sub-title">Bytecode Compilation</div>
@@ -3260,7 +3272,8 @@
             <span class="info-icon">💾</span>
             <div><strong>New in v2.0</strong> — <code>ez file.ez --compile</code> compiles to <code>file.ezc</code>. The
               <code>.ezc</code> format (magic: <code>EZC1</code>) skips lexing, parsing, and type checking on subsequent
-              runs. Ideal for production deployments where startup time matters.</div>
+              runs. Ideal for production deployments where startup time matters.
+            </div>
           </div>
 
           <div class="sub-title">Bytecode Disassembly</div>
@@ -3344,7 +3357,8 @@
             <span class="info-icon">🛡️</span>
             <div><strong>Local packages are protected</strong> — if a directory already exists and <code>ez.lock</code>
               does not record it, the install refuses rather than overwriting what could be hand-written source. Pass
-              <code>--force</code> to replace it deliberately.</div>
+              <code>--force</code> to replace it deliberately.
+            </div>
           </div>
 
           <div class="sub-title">Finding Packages</div>
@@ -3399,7 +3413,8 @@
               <strong>directory</strong>, so a package named <code>mylib</code> living in <code>mylib/</code> is
               importable — a mismatch produces a package that installs but can never be imported. The entry point must
               be <code>&lt;name&gt;.ez</code> or <code>main.ez</code>; the <code>main</code> field is metadata and does
-              not change resolution.</div>
+              not change resolution.
+            </div>
           </div>
 
           <div class="sub-title">Publishing Your Own</div>
@@ -3508,7 +3523,8 @@
             <div class="section-title">Standard Library (ezlib)</div>
             <div class="section-desc">EZ has 38 packages on the public registry, installable with
               <code>ez install</code>. From SQLite to AI to HTTP to crypto — the ecosystem covers the most common
-              scripting needs.</div>
+              scripting needs.
+            </div>
           </div>
 
           <div class="sub-title">Database</div>
@@ -3638,7 +3654,8 @@
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>notify</code>
                   — Notifications</li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)">
-                  <code>clipboard</code> — Clipboard</li>
+                  <code>clipboard</code> — Clipboard
+                </li>
                 <li style="padding:5px 0;font-size:13px"><code>auto</code> — Keyboard/mouse automation</li>
               </ul>
             </div>
@@ -3652,15 +3669,18 @@
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>regex</code>
                   — Regular expressions</li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)">
-                  <code>datetime</code> — Dates and times</li>
+                  <code>datetime</code> — Dates and times
+                </li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)">
-                  <code>calendar</code> — Calendar rendering</li>
+                  <code>calendar</code> — Calendar rendering
+                </li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>pdf</code> —
                   PDF generation</li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)"><code>qr</code> —
                   QR codes</li>
                 <li style="padding:5px 0;font-size:13px;border-bottom:1px solid var(--border-light)">
-                  <code>testing</code> — Unit testing</li>
+                  <code>testing</code> — Unit testing
+                </li>
                 <li style="padding:5px 0;font-size:13px"><code>whatsapp</code> — WhatsApp Web client</li>
               </ul>
             </div>
@@ -3719,7 +3739,8 @@
           <div class="sub-title">@ratelimit(n, "unit") — Throttle call frequency</div>
           <p>Limits the task to at most <code>n</code> calls per time unit. Throws <code>RateLimitError</code> with
             retry-after ms if exceeded. Units: <code>"second"</code>, <code>"minute"</code>, <code>"hour"</code>,
-            <code>"day"</code>.</p>
+            <code>"day"</code>.
+          </p>
           <div class="code-block">
             <div class="code-bar">
               <div class="code-dot red"></div>
@@ -3825,8 +3846,11 @@
 
   <footer>
     <div class="footer-inner">
-      <span>ez language — v4.0 · Windows</span>
+      <span>ez language — v5.0.0 · Windows · Built by <a href="creator.html" style="color:var(--accent-2)">Abdullah
+          Masood (@imabd645)</a></span>
       <div class="footer-links">
+        <a href="creator.html">Creator</a>
+        <a href="https://iamabd.site" target="_blank" rel="noopener">iamabd.site</a>
         <a href="https://packages.ez-lang.site" target="_blank">Package registry</a>
         <a href="https://github.com/imabd645/EZ-language" target="_blank">GitHub</a>
         <a href="vscode-ez-language.vsix" target="_blank">VS Code extension</a>

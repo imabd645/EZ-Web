@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator — Abdullah Masood (imabd645) · EZ Language</title>
+  <meta name="description"
+    content="Meet Abdullah Masood (imabd645) — Creator of the EZ programming language, CS student at UET Lahore, and builder of compilers, databases, and systems software from first principles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #12141a;
+      --bg-raised: #171a21;
+      --surface: #1b1e27;
+      --surface-hover: #212530;
+      --border: #2a2e3a;
+      --border-light: #22252f;
+      --text: #edeae2;
+      --text-2: #a7abb8;
+      --text-3: #6b7080;
+      --accent: #e8a33d;
+      --accent-light: rgba(232, 163, 61, 0.10);
+      --accent-2: #5fd4c4;
+      --accent-2-light: rgba(95, 212, 196, 0.09);
+      --warn: #e8a33d;
+      --danger: #d9705f;
+      --blue: #89b8fa;
+      --blue-light: rgba(137, 184, 250, 0.08);
+      --green: #a6e3a1;
+      --green-light: rgba(166, 227, 161, 0.08);
+
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'IBM Plex Sans', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #12141a;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* ── Header ── */
+    header {
+      background: rgba(18, 20, 26, 0.9);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+    }
+
+    .logo .mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: linear-gradient(155deg, var(--accent), #c97f2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 13px;
+      color: #12141a;
+    }
+
+    .logo span {
+      color: var(--text-3);
+      font-weight: 400;
+      font-size: 15px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      transition: all 0.15s;
+    }
+
+    .header-btn:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    .header-btn.primary {
+      background: var(--accent);
+      color: #12141a;
+      border-color: transparent;
+    }
+
+    .header-btn.primary:hover {
+      background: #f3ae49;
+      color: #12141a;
+    }
+
+    /* ── Main Container ── */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Op Rail ── */
+    .op-rail {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .op-rail .op {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid rgba(232, 163, 61, 0.25);
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+
+    .op-rail .op-addr {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    .op-rail::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    /* ── Hero Profile ── */
+    .profile-hero {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 42px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(232, 163, 61, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-2-light);
+      border: 1px solid rgba(95, 212, 196, 0.25);
+      color: var(--accent-2);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-name {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .profile-handle {
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .profile-bio {
+      color: var(--text-2);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .profile-bio strong {
+      color: var(--text);
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
+      border: 1px solid transparent;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #12141a;
+    }
+
+    .btn.primary:hover {
+      background: #f3ae49;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text-2);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+      transform: translateY(-1px);
+    }
+
+    /* ── Sections ── */
+    .section-title {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 700;
+      margin: 40px 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+      margin-left: 10px;
+    }
+
+    /* ── Project Cards Grid ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 740px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      border-color: rgba(232, 163, 61, 0.4);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .project-name {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid rgba(232, 163, 61, 0.25);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .project-desc {
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .tech-pill {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--bg-raised);
+      color: var(--text-3);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.15s;
+    }
+
+    .project-card:hover .project-link {
+      gap: 9px;
+      color: var(--accent);
+    }
+
+    /* ── Skills & Background ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .skill-card-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-card-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    /* ── Contact Section ── */
+    .contact-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contact-info h3 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .contact-info p {
+      color: var(--text-2);
+      font-size: 14px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border-light);
+      padding: 26px 24px;
+      margin-top: 60px;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-3);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-inner a:hover {
+      color: var(--accent-2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="mark">ez</span>Language<span>/ Creator</span></a>
+      <div class="header-nav">
+        <a class="header-btn" href="index.html">← Back to EZ Home</a>
+        <a class="header-btn" href="index.html#docsView" onclick="localStorage.setItem('openDocs', 'true')">📖 Documentation</a>
+        <a class="header-btn primary" href="https://iamabd.site" target="_blank" rel="noopener">iamabd.site ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Op rail identifier -->
+    <div class="op-rail">
+      <span class="op">ENGINEER</span>
+      <span class="op-addr">0x00 · creator profile</span>
+    </div>
+
+    <!-- Profile Hero -->
+    <div class="profile-hero">
+      <div class="profile-badge">🎓 Computer Science · UET Lahore</div>
+      <h1 class="profile-name">Abdullah Masood</h1>
+      <div class="profile-handle">@imabd645 · Software Engineer &amp; Systems Builder</div>
+      <p class="profile-bio">
+        I am a Computer Science student at <strong>UET Lahore</strong> who builds <strong>compilers, database engines, and full-stack systems from first principles</strong>.
+        Rather than relying on high-level scaffolding, I specialize in architecting systems from the ground up — designing custom lexers, bytecode interpreters, native Win32 desktop applications, and SQL query engines.
+      </p>
+      <div class="profile-actions">
+        <a class="btn primary" href="https://iamabd.site" target="_blank" rel="noopener">🌐 Visit Portfolio (iamabd.site)</a>
+        <a class="btn secondary" href="https://github.com/imabd645" target="_blank" rel="noopener">★ GitHub (@imabd645)</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/abdullah-masood-3056a5379/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="btn secondary" href="mailto:imabd645@gmail.com">✉️ Contact Email</a>
+      </div>
+    </div>
+
+    <!-- Philosophy -->
+    <div class="section-title">Core Philosophy &amp; Engineering Focus</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Compiler &amp; Language Design</div>
+        <div class="skill-card-desc">Full tree-walk &amp; bytecode virtual machines: lexing, recursive-descent parsing, AST generation, stack execution, and native contract enforcement.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Database Internals</div>
+        <div class="skill-card-desc">Architecting file-based DBMS systems, custom query processing (TQL), and building SQL engines executing on raw tabular datasets.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Native Windows Systems</div>
+        <div class="skill-card-desc">Win32 API desktop engineering without external frameworks: custom event loops, GDI+ rendering, and zero-overhead binary packaging.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Full-Stack &amp; Developer Tooling</div>
+        <div class="skill-card-desc">Designing package managers, VS Code extensions, FastAPI microservices, and specialized algorithms for real-world utility.</div>
+      </div>
+    </div>
+
+    <!-- Projects Portfolio -->
+    <div class="section-title">Selected Works &amp; Systems</div>
+    <div class="project-grid">
+
+      <!-- EZ Language -->
+      <div class="project-card" style="border-color: rgba(232, 163, 61, 0.35);">
+        <div>
+          <div class="project-header">
+            <span class="project-name">EZ Language</span>
+            <span class="project-tag">Featured Language</span>
+          </div>
+          <p class="project-desc">
+            A fast, expressive modern scripting language for Windows featuring a custom C++17 bytecode VM, built-in Win32 GUI engine, SQLite integration, design by contract, decorators, async/await, and a standalone one-click .exe bundler.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">C++17</span>
+            <span class="tech-pill">Bytecode VM</span>
+            <span class="tech-pill">Win32 GUI</span>
+            <span class="tech-pill">Package Manager</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/imabd645/EZ-language" target="_blank" rel="noopener">View Repository on GitHub →</a>
+      </div>
+
+      <!-- CSV Query Engine -->
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="project-name">CSV Query Engine</span>
+            <span class="project-tag">Systems &amp; SQL</span>
+          </div>
+          <p class="project-desc">
+            Native Windows desktop SQL engine running real SQL queries (SELECT, JOINs, GROUP BY, HAVING, aggregates) directly on raw CSV files with zero dependencies, syntax-highlighted editor, and GDI+ chart visualizer.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">C++17</span>
+            <span class="tech-pill">Win32 API</span>
+            <span class="tech-pill">GDI+</span>
+            <span class="tech-pill">Zero Deps</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/imabd645/CSV-Parser" target="_blank" rel="noopener">View Repository on GitHub →</a>
+      </div>
+
+      <!-- Backend Builder -->
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="project-name">Backend Builder</span>
+            <span class="project-tag">Web &amp; Tooling</span>
+          </div>
+          <p class="project-desc">
+            Visual developer platform for generating production-ready FastAPI backends — design database schemas on a drag-and-drop canvas with model relationships, JWT auth, and download a ready-to-run containerized package.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">FastAPI</span>
+            <span class="tech-pill">SQLAlchemy</span>
+            <span class="tech-pill">Docker</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/imabd645/Backend-builder" target="_blank" rel="noopener">View Repository on GitHub →</a>
+      </div>
+
+      <!-- TxtDB -->
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="project-name">TxtDB</span>
+            <span class="project-tag">Database</span>
+          </div>
+          <p class="project-desc">
+            A file-based DBMS in C# with a custom query language (TQL). Schema definitions, lexical analyzer, parser, and query executor engineered from first principles based strictly on architectural design documents.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">C#</span>
+            <span class="tech-pill">DBMS Architecture</span>
+            <span class="tech-pill">TQL</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://github.com/imabd645/DBMS" target="_blank" rel="noopener">View Repository on GitHub →</a>
+      </div>
+
+      <!-- urdu-nlp (PyPI) -->
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="project-name">urdu-nlp</span>
+            <span class="project-tag">PyPI Package</span>
+          </div>
+          <p class="project-desc">
+            An open-source NLP toolkit for the Urdu language published on PyPI — providing tokenization, text normalization, stemming algorithms, and Roman Urdu transliteration pipelines.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">NLP</span>
+            <span class="tech-pill">PyPI Published</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://pypi.org/project/urdu-nlp/" target="_blank" rel="noopener">View Package on PyPI →</a>
+      </div>
+
+      <!-- Splitkar -->
+      <div class="project-card">
+        <div>
+          <div class="project-header">
+            <span class="project-name">Splitkar</span>
+            <span class="project-tag">Fintech App</span>
+          </div>
+          <p class="project-desc">
+            Expense-sharing application customized for Pakistan with group splitting, local wallet integration, and a proprietary Smart Settle™ graph algorithm that minimizes transaction transfers to balance accounts.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Android</span>
+            <span class="tech-pill">Fintech</span>
+            <span class="tech-pill">Graph Algorithm</span>
+          </div>
+        </div>
+        <a class="project-link" href="https://splitkar.site" target="_blank" rel="noopener">Visit Splitkar Site →</a>
+      </div>
+
+    </div>
+
+    <!-- Education -->
+    <div class="section-title">Education &amp; Background</div>
+    <div class="skills-grid">
+      <div class="skill-card" style="grid-column: span 2;">
+        <div class="skill-card-title">B.S. Computer Science — UET Lahore (2025 — Present)</div>
+        <div class="skill-card-desc">Studying at the University of Engineering &amp; Technology, Lahore. Combining core academic foundations in algorithms, database design, software engineering, and digital systems with independent research into compilers, virtual machines, and OS internals.</div>
+      </div>
+      <div class="skill-card" style="grid-column: span 2;">
+        <div class="skill-card-title">Self-Directed Systems Engineering</div>
+        <div class="skill-card-desc">Deep-dive implementations of tree-walk interpreters, bytecode VMs, memory management optimizations (rope strings, inline small values), query planners, and Win32 event architecture.</div>
+      </div>
+    </div>
+
+    <!-- Contact Banner -->
+    <div class="contact-card">
+      <div class="contact-info">
+        <h3>Connect with Abdullah Masood</h3>
+        <p>Open to discussions about language design, database internals, systems code, and engineering collaborations.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn primary" href="mailto:imabd645@gmail.com">✉️ Send Email</a>
+        <a class="btn secondary" href="https://iamabd.site" target="_blank" rel="noopener">🌐 iamabd.site</a>
+        <a class="btn secondary" href="https://github.com/imabd645" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Abdullah Masood · imabd645 · Creator of EZ Language</span>
+      <div>
+        <a href="index.html">EZ Home</a> ·
+        <a href="https://iamabd.site" target="_blank" rel="noopener">Portfolio</a> ·
+        <a href="https://github.com/imabd645" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
