@@ -1283,7 +1283,7 @@
       <div class="logo" onclick="showHome()"><span class="mark">ez</span>Language</div>
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="header-docs-btn" id="headerDocsBtn" onclick="showDocs()">📖 Docs</button>
-        <div class="header-badge">v4.0 — Windows</div>
+        <div class="header-badge">v5.0.0 — Windows</div>
         <a class="btn-download primary" style="padding:7px 16px;font-size:12px;" href="ez_setup.exe" target="_blank">⬇
           Download</a>
       </div>
@@ -1420,7 +1420,6 @@
           <li><button class="nav-btn" onclick="goTo(18)"><span class="nav-icon">📚</span> Standard Library</button></li>
           <li><button class="nav-btn" onclick="goTo(19)"><span class="nav-icon">🎨</span> Decorators <span
                 class="nav-count">new</span></button></li>
-          <li><button class="nav-btn" onclick="goTo(20)"><span class="nav-icon">🔍</span> What's New v2.0</button></li>
         </ul>
         <div class="nav-download-section">
           <div class="nav-label">Downloads</div>
@@ -3814,189 +3813,7 @@
             <button class="nav-control btn-prev" onclick="prev()">← Standard Library</button>
             <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
               <div class="progress-dots" id="dots19"></div>
-              <div class="section-progress">Section 20 of 21</div>
-            </div>
-            <button class="nav-control btn-next" onclick="next()">What's New →</button>
-          </div>
-        </section>
-
-        <!-- ═══════════════ 20: WHAT'S NEW ═══════════════ -->
-        <section class="section" id="s20">
-          <div class="section-hero">
-            <div class="op-rail"><span class="op">DIFF</span><span class="op-addr">0x14 · changelog</span></div>
-            <div class="section-eyebrow">v2.0 Changelog</div>
-            <div class="section-title">What's New in v2.0</div>
-            <div class="section-desc">Deep analysis of the latest commit reveals 9 new features, 8 significant
-              improvements, and 3 new source files totalling ~1,300 new lines of C++ compared to the original build.
-            </div>
-          </div>
-
-          <div class="sub-title">New Features</div>
-          <div class="grid-2">
-            <div class="card">
-              <div class="card-title">✨ Template Strings</div>
-              <p>Backtick <code>`Hello {name}!`</code> with full expressions in <code>{}</code>. Nested calls,
-                arithmetic, and string methods all work inside the braces.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🔗 ?? and ?. Operators</div>
-              <p><code>??</code> returns the left side if it's not nil, otherwise the right. <code>?.</code> safely
-                chains property access — returns nil if any link in the chain is nil.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🔢 Tuples &amp; Destructuring</div>
-              <p>Native tuple values via <code>(1, "hi", 3.14)</code>. Unpack with <code>(a, b, c) = t</code>. Functions
-                can return multiple values cleanly without wrapping in arrays.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🏷️ Keyword Arguments</div>
-              <p>Pass arguments by name in any order: <code>Add(y=4, x=3)</code>. The language automatically maps named
-                arguments to the correct parameter positions.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">📐 struct Keyword</div>
-              <p>Define lightweight data structures with typed fields and defaults. Structs are simpler than models — no
-                methods, no inheritance, just fast value containers.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🧩 interface &amp; implements</div>
-              <p>Define contracts using <code>interface</code> and enforce them with <code>implements</code>. Models can
-                implement multiple interfaces. Verified at compile time.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">📌 static Variables</div>
-              <p><code>static</code> inside a task persists its value across calls — like a function-level memory.
-                Useful for counters, caches, and lazy initialization.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🚶 repeat...step</div>
-              <p><code>repeat i = 10 to 0 step -1</code> counts down. <code>step 2</code> skips every other. Step can be
-                any expression — positive, negative, or computed at runtime.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">💾 Script Caching (.ezc)</div>
-              <p>Compile your script with <code>ez file.ez --compile</code> to save a <code>.ezc</code> binary. Run it
-                directly with <code>ez file.ezc</code> for instant startup with no re-parsing.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🎨 6 Decorators</div>
-              <p><code>@cached</code>, <code>@ratelimit</code>, <code>@audited</code>, <code>@snapshot</code>,
-                <code>@persist</code>, <code>@validate</code> — add caching, throttling, logging, undo, persistence, and
-                validation with a single line.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🐞 Better Error Messages</div>
-              <p>Errors now show the exact source line with a <code>^^^</code> caret pointing to the problem. Contract
-                failures print the actual values of local variables at the moment of failure.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🔍 --dump / --ezasm</div>
-              <p>New CLI flag to dump human-readable bytecode for every function. Shows opcode names, operands, and
-                constant pool values. Great for debugging and learning how EZ works.</p>
-            </div>
-          </div>
-
-          <div class="sub-title">Improvements</div>
-          <div class="grid-2">
-            <div class="card">
-              <div class="card-title">🛡️ FRAMES_MAX Enforced</div>
-              <p>Was declared (512) but never checked. <code>dispatchCall()</code> now throws a clean
-                <code>Stack overflow</code> error instead of silently exhausting OS stack memory.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">📍 Source Snippets in Errors</div>
-              <p><code>EZ_RegisterSource()</code> stores source lines at load time. Runtime errors now print the fault
-                line with <code>^^^</code> caret. Contracts show local variable values at failure.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🧵 Rope Strings (EZConcatString)</div>
-              <p>String <code>+</code> now builds a lazy tree instead of allocating immediately. Only flattened on
-                demand. Eliminates O(n²) string building. 10,000 concatenations now takes milliseconds.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🔤 ShortString Inline (14 bytes)</div>
-              <p>Strings ≤14 bytes stored inline in the <code>Value</code> variant — no heap allocation, no
-                <code>shared_ptr</code>. Property names, short identifiers, keywords all benefit.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🛡️ Contract old() Support</div>
-              <p>Pre-call value capture fully implemented. Compiler scans <code>ensures</code> clauses for
-                <code>old()</code>, emits captures into hidden locals at function entry, substitutes them in
-                postcondition checks.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">⚙️ --no-contracts Flag</div>
-              <p>Global <code>g_disableContracts</code> strips all contract compilation. Zero overhead in production.
-                Works with <code>ez run</code> and <code>ez bundle</code>.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🔍 --dump / --ezasm</div>
-              <p>New CLI flag dumps human-readable bytecode disassembly for every function. Shows opcode names,
-                operands, and constant pool values. Invaluable for debugging.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">🏗️ MiniJson.h</div>
-              <p>New lightweight header-only JSON parser/builder. Used internally by <code>@persist</code>. No external
-                dependency — pure C++ with full object/array/string support.</p>
-            </div>
-          </div>
-
-          <div class="sub-title">Codebase Summary</div>
-          <div class="card">
-            <table class="op-table">
-              <tr>
-                <th>File</th>
-                <th>Lines</th>
-                <th>Change</th>
-              </tr>
-              <tr>
-                <td><code>BytecodeVM.cpp</code></td>
-                <td>2,800+</td>
-                <td>+600</td>
-              </tr>
-              <tr>
-                <td><code>BytecodeCompiler.cpp</code></td>
-                <td>2,500</td>
-                <td>+600</td>
-              </tr>
-              <tr>
-                <td><code>Parser.cpp</code></td>
-                <td>1,732</td>
-                <td>+480</td>
-              </tr>
-              <tr>
-                <td><code>TypeChecker.cpp</code></td>
-                <td>970+</td>
-                <td><span class="badge new">new</span></td>
-              </tr>
-              <tr>
-                <td><code>Value.h</code></td>
-                <td>870+</td>
-                <td>+300</td>
-              </tr>
-              <tr>
-                <td><code>AST.h</code></td>
-                <td>804</td>
-                <td>+240</td>
-              </tr>
-              <tr>
-                <td><code>BytecodeSerializer.cpp</code></td>
-                <td>~260</td>
-                <td><span class="badge new">new</span></td>
-              </tr>
-              <tr>
-                <td><code>MiniJson.h</code></td>
-                <td>~120</td>
-                <td><span class="badge new">new</span></td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="section-nav">
-            <button class="nav-control btn-prev" onclick="prev()">← Decorators</button>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <div class="progress-dots" id="dots20"></div>
-              <div class="section-progress">Section 21 of 21</div>
+              <div class="section-progress">Section 20 of 20</div>
             </div>
             <button class="nav-control btn-next btn-disabled">Complete ✓</button>
           </div>
