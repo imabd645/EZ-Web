@@ -90,10 +90,39 @@ footer{border-top:1px solid var(--line);padding:36px 0 48px;color:var(--muted);f
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer a{margin-right:18px}
 
+.mark{display:flex;align-items:baseline;gap:14px;margin:0 0 14px;font-weight:800;font-size:clamp(72px,12vw,132px);line-height:.8;letter-spacing:-.07em;color:var(--accent)}
+.mark small{font-size:16px;letter-spacing:0;color:var(--muted);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+.stats div{padding:24px 16px 4px 0}
+.stats b{display:block;font-size:36px;letter-spacing:-.04em;font-weight:800;line-height:1.1}
+.stats span{color:var(--muted);font-size:14px}
+.vocab{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px;border-top:1px solid var(--line)}
+.vocab div{padding:14px 0;border-bottom:1px solid var(--line)}
+.vocab code{font-weight:500;color:var(--accent);font-size:16px}
+.vocab span{display:block;color:var(--muted);font-size:14px;line-height:1.45;margin-top:2px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);font-weight:800;color:var(--accent);font-size:30px;display:block;line-height:1}
+.steps h3{margin:8px 0 8px;font-size:22px;letter-spacing:-.02em}
+.steps p{color:var(--muted);margin:0 0 12px}
+.steps .win pre{font-size:13px;padding:12px 14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.two h3{margin:0 0 8px;font-size:24px;letter-spacing:-.025em}
+.two p{color:var(--muted);margin:0 0 14px}
+.install{display:flex;align-items:center;gap:10px;margin:22px 0 0;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:10px 12px 10px 16px;max-width:30em;font-size:15px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap}
+.install .p{color:var(--c-com)}
+.install button{font:600 13px "Bricolage Grotesque",system-ui,sans-serif;border:0;border-radius:7px;padding:7px 12px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.facts code{font-size:.9em}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:800;font-size:19px;letter-spacing:-.015em}
+details p{color:var(--muted);margin:10px 0 0;max-width:44em}
 @media (max-width:860px){
   .hero,.showcase,.eco{grid-template-columns:1fr}
   dl.feat,.cmds{grid-template-columns:1fr}
   .hero{padding-top:28px}
+  .stats,.vocab{grid-template-columns:repeat(2,1fr)}
+  .steps,.two{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
 </style>
@@ -104,7 +133,9 @@ footer a{margin-right:18px}
     <a class="logo" href="#top" id="top">E<span>Z</span></a>
     <nav aria-label="Main">
       <a href="#why">Why EZ</a>
+      <a href="#vocabulary">Vocabulary</a>
       <a href="#syntax">Syntax</a>
+      <a href="#engine">Engine</a>
       <a href="#ship">Ship it</a>
       <a href="#ecosystem">Ecosystem</a>
       <a class="btn-sm" href="https://docs.ez-lang.site/">Read the docs</a>
@@ -114,13 +145,15 @@ footer a{margin-right:18px}
   <main>
   <div class="hero">
     <div>
+      <div class="mark" aria-hidden="true">EZ<small>programming language</small></div>
       <h1>Write a script. Ship an .exe.</h1>
       <p class="lede">EZ is a small, fast scripting language for Windows. It reads like plain English, has a native GUI, SQLite and async built in, and bundles into one file you can hand to anyone.</p>
       <div class="cta">
         <a class="btn primary" href="https://github.com/imabd645/EZ-language/releases">Download EZ</a>
         <a class="btn ghost" href="https://docs.ez-lang.site/">Read the docs</a>
       </div>
-      <p class="meta">Version 5.0 · MIT licensed · Builds on Windows, macOS and Linux</p>
+      <div class="install"><code><span class="p">&gt;</span> winget install imabd645.EZ</code><button id="copy" type="button">Copy</button></div>
+      <p class="meta">Version 5.0 · MIT licensed · Windows first, with macOS and Linux builds</p>
     </div>
     <div class="win" role="img" aria-label="Example EZ program and its output">
       <div class="win-bar"><i></i><i></i><i></i><span class="mono">main.ez</span></div>
@@ -139,6 +172,14 @@ Hello, EZ!
     </div>
   </div>
 
+  <div class="stats" aria-label="EZ at a glance">
+    <div><b>46</b><span>keywords in the whole language</span></div>
+    <div><b>60+</b><span>native Windows GUI controls</span></div>
+    <div><b>8</b><span>built-in classes</span></div>
+    <div><b>21</b><span>native error classes</span></div>
+    <div><b>79</b><span>packages in ezlib</span></div>
+  </div>
+
   <section id="why">
     <h2>A language you can learn in an afternoon</h2>
     <p class="sub">EZ keeps the keyword list short (46 in total) and puts the tools you usually hunt for into the box.</p>
@@ -152,6 +193,33 @@ Hello, EZ!
     </dl>
   </section>
 
+  <section id="vocabulary">
+    <h2>The whole vocabulary fits on one screen</h2>
+    <p class="sub">EZ swaps symbols for short English words. Here are the ones you will use every day.</p>
+    <div class="vocab">
+      <div><code>task</code><span>declare a function</span></div>
+      <div><code>give</code><span>return a value</span></div>
+      <div><code>when / other</code><span>if, else if, else</span></div>
+      <div><code>match</code><span>pattern matching with no fallthrough</span></div>
+      <div><code>repeat … to … step</code><span>counting loop</span></div>
+      <div><code>get … in</code><span>loop over arrays, strings and keys</span></div>
+      <div><code>escape / skip</code><span>break and continue</span></div>
+      <div><code>out</code><span>print a line</span></div>
+      <div><code>model</code><span>declare a class</span></div>
+      <div><code>init / self</code><span>constructor and current instance</span></div>
+      <div><code>hidden / shown</code><span>private and public members</span></div>
+      <div><code>extends / super</code><span>inheritance</span></div>
+      <div><code>struct / enum</code><span>typed records and enumerations</span></div>
+      <div><code>interface</code><span>contracts models must satisfy</span></div>
+      <div><code>try / catch / finally</code><span>typed error handling</span></div>
+      <div><code>async / await</code><span>futures on an event loop</span></div>
+      <div><code>requires / ensures</code><span>pre- and postconditions</span></div>
+      <div><code>test</code><span>built-in unit tests</span></div>
+      <div><code>use</code><span>import a module</span></div>
+      <div><code>yes / no / nil</code><span>friendly booleans and nothing</span></div>
+    </div>
+  </section>
+
   <section id="syntax">
     <h2>Real code, not a pitch</h2>
     <p class="sub">Pattern matching, contracts and async are part of the language itself.</p>
@@ -159,10 +227,47 @@ Hello, EZ!
       <button role="tab" aria-selected="true" data-i="0">Async</button>
       <button role="tab" aria-selected="false" data-i="1">Match</button>
       <button role="tab" aria-selected="false" data-i="2">Contracts</button>
+      <button role="tab" aria-selected="false" data-i="3">Models</button>
+      <button role="tab" aria-selected="false" data-i="4">Decorators</button>
+      <button role="tab" aria-selected="false" data-i="5">Threads</button>
     </div>
     <div class="showcase">
       <div id="blurb"></div>
       <div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="mono" id="fname">async.ez</span></div><pre id="code" class="hl" tabindex="0"></pre></div>
+    </div>
+  </section>
+
+  <section id="library">
+    <h2>What is in the box</h2>
+    <p class="sub">Most small programs need nothing outside the standard library.</p>
+    <dl class="feat">
+      <div><dt>Math</dt><dd>Trigonometry, logarithms, <code>clamp</code>, <code>hypot</code>, random numbers, and bitwise operators on 64-bit integers.</dd></div>
+      <div><dt>Strings and regex</dt><dd>Template strings, <code>split</code>, <code>replace</code>, padding, Base64 URL encoding, and <code>re_find</code>, <code>re_replace</code> and <code>re_test</code>.</dd></div>
+      <div><dt>Collections</dt><dd>Arrays, dictionaries and tuples with <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>, <code>sort</code> and <code>range</code>, plus JSON and CSV parsing.</dd></div>
+      <div><dt>Files and I/O</dt><dd>A stream-based <code>File</code> class, whole-file helpers, and the <code>fs</code> module for folders.</dd></div>
+      <div><dt>Database</dt><dd>Embedded SQLite through <code>use "sqlite"</code>, and a <code>@persist</code> decorator that saves model changes automatically.</dd></div>
+      <div><dt>Security</dt><dd>Ciphers and hashes through <code>use "crypto"</code>, plus the permission sandbox for untrusted scripts.</dd></div>
+      <div><dt>Network</dt><dd>HTTP and socket builtins, with <code>NetworkError</code> and <code>TimeoutError</code> for failures.</dd></div>
+      <div><dt>Terminal apps</dt><dd>Terminal and TUI builtins for interactive command-line tools.</dd></div>
+      <div><dt>Binary data</dt><dd>A <code>Buffer</code> class for raw bytes, handy for file formats, protocols and FFI structures.</dd></div>
+      <div><dt>Reflection</dt><dd><code>properties</code>, <code>hasattr</code>, <code>getattr</code> and <code>setattr</code> inspect any object at runtime.</dd></div>
+    </dl>
+  </section>
+
+  <section id="engine">
+    <h2>Small language, serious engine</h2>
+    <p class="sub">EZ is written in C++17. A single-pass compiler turns your code into bytecode for a stack VM.</p>
+    <div class="two">
+      <div>
+        <h3>Built for speed</h3>
+        <p>Moving from a tree-walking interpreter to a bytecode VM with computed gotos made EZ about 40 times faster. Global variable slots, superinstructions and hidden-class object shapes cut overhead further, so a 100,000-iteration loop runs in a few milliseconds, close to CPython.</p>
+        <p>Memory is managed by a cycle-collecting garbage collector, and the event loop runs on libuv.</p>
+      </div>
+      <div id="windows">
+        <h3>Native on Windows</h3>
+        <p>Build desktop apps with real Win32 controls: windows, canvas 2D graphics, buttons, sliders, list views and dialogs. Bundle with <code>--gui</code> and the app opens with no console window.</p>
+        <p>When you need more, the C FFI loads any DLL, behind a permission flag and structured exception handling.</p>
+      </div>
     </div>
   </section>
 
@@ -190,7 +295,40 @@ ez bundle main.ez App.exe --gui --icon app.ico
 <span class="c"># Sandbox: allow only what is needed</span>
 ez --safe --allow-read=data main.ez</pre></div>
     </div>
+    <ul class="facts" style="margin-top:34px">
+      <li><b><code>--safe</code></b><span>run in a capability sandbox that asks before granting access</span></li>
+      <li><b><code>--allow-read[=path]</code></b><span>file reads, optionally limited to one folder</span></li>
+      <li><b><code>--allow-write[=path]</code></b><span>file writes, optionally limited to one folder</span></li>
+      <li><b><code>--allow-net[=host]</code></b><span>network access, optionally limited to one host</span></li>
+      <li><b><code>--allow-ffi</code> and <code>--allow-process</code></b><span>native libraries and running other programs</span></li>
+      <li><b><code>ez permissions main.ez</code></b><span>list what a script needs before you run it</span></li>
+      <li><b><code>--trace</code>, <code>--compile</code>, <code>--dump</code></b><span>step through bytecode, precompile to .ezc, or read the disassembly</span></li>
+    </ul>
     <p class="note">New to EZ? The documentation covers installation, PATH setup and every built-in, and it includes an in-browser playground.</p>
+  </section>
+
+  <section id="start">
+    <h2>Start in three steps</h2>
+    <p class="sub">No installer wizard and no dependencies.</p>
+    <ol class="steps">
+      <li><h3>Install EZ</h3><p>On Windows, install it with winget. Then check the version.</p><div class="win"><pre>winget install imabd645.EZ
+ez --version</pre></div></li>
+      <li><h3>Write a script</h3><p>Save this as <code>hello.ez</code>.</p><div class="win"><pre class="hl">out "Hello from EZ!"</pre></div></li>
+      <li><h3>Run it, then ship it</h3><p>Run the script, then bundle it into a standalone program.</p><div class="win"><pre>ez hello.ez
+ez bundle hello.ez Hello.exe</pre></div></li>
+    </ol>
+    <div class="two" style="margin-top:44px">
+      <div>
+        <h3>More ways to install</h3>
+        <p>Prefer a manual install? Download <code>ez.exe</code> from the latest GitHub release and add its folder to your PATH. On macOS or Linux, build EZ from source with a C++17 compiler.</p>
+      </div>
+      <div>
+        <h3>Update or remove</h3>
+        <p>If you installed with winget, the same tool keeps EZ current.</p>
+        <div class="win"><pre>winget upgrade imabd645.EZ
+winget uninstall imabd645.EZ</pre></div>
+      </div>
+    </div>
   </section>
 
   <section id="ecosystem">
@@ -212,6 +350,25 @@ ez --safe --allow-read=data main.ez</pre></div>
         </div>
       </div>
     </div>
+  </section>
+  <section id="faq">
+    <h2>Questions</h2>
+    <details><summary>Do people need to install EZ to run my program?</summary><p>No. <code>ez bundle</code> packs your script, its libraries and the runtime into one executable that runs on its own.</p></details>
+    <details><summary>Is EZ typed?</summary><p>Types are optional. You can add type hints and a type checker will use them, but the hints are erased at runtime. Turn the checker off with <code>--no-typecheck</code>.</p></details>
+    <details><summary>Can EZ call C libraries?</summary><p>Yes. The FFI loads native libraries and calls them directly. It needs <code>--allow-ffi</code> when you run in the sandbox.</p></details>
+    <details><summary>Which platforms does it support?</summary><p>EZ started as a Windows-native language, and the interpreter now builds and passes its tests on macOS and Linux too. The Win32 GUI is Windows only.</p></details>
+    <details><summary>Is it open source?</summary><p>Yes, under the MIT license. Issues and pull requests are open on GitHub.</p></details>
+    <details><summary>How do I install EZ on Windows?</summary><p>Run <code>winget install imabd645.EZ</code> in a terminal, then check it with <code>ez --version</code>. You can also download <code>ez.exe</code> from GitHub Releases and add it to your PATH.</p></details>
+    <details><summary>How do I update EZ?</summary><p>If you installed with winget, run <code>winget upgrade imabd645.EZ</code>. If you downloaded <code>ez.exe</code> by hand, replace it with the newest release.</p></details>
+    <details><summary>What do EZ files look like?</summary><p>Source files end in <code>.ez</code>. Precompiled bytecode uses <code>.ezc</code>, and <code>ez --dump</code> writes a readable listing as <code>.ezasm</code>.</p></details>
+    <details><summary>Does EZ have a database?</summary><p>Yes. SQLite is built in through <code>use "sqlite"</code>, and the <code>@persist</code> decorator can write a model’s changes straight to a database file.</p></details>
+    <details><summary>How does error handling work?</summary><p>Use <code>try</code>, <code>catch</code> and <code>finally</code> with typed catch clauses. All 21 native errors descend from <code>Exception</code>, and you can extend it with your own error models.</p></details>
+    <details><summary>Can I run things in parallel?</summary><p>Yes. Use <code>async</code> and <code>await</code> for futures, <code>spawn</code> for OS threads, and <code>Mutex</code>, <code>Atomic</code> and <code>Channel</code> to coordinate them.</p></details>
+    <details><summary>How do I test my code?</summary><p>Write <code>test "name" { ... }</code> blocks with <code>assert</code>, then run <code>ez test file.ez</code>. Add <code>--watch</code> to rerun them on every save.</p></details>
+    <details><summary>Is it safe to run someone else’s script?</summary><p>Run it with <code>--safe</code> so it can only touch what you allow. <code>ez permissions script.ez</code> lists the access a script asks for before you run it.</p></details>
+    <details><summary>How do I share a library?</summary><p>Publish it to the ezlib registry at packages.ez-lang.site. The package manager checks SHA-256 hashes when it installs.</p></details>
+    <details><summary>Should I use EZ instead of Python?</summary><p>It depends on the job. EZ suits small tools, desktop apps and programs you want to hand over as one .exe. Python has a far larger ecosystem, so pick it when you need those libraries.</p></details>
+    <details><summary>How can I help?</summary><p>Open an issue or a pull request on GitHub, publish a package, or share an example program.</p></details>
   </section>
   </main>
 </div>
@@ -249,7 +406,13 @@ ez --safe --allow-read=data main.ez</pre></div>
    {f:"match.ez",h:"Pattern matching",p:"Match on values, built-in types or your own models. Arms never fall through, and other is the catch-all.",
     c:"task describe(v) {\n    match v {\n        0      => { give \"zero\" }\n        String => { give `text of {len(v)}` }\n        Array  => { give `list of {len(v)}` }\n        nil    => { give \"nothing\" }\n        other  => { give \"unknown\" }\n    }\n}\n\nout describe([1, 2, 3])"},
    {f:"contracts.ez",h:"Design by contract",p:"State what a task needs and what it guarantees. Contracts run in development and can be stripped for production with --no-contracts.",
-    c:"task safeDivide(a, b)\nrequires b != 0, \"Denominator cannot be zero\"\nensures result != nil, \"Result must not be nil\"\n{\n    give a / b\n}\n\nout safeDivide(100, 4)  # 25"}
+    c:"task safeDivide(a, b)\nrequires b != 0, \"Denominator cannot be zero\"\nensures result != nil, \"Result must not be nil\"\n{\n    give a / b\n}\n\nout safeDivide(100, 4)  # 25"},
+   {f:"models.ez",h:"Models and inheritance",p:"Classes are models. Use extends and super for inheritance, hidden for private members, and interfaces to enforce contracts.",
+    c:"model Animal {\n    init(name) { self.name = name }\n\n    task speak() {\n        give self.name + \" makes a generic sound\"\n    }\n}\n\nmodel Dog extends Animal {\n    init(name, breed) {\n        super.init(name)\n        self.breed = breed\n    }\n\n    task speak() {\n        give self.name + \" barks loudly\"\n    }\n}\n\nd = Dog(\"Buddy\", \"Golden Retriever\")\nout d.speak()"},
+   {f:"decorators.ez",h:"Decorators",p:"Wrap any task with @name. EZ ships @cached, @audited, @snapshot, @persist and @rateLimit, and you can write your own.",
+    c:"@cached\ntask fib(n) {\n    when n <= 1 { give n }\n    give fib(n - 1) + fib(n - 2)\n}\n\nout fib(40)\n\n@rateLimit(5, 1000)\ntask fetchRecord(id) {\n    give `Record_{id}`\n}"},
+   {f:"threads.ez",h:"Threads and channels",p:"Spawn real OS threads, share counters with Atomic, and pass messages through a Go-style Channel.",
+    c:"jobs = Channel()\ntotal = Atomic(0)\n\nworker = spawn(|| {\n    while true {\n        job = jobs.receive()\n        when job == nil { escape }\n        total.add(job)\n    }\n})\n\nrepeat i = 1 to 5 { jobs.send(i) }\njobs.close()\n\nawait(worker)\nout `Sum: {total.get()}`"}
   ];
   var tabs=document.querySelectorAll(".tabs button"),code=document.getElementById("code"),
       blurb=document.getElementById("blurb"),fname=document.getElementById("fname");
@@ -261,6 +424,11 @@ ez --safe --allow-read=data main.ez</pre></div>
   }
   tabs.forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.i)})});
   show(0);
+  var cb=document.getElementById("copy");
+  if(cb)cb.addEventListener("click",function(){
+    function done(){cb.textContent="Copied";setTimeout(function(){cb.textContent="Copy"},1600)}
+    try{navigator.clipboard.writeText("winget install imabd645.EZ").then(done,function(){})}catch(e){}
+  });
 })();
 </script>
 </body>
