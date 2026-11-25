@@ -114,6 +114,23 @@ footer a{margin-right:18px}
 .install .p{color:var(--c-com)}
 .install button{font:600 13px "Bricolage Grotesque",system-ui,sans-serif;border:0;border-radius:7px;padding:7px 12px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
 .facts code{font-size:.9em}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 36px}
+.use{border-top:2px solid var(--ink);padding:16px 0 22px}
+.use h3{margin:0 0 6px;font-size:22px;letter-spacing:-.02em}
+.use p{color:var(--muted);margin:0 0 10px}
+.use a{font-weight:600;color:var(--accent)}
+.mins{margin:0;padding-left:1.2em;color:var(--muted)}
+.mins li{margin-bottom:14px}
+.mins b{color:var(--ink);display:block}
+.tpl{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tpl h3{margin:0 0 4px;font-size:20px;letter-spacing:-.02em}
+.tpl p{color:var(--muted);margin:0 0 12px;font-size:15px}
+.tpl .win pre{font-size:12.5px}
+.tr{display:block;margin-top:8px;font-size:15px}
+.tr b{color:var(--ink)}
+.story{max-width:40em}
+.story p{font-size:19px;margin:0 0 16px}
+.story .by{color:var(--muted);font-size:15px}
 details{border-bottom:1px solid var(--line);padding:16px 0}
 summary{cursor:pointer;font-weight:800;font-size:19px;letter-spacing:-.015em}
 details p{color:var(--muted);margin:10px 0 0;max-width:44em}
@@ -122,7 +139,7 @@ details p{color:var(--muted);margin:10px 0 0;max-width:44em}
   dl.feat,.cmds{grid-template-columns:1fr}
   .hero{padding-top:28px}
   .stats,.vocab{grid-template-columns:repeat(2,1fr)}
-  .steps,.two{grid-template-columns:1fr}
+  .steps,.two,.cards,.tpl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
 </style>
@@ -133,11 +150,13 @@ details p{color:var(--muted);margin:10px 0 0;max-width:44em}
     <a class="logo" href="#top" id="top">E<span>Z</span></a>
     <nav aria-label="Main">
       <a href="#why">Why EZ</a>
+      <a href="#build">Build</a>
       <a href="#vocabulary">Vocabulary</a>
       <a href="#syntax">Syntax</a>
       <a href="#engine">Engine</a>
       <a href="#ship">Ship it</a>
       <a href="#ecosystem">Ecosystem</a>
+      <a href="#story">Story</a>
       <a class="btn-sm" href="https://docs.ez-lang.site/">Read the docs</a>
     </nav>
   </header>
@@ -254,6 +273,107 @@ Hello, EZ!
     </dl>
   </section>
 
+  <section id="build">
+    <h2>What can I build with EZ?</h2>
+    <p class="sub">Small tools and apps are where EZ fits best. Each one ships as a single file.</p>
+    <div class="cards">
+      <div class="use"><h3>Command-line tools</h3><p>Read input, work with files and JSON, and bundle the result into an .exe your teammates can run.</p><a href="#templates">See the CLI template</a></div>
+      <div class="use"><h3>Desktop apps</h3><p>Use the 60+ native Win32 controls for windows, canvas drawing, buttons and dialogs. Bundle with <code>--gui</code> to hide the console.</p><a href="https://docs.ez-lang.site/">Read the GUI docs</a></div>
+      <div class="use"><h3>Local web servers</h3><p>Route requests with Flask-style decorators such as <code>@app.get("/route")</code>, or start from the ezweb package.</p><a href="https://packages.ez-lang.site/">Find web packages</a></div>
+      <div class="use"><h3>Database apps</h3><p>Query embedded SQLite with <code>use "sqlite"</code>, or let <code>@persist</code> save model changes for you.</p><a href="https://docs.ez-lang.site/#stdlib-sqlite">Read the SQLite docs</a></div>
+      <div class="use"><h3>Bots and automation</h3><p>Combine <code>async</code> tasks, <code>Timer</code> and the network builtins. ezlib even includes a WhatsApp Web client.</p><a href="https://github.com/imabd645/ezlib">Browse ezlib</a></div>
+    </div>
+  </section>
+
+  <section id="tour">
+    <h2>EZ in 10 minutes</h2>
+    <p class="sub">Read this one file from top to bottom and you will have seen most of the language.</p>
+    <div class="showcase">
+      <ol class="mins">
+        <li><b>Minute 1</b>Values and output</li>
+        <li><b>Minutes 2–3</b>Tasks and decisions</li>
+        <li><b>Minutes 4–5</b>Arrays and dictionaries</li>
+        <li><b>Minutes 6–7</b>Models</li>
+        <li><b>Minute 8</b>Handling errors</li>
+        <li><b>Minutes 9–10</b>Bundling it into an .exe</li>
+      </ol>
+      <div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="mono">tour.ez</span></div>
+<pre class="hl"># Minute 1: values and output
+name = "EZ"
+out `Welcome to {name}!`
+
+# Minutes 2-3: tasks and decisions
+task grade(score) {
+    when score &gt;= 90 {
+        give "A"
+    } other when score &gt;= 80 {
+        give "B"
+    } other {
+        give "C"
+    }
+}
+out grade(85)
+
+# Minutes 4-5: collections
+nums = [1, 2, 3, 4, 5, 6]
+evens = filter(nums, |x| =&gt; x % 2 == 0)
+out evens
+user = {"name": "Sara", "role": "dev"}
+out `{user.name} is a {user.role}`
+
+# Minutes 6-7: models
+model Pet {
+    init(name) { self.name = name }
+    task speak() { give `{self.name} says hi` }
+}
+pet = Pet("Mo")
+out pet.speak()
+
+# Minute 8: errors
+try {
+    out 10 / 0
+} catch (ZeroDivisionError e) {
+    out `Caught: {e.message}`
+}
+
+# Minutes 9-10: ship it
+# ez bundle tour.ez Tour.exe</pre></div>
+    </div>
+  </section>
+
+  <section id="templates">
+    <h2>Starter templates</h2>
+    <p class="sub">Copy one, rename it, and start changing things.</p>
+    <div class="tpl">
+      <div><h3>Command-line tool</h3><p>Ask a question and respond. Run it with <code>ez greet.ez</code>.</p><div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="mono">greet.ez</span></div>
+<pre class="hl">name = input("Your name: ")
+
+when name == "" {
+    out "No name given."
+} other {
+    out `Nice to meet you, {name}!`
+}</pre></div></div>
+      <div><h3>Data and files</h3><p>Save data as JSON and read it back.</p><div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="mono">notes.ez</span></div>
+<pre class="hl">notes = {"title": "Ideas", "items": ["EZ site", "Blog post"]}
+writeFile("notes.json", to_json(notes))
+
+loaded = parse_json(readFile("notes.json"))
+get item in loaded["items"] {
+    out `- {item}`
+}</pre></div></div>
+      <div><h3>Tests</h3><p>Write tests next to your code. Run them with <code>ez test math_test.ez</code>.</p><div class="win"><div class="win-bar"><i></i><i></i><i></i><span class="mono">math_test.ez</span></div>
+<pre class="hl">task square(x) { give x * x }
+
+test "square works" {
+    assert(square(9) == 81, "9 squared is 81")
+}
+
+test "square of zero" {
+    assert(square(0) == 0)
+}</pre></div></div>
+    </div>
+  </section>
+
   <section id="engine">
     <h2>Small language, serious engine</h2>
     <p class="sub">EZ is written in C++17. A single-pass compiler turns your code into bytecode for a stack VM.</p>
@@ -351,6 +471,56 @@ winget uninstall imabd645.EZ</pre></div>
       </div>
     </div>
   </section>
+  <section id="story">
+    <h2>Why EZ exists</h2>
+    <div class="story">
+      <p>I’m Abdullah, a computer science student at UET Lahore. I started EZ in my second semester as a tree-walking interpreter written in C++.</p>
+      <p>I wanted a language that reads like plain English, runs fast enough for real work, and turns into one file you can give to a friend. Since then I have built the rest on my own: a bytecode VM, a garbage collector, a C FFI, Win32 GUI bindings, a bundler, a package manager and a registry with 79 packages.</p>
+      <p>EZ is still one person’s project, and it gets a little better with every release. If it helps you, or breaks on you, please tell me on GitHub.</p>
+      <p class="by">Abdullah Masood, creator of EZ</p>
+    </div>
+  </section>
+
+  <section id="principles">
+    <h2>Design principles</h2>
+    <p class="sub">Every choice in EZ trades something away. Here is what I picked and what it costs.</p>
+    <dl class="feat">
+      <div><dt>Readable first</dt><dd>Short English keywords such as <code>task</code>, <code>give</code> and <code>when</code> replace punctuation-heavy syntax.<span class="tr"><b>Trade-off:</b> the words are new even if you know other languages.</span></dd></div>
+      <div><dt>One file to ship</dt><dd><code>ez bundle</code> produces a single self-extracting executable.<span class="tr"><b>Trade-off:</b> the program carries the EZ runtime with it.</span></dd></div>
+      <div><dt>Safe by default, when you ask</dt><dd>The <code>--safe</code> sandbox grants only the access a script needs.<span class="tr"><b>Trade-off:</b> you have to choose permissions, or answer prompts.</span></dd></div>
+      <div><dt>Batteries included</dt><dd>SQLite, crypto, a GUI toolkit and an HTTP client ship in the box.<span class="tr"><b>Trade-off:</b> the core is larger than a minimal language.</span></dd></div>
+      <div><dt>Types are optional</dt><dd>Add type hints and the checker will use them, or skip them and move fast.<span class="tr"><b>Trade-off:</b> hints are erased at runtime, so they do not enforce anything while the program runs.</span></dd></div>
+      <div><dt>Simple VM before clever tricks</dt><dd>A bytecode VM with a cycle-collecting GC is fast enough for most tools.<span class="tr"><b>Trade-off:</b> there is no JIT, so heavy number crunching will be slower than in compiled languages.</span></dd></div>
+    </dl>
+  </section>
+
+  <section id="limits">
+    <h2>When not to use EZ</h2>
+    <p class="sub">EZ is a good fit for small tools and apps. It is a poor fit for some jobs, and it is better to know that now.</p>
+    <dl class="feat">
+      <div><dt>You need a huge library ecosystem</dt><dd>ezlib has 79 packages. Python and Node have hundreds of thousands, so pick them if your project depends on a specific library.</dd></div>
+      <div><dt>You need a cross-platform GUI</dt><dd>The native GUI uses Win32 and works on Windows only. The language itself also builds on macOS and Linux.</dd></div>
+      <div><dt>You need machine-code speed</dt><dd>EZ runs on a bytecode VM, with speed in the range of CPython. Native compilation is not available yet.</dd></div>
+      <div><dt>You need a long-term stability guarantee</dt><dd>EZ is a young language maintained by one person. Check the release notes before you upgrade a large project.</dd></div>
+    </dl>
+  </section>
+
+  <section id="security">
+    <h2>Security and releases</h2>
+    <div class="two">
+      <div>
+        <h3>Report a vulnerability</h3>
+        <p>Please do not post security problems in a public issue. Open a private security advisory from the Security tab of the <a href="https://github.com/imabd645/EZ-language">EZ repository</a>, and include your EZ version, the steps to reproduce and what you think the impact is.</p>
+        <p>The <code>--safe</code> sandbox limits what a script can ask EZ to do. Even so, read code you did not write before you run it.</p>
+      </div>
+      <div>
+        <h3>How releases work</h3>
+        <p>EZ versions use three numbers, such as 5.0.0. Run <code>ez --version</code> to see yours. Every release and its notes are on <a href="https://github.com/imabd645/EZ-language/releases">GitHub Releases</a>.</p>
+        <p>The package manager checks a SHA-256 hash for each package it installs.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="faq">
     <h2>Questions</h2>
     <details><summary>Do people need to install EZ to run my program?</summary><p>No. <code>ez bundle</code> packs your script, its libraries and the runtime into one executable that runs on its own.</p></details>
